@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { RenderPropsCallback } from 'types/render-props-callback';
 
 /** Props to be passed to Toggle component */
@@ -22,7 +22,7 @@ interface IChildrenProps extends IToggleState {
 }
 
 /** Provides Boolean State Management - i.e. a toggle switch */
-export class Toggle extends React.Component<IToggleProps, IToggleState> {
+export class Toggle extends Component<IToggleProps, IToggleState> {
   state = {
     isToggled: this.props.defaultOn || false,
   };

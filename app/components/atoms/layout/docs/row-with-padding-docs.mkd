@@ -1,0 +1,1 @@
+The `RowWithPadding` component extends the `Row` component to evenly space it's children by a set amount of `childPadding` prop. The default spacing is `16px`.

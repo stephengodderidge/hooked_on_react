@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
@@ -9,4 +9,4 @@ const FlexColumn = styled.div`
 `;
 
 /** Flex Column */
-export const Column: React.SFC<IDefaultProps> = props => <FlexColumn {...props} />;
+export const Column: SFC<IDefaultProps> = props => <FlexColumn {...props} />;

@@ -1,5 +1,5 @@
 import { Fonts } from 'components/atoms';
-import React from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
@@ -43,7 +43,7 @@ const BlockCode = styled.pre`
   margin: 16px;
 `;
 
-export const Code: React.SFC<ICodeProps> = props =>
+export const Code: SFC<ICodeProps> = props =>
   props.inline ? (
     <InlineCode className={props.className}>{props.children}</InlineCode>
   ) : (

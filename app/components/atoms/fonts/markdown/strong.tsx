@@ -1,5 +1,5 @@
 import { Fonts } from 'components/atoms';
-import React from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
@@ -19,7 +19,7 @@ interface IStrongProps extends IDefaultProps {
   children: any;
 }
 
-export const Strong: React.SFC<IStrongProps> = props => (
+export const Strong: SFC<IStrongProps> = props => (
   <StrongFont boldness={Fonts.BoldnessLevels.Semibold} className={props.className}>
     {props.children}
   </StrongFont>

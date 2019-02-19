@@ -27,12 +27,12 @@
   "Simple Page Component - Renders content.md in same folder": {
     "prefix": "SimplePageComponent",
     "body": [
-      "import React from 'react';",
+      "import React, {SFC} from 'react';",
       "import ReactMarkdown from 'react-markdown';",
       "import content from './${1:PAGE_NAME_HERE}.md';",
       "import renderers from 'components/fonts/markdown';",
       "",
-      "const ${1:PAGE_NAME_HERE}: React.SFC<null> = props => (",
+      "const ${1:PAGE_NAME_HERE}: SFC<null> = props => (",
       "  <ReactMarkdown source={content} renderers={renderers} />",
       ");",
       "",

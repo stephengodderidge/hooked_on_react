@@ -4,7 +4,7 @@ This repo is intended to serve as a bootstrap / accelerator for building React w
 
 ## Getting Started
 
-1. Clone repo: `git clone https://{{YOUR_USERNAME}}@bitbucket.org/ZakButcher/react-accelerator.git`
+1. Clone repo: `git clone https://{{YOUR_USERNAME}}@bitbucket.org/parivedasolutions/react-accelerator.git`
 2. Install `yarn` (and [homebrew](https://brew.sh/) if not already installed): `brew install yarn`
 3. Run `yarn`
 4. Run `yarn up`

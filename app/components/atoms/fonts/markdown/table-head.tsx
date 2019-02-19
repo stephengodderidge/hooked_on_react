@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
@@ -19,7 +19,7 @@ interface ITableHeadProps extends IDefaultProps {
   children: any;
 }
 
-export const TableHead: React.SFC<ITableHeadProps> = props => (
+export const TableHead: SFC<ITableHeadProps> = props => (
   <TableHeadComponent className={props.className}>
     {props.children}
   </TableHeadComponent>

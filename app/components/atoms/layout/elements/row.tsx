@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
@@ -18,9 +18,9 @@ interface IRowWithPadding extends IDefaultProps {
 }
 
 /** Flex Row */
-export const Row: React.SFC<IDefaultProps> = props => <FlexRow {...props} />;
+export const Row: SFC<IDefaultProps> = props => <FlexRow {...props} />;
 
-export const RowWithPadding: React.SFC<IRowWithPadding> = props => (
+export const RowWithPadding: SFC<IRowWithPadding> = props => (
   <FlexRow>
     {props.children.map((child: JSX.Element, index: number) =>
       index < props.children.length - 1 ? (
