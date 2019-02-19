@@ -1,4 +1,3 @@
-import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Fonts, LayoutElements } from 'components/atoms';
 import { colors, TColorNames } from 'modules/config/colors';
@@ -31,13 +30,4 @@ const SmallTiles = tileColors.map(color => (
 ));
 const story = <LayoutElements.Column>{SmallTiles}</LayoutElements.Column>;
 
-storiesOf('Colors', module).add(
-  'All',
-  withInfo({
-    text: 'asdf',
-    source: false,
-    propTables: [],
-    propTablesExclude: [],
-    inline: true,
-  })(() => story),
-);
+storiesOf('Colors', module).add('All', () => story);
