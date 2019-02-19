@@ -3,7 +3,7 @@ import {
   initialState as initialEntities,
 } from 'modules/entities/rdc.entities';
 import * as PropTypes from 'prop-types';
-import React from 'react';
+import { Component } from 'react';
 import { FSA } from 'types/fsa';
 
 /** App Props */
@@ -25,7 +25,7 @@ export const initialState: IAppState = {
 };
 
 /** Custom React Context Provider */
-export class ContextProvider extends React.Component<IAppProps, IAppState> {
+export class ContextProvider extends Component<IAppProps, IAppState> {
   static childContextTypes = {
     dispatch: PropTypes.func,
     entities: PropTypes.object,

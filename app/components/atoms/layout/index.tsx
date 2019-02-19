@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 import { LayoutElements } from './elements';
@@ -23,7 +23,7 @@ const BodyContent = styled(LayoutElements.Column)`
 /**
  * App Layout
  */
-export const Layout: React.SFC<IDefaultProps> = props => (
+export const Layout: SFC<IDefaultProps> = props => (
   <ThemeProvider theme={theme}>
     <AppWrapper>
       <AppContent>

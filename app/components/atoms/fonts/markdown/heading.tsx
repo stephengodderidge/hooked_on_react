@@ -1,11 +1,6 @@
-// external dependencies
-import React from 'react';
-import styled from 'styled-components';
-
-// custom components
 import { Fonts } from 'components/atoms';
-
-// interfaces
+import React, { SFC } from 'react';
+import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
 interface IHeadingProps extends IDefaultProps {
@@ -47,7 +42,7 @@ const StyledH4 = styled(Fonts.H4)`
 `;
 
 /** Heading */
-export const Heading: React.SFC<IHeadingProps> = props => {
+export const Heading: SFC<IHeadingProps> = props => {
   const renderHeading = () => {
     switch (props.level) {
       case 1:

@@ -1,5 +1,5 @@
 import { Fonts } from 'components/atoms';
-import React from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
@@ -24,7 +24,7 @@ interface ILinkProps extends IDefaultProps {
   href?: string;
 }
 
-export const Link: React.SFC<ILinkProps> = props => {
+export const Link: SFC<ILinkProps> = props => {
   const linkUrl =
     typeof window !== 'undefined'
       ? `${window.location.pathname}/${props.href}`

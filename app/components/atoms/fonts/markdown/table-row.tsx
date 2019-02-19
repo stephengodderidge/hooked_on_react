@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import { IDefaultProps } from 'types/default-props';
 
 interface ITableRowProps extends IDefaultProps {
@@ -13,6 +13,6 @@ interface ITableRowProps extends IDefaultProps {
   children: any;
 }
 
-export const TableRow: React.SFC<ITableRowProps> = props => (
+export const TableRow: SFC<ITableRowProps> = props => (
   <tr className={props.className}>{props.children}</tr>
 );

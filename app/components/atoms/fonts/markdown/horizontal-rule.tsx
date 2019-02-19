@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
@@ -7,6 +7,6 @@ const HrComponent = styled.hr`
   color: ${props => props.theme.colors.grey3};
 `;
 
-export const HorizontalRule: React.SFC<IDefaultProps> = props => (
+export const HorizontalRule: SFC<IDefaultProps> = props => (
   <HrComponent className={props.className} />
 );

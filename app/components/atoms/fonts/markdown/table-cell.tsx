@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
@@ -40,7 +40,7 @@ interface ITableCellProps extends IDefaultProps {
   align?: 'left' | 'right' | 'center' | 'justify' | 'char';
 }
 
-export const TableCell: React.SFC<ITableCellProps> = props => {
+export const TableCell: SFC<ITableCellProps> = props => {
   return props.isHeader ? (
     <th className={props.className} align={props.align}>
       {props.children}
