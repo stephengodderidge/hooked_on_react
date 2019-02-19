@@ -1,0 +1,18 @@
+import React from 'react';
+import { IDefaultProps } from 'types/default-props';
+
+interface ITableRowProps extends IDefaultProps {
+  /**
+   * See https://github.com/rexxars/commonmark-react-renderer#type-renderer-options
+   * for more information on props
+   */
+
+  /**
+   * [required] Any children being passed to TableRow
+   */
+  children: any;
+}
+
+export const TableRow: React.SFC<ITableRowProps> = props => (
+  <tr className={props.className}>{props.children}</tr>
+);

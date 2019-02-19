@@ -1,0 +1,18 @@
+{
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.awcache": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/.cache": true,
+    "**/*.js.map": true,
+    "**/*.orig": true,
+    "**/.git": true,
+    "**/.gitignore": false,
+    "**/.gitmodules": true,
+    "**/.server": true
+  },
+  "javascript.suggestionActions.enabled": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

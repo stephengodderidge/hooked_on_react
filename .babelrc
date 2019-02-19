@@ -1,0 +1,44 @@
+{
+  "presets": ["@babel/preset-env", "next/babel", "@zeit/next-typescript/babel"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./app"],
+        "alias": {
+          "components": "./app/components",
+          "modules": "./app/modules",
+          "pages": "./pages",
+          "static": "./static",
+          "types": "./app/types",
+          "schemas": "./server/schemas",
+          "resovers": "./server/resolvers",
+          "data": "./server/data"
+        }
+      }
+    ],
+    ["transform-md-import-to-string"],
+    [
+      "styled-components",
+      {
+        "ssr": true
+      }
+    ],
+    [
+      "inline-react-svg",
+      {
+        "caseSensitive": true,
+        "svgo": {
+          "plugins": [
+            {
+              "cleanupIDs": false
+            },
+            {
+              "removeTitle": true
+            }
+          ]
+        }
+      }
+    ]
+  ]
+}

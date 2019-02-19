@@ -1,0 +1,16 @@
+{
+  "Simple Page Index File - Default export for page": {
+    "prefix": "SimplePageIndex",
+    "body": [
+      "import ${1:COMPONENT} from './${2:URL-PATH}';",
+      "",
+      "export default {",
+      "  url: '${2:game-design}',",
+      "  children: {},",
+      "  page: ${1:COMPONENT},",
+      "};",
+      ""
+    ],
+    "description": "Simple Page Index File - Default export for page"
+  }
+}

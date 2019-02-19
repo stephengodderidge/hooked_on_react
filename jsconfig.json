@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "module": "es6",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "es2017", "dom.iterable", "scripthost"],
+    "noImplicitAny": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "app/*"],
+      "components": ["./app/components"],
+      "modules": ["./app/modules"],
+      "pages": ["./pages"],
+      "static": ["./static"],
+      "types": ["./app/types"]
+    },
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "plugins": []
+  },
+  "compileOnSave": true,
+  "exclude": ["node_modules"]
+}
