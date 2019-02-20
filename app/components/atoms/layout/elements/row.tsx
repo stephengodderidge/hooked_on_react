@@ -24,10 +24,10 @@ export const RowWithPadding: SFC<IRowWithPadding> = props => (
   <FlexRow>
     {props.children.map((child: JSX.Element, index: number) =>
       index < props.children.length - 1 ? (
-        <>
+        <React.Fragment key={`child-${index}`}>
           {child}
           <Padding width={props.childPadding} />
-        </>
+        </React.Fragment>
       ) : (
         child
       ),

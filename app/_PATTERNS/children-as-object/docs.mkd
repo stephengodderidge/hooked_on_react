@@ -1,0 +1,12 @@
+This hierarchy component expects an object that matches the `IMyObject` interface:
+
+```ts
+interface IMyObject {
+  /** Name of child within hierarchy */
+  name: string;
+  /** Nested children within hierarchy */
+  children: IMyObject[];
+}
+```
+
+The `Hierarchy` component recursively renders any children that match the `IMyObject` interface using a **type-guard**. The `Toggle` component is used to enable expand/collapse functionality for each hierarchy level.
