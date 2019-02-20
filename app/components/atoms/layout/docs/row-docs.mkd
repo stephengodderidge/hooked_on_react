@@ -1,1 +1,0 @@
-The `Row` component aligns it's children using `display: flex` and `flex-direction: row` styles
