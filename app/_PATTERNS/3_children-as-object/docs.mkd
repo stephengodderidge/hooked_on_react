@@ -1,4 +1,4 @@
-This hierarchy component expects an object that matches the `IMyObject` interface:
+This hierarchy component expects an object that matches the `IMyObject` interface to be passed as its child:
 
 ```ts
 interface IMyObject {

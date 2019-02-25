@@ -20,14 +20,15 @@ const rowWithPadding = (
   <LayoutElements.RowWithPadding>{elements}</LayoutElements.RowWithPadding>
 );
 
-storiesOf('_PATTERNS', module).add(
-  'Children as Array',
-  withInfo({
-    text: docs,
-    source: false,
-    header: false,
-    propTables: [],
-    propTablesExclude: [Tile],
-    inline: true,
-  })(() => rowWithPadding),
-);
+storiesOf('_PATTERNS', module)
+  .addDecorator(withInfo)
+  .addParameters({
+    info: {
+      text: docs,
+      source: false,
+      header: false,
+      propTablesExclude: [Tile],
+      inline: true,
+    },
+  })
+  .add('2 - Children as Array', () => rowWithPadding);

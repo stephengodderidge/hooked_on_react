@@ -3,18 +3,27 @@ import { Toggle } from 'components/atoms';
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 
-interface ISpacerProps {
-  halfWidth: boolean;
-}
-
-const Spacer = styled.div<ISpacerProps>`
-  width: ${props => (props.halfWidth ? 12 : 32)}px;
-`;
-
-const HierarchyRow = styled(LayoutElements.Row)`
+const HoverableText = styled(Fonts.Body1)`
   &:hover {
     cursor: pointer;
   }
+`;
+
+interface IHierarchyNode {
+  /** Indicates whether parent is in expanded state */
+  isExpanded: boolean;
+  /** Callback when component is clicked */
+  onClick: () => void;
+}
+
+const HierarchyNode: SFC<IHierarchyNode> = props => (
+  <HoverableText onClick={props.onClick}>
+    {props.children} {props.isExpanded ? '-' : '+'}
+  </HoverableText>
+);
+
+const Spacer = styled.div`
+  width: 12px;
 `;
 
 export interface IMyObject {
@@ -30,44 +39,42 @@ export interface IHierarchyProps {
 }
 
 // Type Guard
-const childIsMyObject = (child: IMyObject | any): child is IMyObject => {
-  return child && child.name && child.children;
-};
+const childIsMyObject = (child: IMyObject | any): child is IMyObject =>
+  child && child.name && child.children;
 
+// Helper to determine if children array has valid children
 const childHasChildren = (child: IMyObject) =>
-  child.children && child.children.length > 0;
+  child.children &&
+  child.children.length > 0 &&
+  child.children.every(c => childIsMyObject(c));
 
 /** Generates a Hierarchical structure for a nested object */
 export const Hierarchy: SFC<IHierarchyProps> = props => {
   if (childIsMyObject(props.children)) {
     return childHasChildren(props.children) ? (
-      <HierarchyRow>
-        <Toggle>
-          {renderProps => {
-            return renderProps.isToggled ? (
-              <LayoutElements.Column>
-                <Fonts.Body1 onClick={renderProps.toggleState}>
-                  - {props.children.name}
-                </Fonts.Body1>
-                {props.children.children.map(child => (
-                  <HierarchyRow key={child.name}>
-                    <Spacer halfWidth={childHasChildren(child)} />
+      <Toggle>
+        {renderProps => {
+          return (
+            <LayoutElements.Column>
+              <HierarchyNode
+                isExpanded={renderProps.isToggled}
+                onClick={renderProps.toggleState}
+              >
+                {props.children.name}
+              </HierarchyNode>
+              {renderProps.isToggled &&
+                props.children.children.map(child => (
+                  <LayoutElements.Row key={child.name}>
+                    <Spacer />
                     <Hierarchy>{child}</Hierarchy>
-                  </HierarchyRow>
+                  </LayoutElements.Row>
                 ))}
-              </LayoutElements.Column>
-            ) : (
-              <Fonts.Body1 onClick={renderProps.toggleState}>
-                + {props.children.name}
-              </Fonts.Body1>
-            );
-          }}
-        </Toggle>
-      </HierarchyRow>
+            </LayoutElements.Column>
+          );
+        }}
+      </Toggle>
     ) : (
-      <HierarchyRow>
-        <Fonts.Body1>{props.children.name}</Fonts.Body1>
-      </HierarchyRow>
+      <Fonts.Body1>{props.children.name}</Fonts.Body1>
     );
   }
   return null;
