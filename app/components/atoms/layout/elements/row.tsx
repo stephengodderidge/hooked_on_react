@@ -20,6 +20,7 @@ interface IRowWithPadding extends IDefaultProps {
 /** Flex Row */
 export const Row: SFC<IDefaultProps> = props => <FlexRow {...props} />;
 
+/** Adds spacing between child elements for consistently spaced children */
 export const RowWithPadding: SFC<IRowWithPadding> = props => (
   <FlexRow>
     {props.children.map((child: JSX.Element, index: number) =>

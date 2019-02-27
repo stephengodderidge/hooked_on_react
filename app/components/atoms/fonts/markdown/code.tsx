@@ -26,7 +26,7 @@ interface ICodeProps extends IDefaultProps {
 }
 
 const InlineCode = styled(Fonts.Body1)`
-  color: ${props => props.theme.colors.darkRed};
+  color: ${props => props.theme.colors.red};
   background-color: ${props => props.theme.colors.grey1};
   padding: 0px 4px;
   border-radius: 5px;
@@ -35,7 +35,7 @@ const InlineCode = styled(Fonts.Body1)`
 
 const BlockCode = styled.pre`
   color: ${props => props.theme.colors.white};
-  background-color: ${props => props.theme.colors.midnight};
+  background-color: ${props => props.theme.colors.black};
   line-height: 20px;
   padding: 16px;
   border-radius: 5px;

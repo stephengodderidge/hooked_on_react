@@ -11,7 +11,7 @@ enum BoldnessLevels {
   Bold,
 }
 
-interface IProps extends IDefaultProps {
+export interface IFontProps extends IDefaultProps {
   /**
    * [optional] specify the boldness level.
    * Use the BoldnessLevels enum.
@@ -38,7 +38,7 @@ interface IProps extends IDefaultProps {
   onClick?: (...args: any[]) => any;
 }
 
-const BaseFont = (props: IProps) => {
+const BaseFont = (props: IFontProps) => {
   const { linkUrl, tag, ...otherProps } = props;
   const tagType = tag ? tag : 'div';
   const factory = React.createFactory(tagType);
@@ -66,8 +66,9 @@ const FONT = 'Courier' || 'Arial';
 
 /*  'Display' fonts (large headers)  */
 const Display1 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Light,
     )};
@@ -76,8 +77,9 @@ const Display1 = styled(BaseFont)`
 `;
 
 const Display2 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};
@@ -86,8 +88,9 @@ const Display2 = styled(BaseFont)`
 `;
 
 const Display3 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};
@@ -97,8 +100,9 @@ const Display3 = styled(BaseFont)`
 
 /*  'H' fonts (headers)  */
 const H1 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};
@@ -107,8 +111,9 @@ const H1 = styled(BaseFont)`
 `;
 
 const H2 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};
@@ -117,8 +122,9 @@ const H2 = styled(BaseFont)`
 `;
 
 const H3 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};
@@ -127,8 +133,9 @@ const H3 = styled(BaseFont)`
 `;
 
 const H4 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};
@@ -138,8 +145,9 @@ const H4 = styled(BaseFont)`
 
 /*  'Body' Styles  */
 const Body1 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};
@@ -148,8 +156,9 @@ const Body1 = styled(BaseFont)`
 `;
 
 const Body2 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};
@@ -158,8 +167,9 @@ const Body2 = styled(BaseFont)`
 `;
 
 const Body3 = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};
@@ -169,7 +179,7 @@ const Body3 = styled(BaseFont)`
 
 /*  'Link' Styles  */
 const Link1 = styled(H1)`
-  color: ${(props: IProps) => props.theme.colors.blue};
+  color: ${(props: IFontProps) => props.theme.colors.blue};
   &:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -177,7 +187,7 @@ const Link1 = styled(H1)`
 `;
 
 const Link2 = styled(H3)`
-  color: ${(props: IProps) => props.theme.colors.blue};
+  color: ${(props: IFontProps) => props.theme.colors.blue};
   &:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -185,7 +195,7 @@ const Link2 = styled(H3)`
 `;
 
 const Link3 = styled(Body1)`
-  color: ${(props: IProps) => props.theme.colors.blue};
+  color: ${(props: IFontProps) => props.theme.colors.blue};
   text-decoration: none;
   &:hover {
     text-decoration: underline;
@@ -194,8 +204,9 @@ const Link3 = styled(Body1)`
 `;
 
 const Label = styled(BaseFont)`
+  color: ${props => props.theme.colors.black};
   font-family: ${FONT};
-  font-weight: ${(props: IProps) =>
+  font-weight: ${(props: IFontProps) =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
     )};

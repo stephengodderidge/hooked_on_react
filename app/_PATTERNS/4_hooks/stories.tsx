@@ -40,4 +40,9 @@ storiesOf('_PATTERNS', module)
       inline: true,
     },
   })
-  .add('4 - React Hooks', () => <CounterStory />);
+  .add('4 - React Hooks', () => (
+    <>
+      <CounterStory key={1} />
+      <CounterStory key={2} />
+    </>
+  ));

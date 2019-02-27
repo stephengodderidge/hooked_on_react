@@ -1,7 +1,9 @@
+import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Fonts, renderers } from 'components/atoms';
-import React from 'react';
+import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { IFontProps } from '.';
 
 const content = `
 # Heading 1
@@ -20,7 +22,7 @@ _italic paragraph_
 
 const markdownFonts = <ReactMarkdown source={content} renderers={renderers} />;
 const standardFonts = (
-  <>
+  <React.Fragment>
     <Fonts.Display1>Display 1</Fonts.Display1>
     <Fonts.Display2>Display 2</Fonts.Display2>
     <Fonts.Display3>Display 3</Fonts.Display3>
@@ -35,9 +37,38 @@ const standardFonts = (
     <Fonts.Link2>Link 2</Fonts.Link2>
     <Fonts.Link3>Link 3</Fonts.Link3>
     <Fonts.Label>Label</Fonts.Label>
-  </>
+  </React.Fragment>
 );
 
+const FontProps: SFC<IFontProps> = () => <div />;
+
 storiesOf('Fonts', module)
+  .addDecorator(withInfo)
+  .addParameters({
+    info: {
+      text: ``,
+      source: false,
+      header: false,
+      propTables: [FontProps],
+      propTablesExclude: [
+        Fonts.Display1,
+        Fonts.Display2,
+        Fonts.Display3,
+        Fonts.H1,
+        Fonts.H2,
+        Fonts.H3,
+        Fonts.H4,
+        Fonts.Body1,
+        Fonts.Body2,
+        Fonts.Body3,
+        Fonts.Link1,
+        Fonts.Link2,
+        Fonts.Link3,
+        Fonts.Label,
+        React.Fragment,
+      ],
+      inline: true,
+    },
+  })
   .add('Markdown', () => markdownFonts)
   .add('Standard Fonts', () => standardFonts);
