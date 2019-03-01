@@ -1,10 +1,10 @@
-import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Fonts, LayoutElements } from 'components';
 import { Toggle } from 'components/atoms';
 import React, { SFC, useState } from 'react';
+// import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
-import docs from './docs.mkd';
+// import { renderers } from '../components/atoms/fonts/markdown';
 
 interface IHierarchySelectionContext {
   selections: string[];
@@ -160,20 +160,8 @@ const hierarchy: IMyObject = {
   ],
 };
 
-storiesOf('_PATTERNS', module)
-  .addDecorator(withInfo)
-  .addParameters({
-    info: {
-      text: docs,
-      source: false,
-      header: false,
-      propTables: [],
-      propTablesExclude: [],
-      inline: true,
-    },
-  })
-  .add('6 - Combining Patterns', () => (
-    <HierarchySelection>
-      <Hierarchy>{hierarchy}</Hierarchy>
-    </HierarchySelection>
-  ));
+storiesOf('_PATTERNS', module).add('6 - Combining Patterns', () => (
+  <HierarchySelection>
+    <Hierarchy>{hierarchy}</Hierarchy>
+  </HierarchySelection>
+));

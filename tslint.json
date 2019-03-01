@@ -82,13 +82,12 @@
     "no-submodule-imports": [
       true,
       "components",
-      "helpers",
       "modules",
-      "redux",
       "types",
       "next",
       "styled-components",
-      "pages"
+      "pages",
+      "react-syntax-highlighter"
     ],
     "no-implicit-dependencies": false
   },

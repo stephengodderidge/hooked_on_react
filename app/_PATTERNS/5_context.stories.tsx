@@ -1,9 +1,9 @@
-import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { LayoutElements } from 'components/atoms';
 import React, { Component, SFC } from 'react';
+// import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
-import docs from './docs.mkd';
+// import { renderers } from '../components/atoms/fonts/markdown';
 
 const initialState = {
   count: 0,
@@ -78,16 +78,4 @@ class ContextStory extends Component<{}> {
   }
 }
 
-storiesOf('_PATTERNS', module)
-  .addDecorator(withInfo)
-  .addParameters({
-    info: {
-      text: docs,
-      source: false,
-      header: false,
-      propTables: [],
-      propTablesExclude: [],
-      inline: true,
-    },
-  })
-  .add('5 - React Context', () => <ContextStory />);
+storiesOf('_PATTERNS', module).add('5 - React Context', () => <ContextStory />);
