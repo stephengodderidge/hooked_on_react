@@ -66,7 +66,6 @@
         "ignoreImports": true
       }
     ],
-    "semicolon": [true, "always"], // 20.1
     "radix": true, // 21.3
     "no-construct": true, // 21.3, 21.6
     "variable-name": [

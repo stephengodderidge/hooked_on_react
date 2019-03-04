@@ -3,7 +3,7 @@ import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
-const LinkFont = styled(Fonts.Link1)`
+const LinkFont = styled(Fonts.Link3)`
   margin: 16px 0px;
 `;
 
@@ -24,14 +24,8 @@ interface ILinkProps extends IDefaultProps {
   href?: string;
 }
 
-export const Link: SFC<ILinkProps> = props => {
-  const linkUrl =
-    typeof window !== 'undefined'
-      ? `${window.location.pathname}/${props.href}`
-      : props.href;
-  return (
-    <LinkFont className={props.className} tag="a" linkUrl={linkUrl}>
-      {props.children}
-    </LinkFont>
-  );
-};
+export const Link: SFC<ILinkProps> = props => (
+  <LinkFont className={props.className} tag="a" linkUrl={props.href}>
+    {props.children}
+  </LinkFont>
+);
