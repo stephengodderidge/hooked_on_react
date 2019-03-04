@@ -7,8 +7,8 @@ import { renderers } from '../components/atoms/fonts/markdown';
 
 const docs = `
   # Children as Array
-  The **Children as Array** pattern is frequently used with React.  In fact, any time more than
-  one child is passed to a parent component, this pattern is being used.
+  The **Children as Array** pattern is very common with React.  Put simply, anytime more than one
+  child is passed to a parent component, this pattern is being used.
 
   Because the parent component's children are an array, we can use regular JS to perform actions
   on that array with methods such as \`map\`, \`reduce\`, and \`forEach\`.  For example, we can
@@ -17,15 +17,20 @@ const docs = `
   ## Pattern Breakdown
   The \`RowWithPadding\` component will iterate over its children and add a padding element between
   each child.  This can be useful when multiple components need to be evenly spaced along a row at
-  fixed inervales and other approaches like FlexBox do not provide the necessary layout utilities.
+  fixed intervals and other approaches like FlexBox do not provide the necessary layout utilities.
 
   \`\`\`tsx
+  interface IRowWithPadding extends IDefaultProps {
+    /** Space between children */
+    childPadding?: number;
+  }
+  
   const RowWithPadding: SFC<IRowWithPadding> = props => (
-    <FlexRow>
+    <Row>
       {React.Children.toArray(props.children).map(
         (child: JSX.Element, index: number) =>
           index < props.children.length - 1 ? (
-            <React.Fragment key={\`child-\${index}\`}>
+            <React.Fragment key={child.key}>
               {child}
               <Padding width={props.childPadding} />
             </React.Fragment>
@@ -33,7 +38,7 @@ const docs = `
             child
           ),
       )}
-    </FlexRow>
+    </Row>
   );
   \`\`\`
 
@@ -61,12 +66,29 @@ const docs = `
   \`\`\`
 
   ## Example Implementation - RowWithPadding for evenly spaced buttons
+  \`\`\`tsx
+  const rowWithPadding = (
+    <LayoutElements.RowWithPadding>
+      <Button key="back">Back</Button>
+      <Button key="cancel">Cancel</Button>
+      <Button key="ok">Ok</Button>
+    </LayoutElements.RowWithPadding>
+  );
+  \`\`\`
 
 `;
 
 const docs2 = `
   ## Example Implementation - Sorted RowWithPadding for evenly spaced, sorted children
-
+  \`\`\`tsx
+  const sortedRowWithPadding = (
+    <LayoutElements.SortedRowWithPadding>
+      <Fonts.Body1 key="zebra">Zebra</Fonts.Body1>
+      <Fonts.Body1 key="monkey">Monkey</Fonts.Body1>
+      <Fonts.Body1 key="alligator">Alligator</Fonts.Body1>
+    </LayoutElements.SortedRowWithPadding>
+  );
+  \`\`\`
 `;
 
 const Button = styled.button`
@@ -98,6 +120,6 @@ const ChildArrayStory: SFC<{}> = () => (
   </React.Fragment>
 );
 
-storiesOf('_PATTERNS', module).add('2 - Children as Array', () => (
+storiesOf('_PATTERNS', module).add('3 - Children as Array', () => (
   <ChildArrayStory />
 ));

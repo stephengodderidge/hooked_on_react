@@ -26,7 +26,7 @@ export const RowWithPadding: SFC<IRowWithPadding> = props => (
     {React.Children.toArray(props.children).map(
       (child: JSX.Element, index: number) =>
         index < props.children.length - 1 ? (
-          <React.Fragment key={`child-${index}`}>
+          <React.Fragment key={child.key}>
             {child}
             <Padding width={props.childPadding} />
           </React.Fragment>
@@ -47,7 +47,7 @@ export const SortedRowWithPadding: SFC<IRowWithPadding> = props => (
       .sort(sortByKey)
       .map((child: JSX.Element, index: number) =>
         index < props.children.length - 1 ? (
-          <React.Fragment key={`child-${index}`}>
+          <React.Fragment key={child.key}>
             {child}
             <Padding width={props.childPadding} />
           </React.Fragment>

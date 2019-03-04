@@ -38,19 +38,13 @@ const docs = `
   \`\`\`tsx
   <Toggle>
     {({ isToggled, toggleState }) => (
-      {...}
+      <LayoutElements.Column>
+        <Fonts.Body1>Toggle is currently {isToggled ? 'on' : 'off'}</Fonts.Body1>
+        <button onClick={toggleState}>Toggle State</button>
+      </LayoutElements.Column>
     )}
   </Toggle>
   \`\`\`
-
-  An alternative implementation could be:
-  \`\`\`tsx
-  <Toggle>
-    {(toggleRenderProps) => (
-      {...}
-    )}
-  </Toggle>
-\`\`\`
 
   ## Example Implementation - On / Off Toggle
 `;
@@ -69,6 +63,6 @@ const ToggleStory: SFC<{}> = () => (
   </React.Fragment>
 );
 
-storiesOf('_PATTERNS', module).add('1 - Children as Function', () => (
+storiesOf('_PATTERNS', module).add('2 - Children as Function', () => (
   <ToggleStory />
 ));

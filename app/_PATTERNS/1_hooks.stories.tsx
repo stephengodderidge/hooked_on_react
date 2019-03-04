@@ -15,16 +15,18 @@ const docs = `
   ## Pattern Breakdown
   Hooks are fairly straight forward.  The \`useState\` hook provides state management while the
   \`useEffect\` hook provides lifecycle management.  Many other hooks have been created to support
-  building reducers, memoized callbacks, and more.  A very basic implementation for a hook is
-  a counter that tracks how many times a user has pressed a button:
+  building reducers, memoized callbacks, and more.  A very basic implementation for a custom hook is
+  a counter that can be incremented or decremented:
 
   \`\`\`tsx
   const useCounter = (initialCount = 0) => {
     const [counter, setCounter] = useState(initialCount);
-    const incrementCounter = () => setCounter(counter + 1);
+    const increment = () => setCounter(counter + 1);
+    const decrement = () => setCounter(counter - 1);
     return {
       counter,
-      incrementCounter,
+      increment,
+      decrement,
     };
   };
   \`\`\`
@@ -34,15 +36,17 @@ const docs = `
   statement:
 
   \`\`\`tsx
-  const MyHooksComponent: SFC<{}> = () => {
-    const {counter, incrementCounter} = useCounter();
+  const HooksStory: SFC<{}> = () => {
+    const { counter, increment, decrement } = useCounter();
     return (
       <>
+        <ReactMarkdown renderers={renderers} source={docs} />
         <Fonts.Body1>Counter is currently at {counter}</Fonts.Body1>
-        <button onClick={incrementCounter}>Increment</button>
+        <button onClick={increment}>Increment</button>
+        <button onClick={decrement}>Decrement</button>
       </>
     );
-  }
+  };
   \`\`\`
 
   ## Example Implementation - Custom Counter Hook
@@ -50,22 +54,25 @@ const docs = `
 
 const useCounter = (initialCount = 0) => {
   const [counter, setCounter] = useState(initialCount);
-  const incrementCounter = () => setCounter(counter + 1);
+  const increment = () => setCounter(counter + 1);
+  const decrement = () => setCounter(counter - 1);
   return {
     counter,
-    incrementCounter,
+    increment,
+    decrement,
   };
 };
 
 const HooksStory: SFC<{}> = () => {
-  const { counter, incrementCounter } = useCounter();
+  const { counter, increment, decrement } = useCounter();
   return (
     <>
       <ReactMarkdown renderers={renderers} source={docs} />
       <Fonts.Body1>Counter is currently at {counter}</Fonts.Body1>
-      <button onClick={incrementCounter}>Increment</button>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
     </>
   );
 };
 
-storiesOf('_PATTERNS', module).add('4 - React Hooks', () => <HooksStory />);
+storiesOf('_PATTERNS', module).add('1 - React Hooks', () => <HooksStory />);

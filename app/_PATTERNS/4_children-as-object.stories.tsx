@@ -154,6 +154,6 @@ const ChildrenAsObjectStory: SFC<{}> = () => (
   </React.Fragment>
 );
 
-storiesOf('_PATTERNS', module).add('3 - Children as Object', () => (
+storiesOf('_PATTERNS', module).add('4 - Children as Object', () => (
   <ChildrenAsObjectStory />
 ));
