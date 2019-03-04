@@ -1,4 +1,4 @@
-import { Column } from './column';
-import { Row, RowWithPadding, SortedRowWithPadding } from './row';
+import * as Columns from './column';
+import * as Rows from './row';
 
-export const LayoutElements = { Row, RowWithPadding, SortedRowWithPadding, Column };
+export const LayoutElements = { ...Columns, ...Rows };
