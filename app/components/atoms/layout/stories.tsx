@@ -1,7 +1,10 @@
+import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { greys } from 'modules/config/colors';
 import React from 'react';
 import styled from 'styled-components';
+import rowDocs from './docs/row-docs.mkd';
+import rowWithPaddingDocs from './docs/row-with-padding-docs.mkd';
 import { LayoutElements } from './elements';
 
 const Tile = styled.div`
@@ -21,6 +24,26 @@ const rowWithPadding = (
 const column = <LayoutElements.Column>{elements}</LayoutElements.Column>;
 
 storiesOf('Layout Elements', module)
-  .add('Row', () => row)
-  .add('Row With Padding', () => rowWithPadding)
+  .add(
+    'Row',
+    withInfo({
+      text: rowDocs,
+      source: false,
+      header: false,
+      propTables: [],
+      propTablesExclude: [Tile],
+      inline: true,
+    })(() => row),
+  )
+  .add(
+    'Row With Padding',
+    withInfo({
+      text: rowWithPaddingDocs,
+      source: false,
+      header: false,
+      propTables: [],
+      propTablesExclude: [Tile],
+      inline: true,
+    })(() => rowWithPadding),
+  )
   .add('Column', () => column);
