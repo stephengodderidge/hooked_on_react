@@ -15,9 +15,9 @@ export interface IColors {
   teal: '#0fb9b1';
   lightPurple: '#a55eea';
   purple: '#8854d0';
-  grey1: '#a6b2c2';
-  grey2: '#818d9c';
-  grey3: '#5e6978';
+  grey1: '#D3D9E1';
+  grey2: '#798BA3';
+  grey3: '#54657B';
   black: '#3d4856';
   white: '#f5f6fa';
   [key: string]: TColorCodes;
@@ -63,9 +63,9 @@ export type TColorCodes =
   | '#0fb9b1'
   | '#a55eea'
   | '#8854d0'
-  | '#a6b2c2'
-  | '#818d9c'
-  | '#5e6978'
+  | '#D3D9E1'
+  | '#798BA3'
+  | '#54657B'
   | '#3d4856'
   | '#f5f6fa';
 
@@ -108,9 +108,9 @@ export const purples: IColorSubset = {
 };
 
 export const greys: IColorSubset = {
-  grey1: '#a6b2c2',
-  grey2: '#818d9c',
-  grey3: '#5e6978',
+  grey1: '#D3D9E1',
+  grey2: '#798BA3',
+  grey3: '#54657B',
   black: '#3d4856',
 };
 

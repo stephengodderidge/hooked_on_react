@@ -20,17 +20,40 @@ interface IRowWithPadding extends IDefaultProps {
 /** Flex Row */
 export const Row: SFC<IDefaultProps> = props => <FlexRow {...props} />;
 
+/** Adds spacing between child elements for consistently spaced children */
 export const RowWithPadding: SFC<IRowWithPadding> = props => (
   <FlexRow>
-    {props.children.map((child: JSX.Element, index: number) =>
-      index < props.children.length - 1 ? (
-        <>
-          {child}
-          <Padding width={props.childPadding} />
-        </>
-      ) : (
-        child
-      ),
+    {React.Children.toArray(props.children).map(
+      (child: JSX.Element, index: number) =>
+        index < props.children.length - 1 ? (
+          <React.Fragment key={child.key}>
+            {child}
+            <Padding width={props.childPadding} />
+          </React.Fragment>
+        ) : (
+          child
+        ),
     )}
+  </FlexRow>
+);
+
+const sortByKey = (a: JSX.Element, b: JSX.Element) =>
+  a.key.toString() > b.key.toString() ? 1 : -1;
+
+/** Sorts and adds spacing between child elements for consistently spaced children */
+export const SortedRowWithPadding: SFC<IRowWithPadding> = props => (
+  <FlexRow>
+    {React.Children.toArray(props.children)
+      .sort(sortByKey)
+      .map((child: JSX.Element, index: number) =>
+        index < props.children.length - 1 ? (
+          <React.Fragment key={child.key}>
+            {child}
+            <Padding width={props.childPadding} />
+          </React.Fragment>
+        ) : (
+          child
+        ),
+      )}
   </FlexRow>
 );

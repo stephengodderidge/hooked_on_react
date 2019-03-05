@@ -14,5 +14,8 @@
     "**/.server": true
   },
   "javascript.suggestionActions.enabled": false,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  }
 }
