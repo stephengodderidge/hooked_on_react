@@ -4,61 +4,75 @@ import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import { renderers } from '../components/atoms/fonts/markdown';
+import { ExampleWrapper } from './shared-components';
 
 const docs = `
   # Children as Object
-  The **Children as Object** pattern is uncommon and serves as an example of a pattern with very
-  specific use-cases.  In many cases, it's more appropriate to pass the object in as a prop to the
-  parent component; resulting in fewer lines of code and a cleaner implementation.
-
-  One potential use-case for this pattern involves data-driven views and is referred to as
-  **Data Projection**.  When a page's view is dictated by data, this pattern could result in a
-  more maintainable component hierarchy.  Another use case is commonly called **Named Slots**
-  and is generally used when configuring layouts.
+  The **Children as Object** pattern is less common and serves as an example of a pattern with very
+  specific, but important, use-cases.
+  
+  The two most common use-cases for this pattern are called **Data Projection** and **Named Slots**.
+  **Data Projection** focuses on data-driven views and where data dictates which components are
+  shown or hidden.  **Named Slots** focuses on templated layouts where specific components are fit
+  into *named slots* in various configurations.
 
   ## Pattern Breakdown
-  The **Named Slots** or **Data Projection** pattern expects an object to be passed as the child
-  of a parent component.  The parent component is responsible for displaying the child object
-  in the appropriate way.  This \`NamedSlotsLayout\` component parses three components from its
-  child object and organizes them into two columns:
+  In the same way a component's children can be defined as a function, array, or JS primitive,
+  children may also be defined as an object.  This \`NamedSlotsLayout\` component demonstrates how
+  *named slots* can be used to define a layout that can be reused in multiple ways:
 
   \`\`\`tsx
   const NamedSlotsLayout: SFC<INamedSlotsLayoutProps> = props => {
     const { Top, Bottom, Right } = props.children;
     return (
-      <LayoutElements.Row>
-        <FiltersWrapper>
+      <Row>
+        <LeftSection>
           {Top || null}
           <Hr />
           {Bottom || null}
-        </FiltersWrapper>
+        </LeftSection>
         {Right || null}
-      </LayoutElements.Row>
+      </Row>
     );
   };
   \`\`\`
 
   ## Pattern Usage
-  To use this pattern, define the children of the parent component as an object, passing in
-  an object that matches the interface definition for the parent's children:
+  To use this pattern, define the children of the \`NamedSlotsLayout\` component as an object
+  that matches the interface definition \`NameSlotLayout\`'s children:
 
+  \`\`\`tsx
+  <NamedSlotsLayout>
+    {{
+      Top: <div>Top Component</div>,
+      Bottom: <div>Bottom Component</div>,
+      Right: <div>Right Component</div>,
+    }}
+  </NamedSlotsLayout>
+  \`\`\`
+
+  will yield:
+`;
+
+const docs2 = `
+  A more complex example with custom components might look something like this:
   \`\`\`tsx
   <NamedSlotsLayout>
     {{
       Top: <BrandComponent {...brand} />,
       Bottom: <MarketComponent {...market} />,
       Right: (
-        <LayoutElements.PaddedColumn>
+        <Column>
           {['One', 'Two', 'Three'].map(s => (
-            <Fonts.H1 key={s}>{s}</Fonts.H1>
+            <BodyFont key={s}>{s}</BodyFont>
           ))}
-        </LayoutElements.PaddedColumn>
+        </Column>
       ),
     }}
   </NamedSlotsLayout>
   \`\`\`
 
-  ## Example Implementation - Named Slots Layout
+  will yield:
 `;
 
 const FiltersWrapper = styled(LayoutElements.PaddedColumn)`
@@ -135,9 +149,20 @@ const market = {
   options: ['US', 'Canada', 'Japan'],
 };
 
-const ChildrenAsObjectStory: SFC<{}> = () => (
-  <React.Fragment>
-    <ReactMarkdown renderers={renderers} source={docs} />
+const basicExample = (
+  <ExampleWrapper>
+    <NamedSlotsLayout>
+      {{
+        Top: <div>Top Component</div>,
+        Bottom: <div>Bottom Component</div>,
+        Right: <div>Right Component</div>,
+      }}
+    </NamedSlotsLayout>
+  </ExampleWrapper>
+);
+
+const customComponentExample = (
+  <ExampleWrapper>
     <NamedSlotsLayout>
       {{
         Top: <BrandComponent {...brand} />,
@@ -151,6 +176,15 @@ const ChildrenAsObjectStory: SFC<{}> = () => (
         ),
       }}
     </NamedSlotsLayout>
+  </ExampleWrapper>
+);
+
+const ChildrenAsObjectStory: SFC<{}> = () => (
+  <React.Fragment>
+    <ReactMarkdown renderers={renderers} source={docs} />
+    {basicExample}
+    <ReactMarkdown renderers={renderers} source={docs2} />
+    {customComponentExample}
   </React.Fragment>
 );
 

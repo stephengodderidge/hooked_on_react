@@ -3,17 +3,18 @@ import { Fonts, LayoutElements } from 'components/atoms';
 import React, { SFC, useContext, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { renderers } from '../components/atoms/fonts/markdown';
+import { ExampleWrapper } from './shared-components';
 
 const docs = `
   # Context
   React Context provides a way to share stateful data across many layers of components without
-  having to explicitly pass props through each level.  Much like how Redux's \`connect\` HOC
-  allows individual components at any level to access the global Redux store, context Consumers
-  have access to a shared state which is managed by a context Provider component
+  having to explicitly pass props through each level.  Context is most useful when a component
+  hierarchy is more than 3 levels deep and stateful data must be passed or maintained through
+  each level.
 
   ## Pattern Breakdown
-  First, a context must be created using React's top-level API method \`createContext\`.  The
-  value passed to this method can be any valid JSON structure.
+  To use Context, it must first be created using React's top-level API method \`createContext\`.
+  The value passed to this method can be any valid JSON structure or JS primitive:
 
   \`\`\`tsx
   const initialState = {
@@ -24,29 +25,29 @@ const docs = `
   const CounterContext = React.createContext(initialState);
   \`\`\`
 
-  Next, a parent component must use \`CounterContext.Provider\` to wrap its children.  This
-  component will generally require local state as well, so the \`useState\` hook will
-  frequently be used with this pattern:
+  \`createContext\` will return an object with two components: \`Provider\` & \`Consumer\`. The
+  \`Provider\` is used to provide access to a parent's state or helper methods.  The \`Consumer\`
+  is used by children to access the parent's context directly, without having to be explicitly
+  passed from one component to the next.
 
   \`\`\`tsx
   const ContextProvider: SFC<{}> = props => {
     const [count, setCount] = useState(0);
     const increment = () => setCount(count + 1);
     return (
-      <LayoutElements.Column>
+      <Column>
         <CounterContext.Provider value={{ count, increment }}>
           {props.children}
         </CounterContext.Provider>
-      </LayoutElements.Column>
+      </Column>
     );
   };
   \`\`\`
 
   ## Pattern Usage
-  To use this pattern, a child being passed as a child to the \`ContextProvider\` component
-  must use the \`useContext\` hook and pass the appropriate Context as an argument.  The returned
-  object will match the \`initialState\` object originally passed to \`createContext\`, although,
-  with object destructuring, specific fields can be parsed out:
+  There are two ways for a child to access its parent's conext: using \`Context.Consumer\` or the
+  new \`useContext\` hook.  Latest best practices recommend using the \`useContext\` hook which will
+  return the current object being passed to the \`Context.Provider\`'s \`value\` prop in the parent:
 
   \`\`\`tsx
   const ButtonClickCounter: SFC<{}> = () => {
@@ -56,12 +57,12 @@ const docs = `
   
   const CountDisplay: SFC<{}> = () => {
     const { count } = useContext(CounterContext);
-    return <Fonts.H1>Button has been clicked {count} times</Fonts.H1>;
+    return <BodyFont>Button has been clicked {count} times</BodyFont>;
   };
   \`\`\`
 
-  To tie everything together, nest the components that use the \`useContext\` hook within the
-  provider component:
+  To tie everything together, nest the children that use the \`useContext\` hook within the provider
+  component:
 
   \`\`\`tsx
   <ContextProvider>
@@ -106,10 +107,12 @@ const ContextStory: SFC<{}> = () => {
   return (
     <>
       <ReactMarkdown renderers={renderers} source={docs} />
-      <ContextProvider>
-        <ButtonClickCounter />
-        <CountDisplay />
-      </ContextProvider>
+      <ExampleWrapper>
+        <ContextProvider>
+          <ButtonClickCounter />
+          <CountDisplay />
+        </ContextProvider>
+      </ExampleWrapper>
     </>
   );
 };

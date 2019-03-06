@@ -1,7 +1,7 @@
 import { Fonts } from 'components/atoms';
 import React, { SFC } from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { tomorrowNightEighties } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { hopscotch } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
@@ -35,22 +35,11 @@ const InlineCode = styled(Fonts.Body1)`
   display: inline-block;
 `;
 
-const BlockCode = styled(SyntaxHighlighter)`
-  line-height: 20px;
-  padding: 16px;
-  border-radius: 5px;
-  margin: 16px;
-`;
-
 export const Code: SFC<ICodeProps> = props =>
   props.inline ? (
     <InlineCode className={props.className}>{props.children}</InlineCode>
   ) : (
-    <BlockCode
-      language={props.language}
-      style={tomorrowNightEighties}
-      className={props.className}
-    >
+    <SyntaxHighlighter language={props.language} style={hopscotch} useInlineStyles>
       {props.value}
-    </BlockCode>
+    </SyntaxHighlighter>
   );

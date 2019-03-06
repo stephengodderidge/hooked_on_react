@@ -4,27 +4,27 @@ import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import { renderers } from '../components/atoms/fonts/markdown';
+import { ExampleWrapper } from './shared-components';
 
 const docs = `
   # Children as Array
-  The **Children as Array** pattern is very common with React.  Put simply, anytime more than one
-  child is passed to a parent component, this pattern is being used.
+  The **Children as Array** pattern is probably the most common pattern used in React; without
+  most devs realizing it.  Any time multiple components are passed as children to a parent,
+  the **Children as Array** pattern is being used.
 
-  Because the parent component's children are an array, we can use regular JS to perform actions
-  on that array with methods such as \`map\`, \`reduce\`, and \`forEach\`.  For example, we can
-  inject other components between each child or rearrange the children altogether.
+  In addition, JS array methods such as \`map\`, \`reduce\`, and \`forEach\` may be used to iterate
+  over the children and perform actions on each child; i.e. inject other components between each
+  child or rearrange the children altogether.
 
   ## Pattern Breakdown
-  The \`RowWithPadding\` component will iterate over its children and add a padding element between
-  each child.  This can be useful when multiple components need to be evenly spaced along a row at
-  fixed intervals and other approaches like FlexBox do not provide the necessary layout utilities.
+  When multiple children are passed to a parent, \`props.children\` can be safely converted into an
+  array using \`React.Children.toArray(props.children)\`.
+
+  For example, this \`RowWithPadding\` component will iterate over its children and add a padding
+  element between each child.  This can be useful when multiple components need to be evenly spaced
+  along a row at fixed intervals.
 
   \`\`\`tsx
-  interface IRowWithPadding extends IDefaultProps {
-    /** Space between children */
-    childPadding?: number;
-  }
-  
   const RowWithPadding: SFC<IRowWithPadding> = props => (
     <Row>
       {React.Children.toArray(props.children).map(
@@ -32,7 +32,7 @@ const docs = `
           index < props.children.length - 1 ? (
             <React.Fragment key={child.key}>
               {child}
-              <Padding width={props.childPadding} />
+              <Padding width={16} />
             </React.Fragment>
           ) : (
             child
@@ -43,9 +43,8 @@ const docs = `
   \`\`\`
 
   ## Pattern Usage
-  When using this pattern, simply pass an array of JSX elements as children to the parent component.
-  The \`RowWithPadding\` component will automatically inject a padding element between each child.
-  For example:
+  To use this pattern, pass an array of JSX elements as children to the parent \`RowWithPadding\`.
+  The \`RowWithPadding\` component will automatically inject a padding element between each child:
   \`\`\`tsx
   <RowWithPadding>
     <FirstChildComponent />
@@ -68,11 +67,11 @@ const docs = `
   ## Example Implementation - RowWithPadding for evenly spaced buttons
   \`\`\`tsx
   const rowWithPadding = (
-    <LayoutElements.RowWithPadding>
+    <RowWithPadding>
       <Button key="back">Back</Button>
       <Button key="cancel">Cancel</Button>
       <Button key="ok">Ok</Button>
-    </LayoutElements.RowWithPadding>
+    </RowWithPadding>
   );
   \`\`\`
 
@@ -82,11 +81,11 @@ const docs2 = `
   ## Example Implementation - Sorted RowWithPadding for evenly spaced, sorted children
   \`\`\`tsx
   const sortedRowWithPadding = (
-    <LayoutElements.SortedRowWithPadding>
-      <Fonts.Body1 key="zebra">Zebra</Fonts.Body1>
-      <Fonts.Body1 key="monkey">Monkey</Fonts.Body1>
-      <Fonts.Body1 key="alligator">Alligator</Fonts.Body1>
-    </LayoutElements.SortedRowWithPadding>
+    <SortedRowWithPadding>
+      <BodyFont key="zebra">Zebra</BodyFont>
+      <BodyFont key="monkey">Monkey</BodyFont>
+      <BodyFont key="alligator">Alligator</BodyFont>
+    </SortedRowWithPadding>
   );
   \`\`\`
 `;
@@ -114,9 +113,9 @@ const sortedRowWithPadding = (
 const ChildArrayStory: SFC<{}> = () => (
   <React.Fragment>
     <ReactMarkdown renderers={renderers} source={docs} />
-    {rowWithPadding}
+    <ExampleWrapper>{rowWithPadding}</ExampleWrapper>
     <ReactMarkdown renderers={renderers} source={docs2} />
-    {sortedRowWithPadding}
+    <ExampleWrapper>{sortedRowWithPadding}</ExampleWrapper>
   </React.Fragment>
 );
 
