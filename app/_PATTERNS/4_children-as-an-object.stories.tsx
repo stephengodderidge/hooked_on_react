@@ -7,9 +7,9 @@ import { renderers } from '../components/atoms/fonts/markdown';
 import { ExampleWrapper } from './shared-components';
 
 const docs = `
-  # Children as Object
-  The **Children as Object** pattern is less common and serves as an example of a pattern with very
-  specific, but important, use-cases.
+  # Children as an Object
+  The **Children as an Object** pattern is less common and serves as an example of a pattern with
+  very specific, but important, use-cases.
   
   The two most common use-cases for this pattern are called **Data Projection** and **Named Slots**.
   **Data Projection** focuses on data-driven views and where data dictates which components are
@@ -188,6 +188,6 @@ const ChildrenAsObjectStory: SFC<{}> = () => (
   </React.Fragment>
 );
 
-storiesOf('_PATTERNS', module).add('4 - Children as Object', () => (
+storiesOf('_PATTERNS', module).add('4 - Children as an Object', () => (
   <ChildrenAsObjectStory />
 ));

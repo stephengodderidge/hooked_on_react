@@ -1,9 +1,10 @@
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import { Fonts, renderers } from 'components/atoms';
+import { Fonts } from 'components/atoms';
 import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { IFontProps } from '.';
+import { renderers } from './markdown';
 
 const content = `
 # Heading 1

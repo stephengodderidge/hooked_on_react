@@ -6,8 +6,8 @@ import { renderers } from '../components/atoms/fonts/markdown';
 import { ExampleWrapper } from './shared-components';
 
 const docs = `
-  # Children as Function
-  The **Children as Function** pattern is most commonly referred to as **Render Props** and
+  # Children as a Function
+  The **Children as a Function** pattern is most commonly referred to as **Render Props** and
   is preferred over a similar, likely-to-be-deprecated pattern called **Higher Order Components
   (HOC)**.  An [example](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)
   of an HOC is Redux's \`connect\` method.
@@ -68,6 +68,6 @@ const ToggleStory: SFC<{}> = () => (
   </React.Fragment>
 );
 
-storiesOf('_PATTERNS', module).add('2 - Children as Function', () => (
+storiesOf('_PATTERNS', module).add('2 - Children as a Function', () => (
   <ToggleStory />
 ));

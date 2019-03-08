@@ -7,10 +7,10 @@ import { renderers } from '../components/atoms/fonts/markdown';
 import { ExampleWrapper } from './shared-components';
 
 const docs = `
-  # Children as Array
-  The **Children as Array** pattern is probably the most common pattern used in React; without
+  # Children as an Array
+  The **Children as an Array** pattern is probably the most common pattern used in React; without
   most devs realizing it.  Any time multiple components are passed as children to a parent,
-  the **Children as Array** pattern is being used.
+  the **Children as an Array** pattern is being used.
 
   In addition, JS array methods such as \`map\`, \`reduce\`, and \`forEach\` may be used to iterate
   over the children and perform actions on each child; i.e. inject other components between each
@@ -119,6 +119,6 @@ const ChildArrayStory: SFC<{}> = () => (
   </React.Fragment>
 );
 
-storiesOf('_PATTERNS', module).add('3 - Children as Array', () => (
+storiesOf('_PATTERNS', module).add('3 - Children as an Array', () => (
   <ChildArrayStory />
 ));

@@ -3,5 +3,4 @@ export * from './fonts';
 export * from './layout';
 export * from './layout/elements';
 export * from './layout/theme';
-export * from './fonts/markdown';
 export * from './hierarchy';
