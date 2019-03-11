@@ -1,4 +1,4 @@
-import { Layout } from 'components/atoms';
+import { Layout } from 'components/templates';
 import { stateReducer } from 'modules/app/state-reducer';
 import React from 'react';
 import { FSA } from 'types/fsa';
@@ -53,7 +53,13 @@ export class App extends AppState.ContextProvider {
     updateLocalStorage(this.state);
     return (
       <AppContext.Provider value={this}>
-        <Layout>{this.props.children}</Layout>
+        <Layout>
+          {{
+            FilterBar: <div>Filter Bar</div>,
+            ActionBar: <div>Action Bar</div>,
+            PageContent: <div>Page Content</div>,
+          }}
+        </Layout>
       </AppContext.Provider>
     );
   }

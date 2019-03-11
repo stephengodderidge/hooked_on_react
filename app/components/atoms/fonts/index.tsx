@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { colors } from 'modules/config/colors';
 import { IDefaultProps } from 'types/default-props';
 
 enum BoldnessLevels {
@@ -9,6 +10,11 @@ enum BoldnessLevels {
   Medium,
   Semibold,
   Bold,
+}
+
+export enum FontColor {
+  BLACK = 1,
+  WHITE,
 }
 
 export interface IFontProps extends IDefaultProps {
@@ -36,10 +42,15 @@ export interface IFontProps extends IDefaultProps {
    * to become clickable
    */
   onClick?: (...args: any[]) => any;
+
+  /**
+   * [optional] Color of font text
+   */
+  color?: FontColor;
 }
 
 const BaseFont = (props: IFontProps) => {
-  const { linkUrl, tag, ...otherProps } = props;
+  const { linkUrl, tag, color, ...otherProps } = props;
   const tagType = tag ? tag : 'div';
   const factory = React.createFactory(tagType);
   const tagProps = linkUrl ? { ...otherProps, href: linkUrl } : otherProps;
@@ -64,9 +75,19 @@ const getBoldness = (boldnessLevel: BoldnessLevels): number => {
 
 const FONT = 'Courier' || 'Arial';
 
+const getFontColor = (props: IFontProps) => {
+  switch (props.color) {
+    case FontColor.WHITE:
+      return colors.white;
+    case FontColor.BLACK:
+    default:
+      return colors.black;
+  }
+};
+
 /*  'Display' fonts (large headers)  */
 const Display1 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -77,7 +98,7 @@ const Display1 = styled(BaseFont)`
 `;
 
 const Display2 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -88,7 +109,7 @@ const Display2 = styled(BaseFont)`
 `;
 
 const Display3 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -100,7 +121,7 @@ const Display3 = styled(BaseFont)`
 
 /*  'H' fonts (headers)  */
 const H1 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -111,7 +132,7 @@ const H1 = styled(BaseFont)`
 `;
 
 const H2 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -122,7 +143,7 @@ const H2 = styled(BaseFont)`
 `;
 
 const H3 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -133,7 +154,7 @@ const H3 = styled(BaseFont)`
 `;
 
 const H4 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -145,7 +166,7 @@ const H4 = styled(BaseFont)`
 
 /*  'Body' Styles  */
 const Body1 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -156,7 +177,7 @@ const Body1 = styled(BaseFont)`
 `;
 
 const Body2 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -167,7 +188,7 @@ const Body2 = styled(BaseFont)`
 `;
 
 const Body3 = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
@@ -204,7 +225,7 @@ const Link3 = styled(Body1)`
 `;
 
 const Label = styled(BaseFont)`
-  color: ${props => props.theme.colors.black};
+  color: ${props => getFontColor(props)};
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
