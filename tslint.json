@@ -1,11 +1,6 @@
 {
   "defaultSeverity": "error",
-  "extends": [
-    "tslint:latest",
-    "tslint-react",
-    "tslint-eslint-rules",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint-react", "tslint-eslint-rules", "tslint-config-prettier"],
   "jsRules": {},
   // Below we borrow several rules from https://github.com/progre/tslint-config-airbnb
   // but didn't use that directly because several rules haven't been updated to support tslint 5

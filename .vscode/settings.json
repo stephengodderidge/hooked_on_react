@@ -17,5 +17,19 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.codeActionsOnSave": {
     "source.fixAll.tslint": true
-  }
+  },
+  "editor.formatOnSave": true,
+  "tslint.configFile": "./eslintrc.json",
+  "auto-close-tag.activationOnLanguage": [
+    "xml",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "plaintext",
+    "markdown"
+  ],
+  "editor.tabSize": 2,
+  "typescript.autoClosingTags": true,
+  "typescript.validate.enable": true
 }
