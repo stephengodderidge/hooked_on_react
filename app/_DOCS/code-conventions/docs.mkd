@@ -1,0 +1,11 @@
+# Code Conventions
+
+## Names
+
+- Variables: `camelCase`
+- React Component: `PascalCase`
+
+## JSX
+
+- Inline Arrow for props: `Allowed`
+  - e.g. `<MyComponent onClick={() => props.onClick(props.id)} />`

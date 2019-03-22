@@ -1,4 +1,4 @@
-import { Fonts } from 'components/atoms';
+import { Body1 } from 'components';
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
@@ -15,7 +15,7 @@ interface IParagraphProps extends IDefaultProps {
   children: any;
 }
 
-const ParagraphFont = styled(Fonts.Body1)`
+const ParagraphFont = styled(Body1)`
   margin: 4px 0px 16px 0px;
 `;
 

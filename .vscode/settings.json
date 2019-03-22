@@ -11,7 +11,9 @@
     "**/.git": true,
     "**/.gitignore": false,
     "**/.gitmodules": true,
-    "**/.server": true
+    "**/.server": true,
+    "**/coverage": true,
+    "**/out": true
   },
   "javascript.suggestionActions.enabled": false,
   "typescript.tsdk": "node_modules/typescript/lib",
@@ -19,7 +21,13 @@
     "source.fixAll.tslint": true
   },
   "editor.formatOnSave": true,
-  "tslint.configFile": "./eslintrc.json",
+  "eslint.options": { "configFile": ".eslintrc.json" },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "auto-close-tag.activationOnLanguage": [
     "xml",
     "javascript",

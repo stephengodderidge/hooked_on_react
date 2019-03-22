@@ -1,0 +1,33 @@
+
+.loading-page {
+  height: -webkit-fill-available;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0d65ab;
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-message{
+    color: white;
+    margin-top: 30px;
+    font-size: 16px;
+  }
+
+  .pete-center__logo {
+    background: url('../images/pete-logo-animated-charlie.gif') no-repeat;
+    background-size: 150px;
+    width: 151px;
+    height: 100px;
+    margin-left: 0.8em;
+    transition-property: background;
+    transition-duration: 500ms;
+    padding: 0;
+    margin: 0;
+  }
+}
+

@@ -14,7 +14,7 @@ interface IChildrenProps {
   /** Whether Toggle is on or off */
   isToggled: boolean;
   /** Callback for flipping the state of the Toggle */
-  toggleState?: () => any;
+  toggleState?: () => void;
 }
 
 /** Provides Boolean State Management - i.e. a toggle switch */

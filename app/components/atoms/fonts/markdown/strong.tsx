@@ -1,9 +1,9 @@
-import { Fonts } from 'components/atoms';
+import { BoldnessLevels, Body1 } from 'components';
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
-const StrongFont = styled(Fonts.Body1)`
+const StrongFont = styled(Body1)`
   display: inline;
 `;
 
@@ -20,7 +20,7 @@ interface IStrongProps extends IDefaultProps {
 }
 
 export const Strong: SFC<IStrongProps> = props => (
-  <StrongFont boldness={Fonts.BoldnessLevels.Semibold} className={props.className}>
+  <StrongFont boldness={BoldnessLevels.Semibold} className={props.className}>
     {props.children}
   </StrongFont>
 );

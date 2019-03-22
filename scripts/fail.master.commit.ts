@@ -1,8 +1,6 @@
-// tslint:disable-next-line:no-var-requires
 const exec = require('child_process').exec;
 const cmd = 'git rev-parse --abbrev-ref HEAD';
 
-// tslint:disable:no-console
 exec(cmd, (error: string, stdout: any, stderr: any) => {
   if (error || stderr || !stdout) {
     console.error('Failed to get branch name.');

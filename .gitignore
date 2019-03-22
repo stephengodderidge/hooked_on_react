@@ -11,3 +11,5 @@ dist
 .awcache
 .next
 .env
+out
+coverage

@@ -1,0 +1,68 @@
+.brand-box-component{
+    width: 340px;
+    height: 250px;
+    border-radius: 11px;
+	background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    margin: 0px 20px 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gap-logo{
+    background: url('../images/brands/gap-logo.jpg') no-repeat;
+    width: 172px;
+    height: 173px;
+}
+
+.gap_outlet-logo{
+    background: url('../images/brands/gap_outlet-logo.png') no-repeat;
+    width: 203px;
+    height: 203px;
+    background-size: 203px;
+}
+
+.banana_republic-logo{
+    background: url('../images/brands/banana_republic-logo.png') no-repeat;
+    width: 283px;
+    height: 37px;
+    background-size: 279px;
+
+    label{
+        position: relative;
+        top: 40px;
+    }
+}
+
+.athleta-logo{
+    background: url('../images/brands/athleta-logo.png') no-repeat;
+    width: 249px;
+    height: 41px;
+    background-size: 248px;
+}
+
+.old_navy-logo{
+    background: url('../images/brands/old_navy-logo.png') no-repeat;
+    width: 221px;
+    height: 77px;
+    background-size: 219px;
+
+    label{
+        position: relative;
+        top: 85px;
+    }
+}
+
+.factory-label{
+    text-align: center;
+
+    label{
+        font-size: 28px;
+        font-weight: 300;
+        letter-spacing: 0.8px;
+        color: $grey;
+	    font-family: 'Roboto-Light', sans-serif;
+    }
+}

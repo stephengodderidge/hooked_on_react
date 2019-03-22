@@ -1,0 +1,139 @@
+.main__categories-div{
+    padding-top: 30px;
+
+    .category__view__wrapper-div{
+        height: 100%;
+        background-color: white;
+
+        // force 100%
+        .ag-body,
+        .ag-body-viewport-wrapper,
+        .ag-body-viewport,
+        .ag-body-container  {
+            width: 100% !important;
+        }
+
+        .ag-body-viewport {
+            overflow: overlay !important;
+        }
+
+        div[style].ag-row {
+            transform: unset !important;
+        }
+
+        // set border on row and not cells
+        .ag-row.ag-row-odd,
+        .ag-row.ag-row-even {
+            border-bottom: 1px solid rgb(239, 239, 237);
+        }
+
+        .ag-row.ag-row-level-0:nth-child(odd) {
+            background-color: $ag-row-odd-background-color;
+        }
+
+        .ag-row.ag-row-level-0:nth-child(even) {
+            background-color: $ag-row-even-background-color;
+        }
+
+        // force flexbox styles
+        .ag-header-row,
+        .ag-row.ag-row-odd,
+        .ag-row.ag-row-even {
+            align-items: stretch;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            position: relative !important;
+            top: unset !important;
+            width: 100% !important;
+            height: auto !important;
+
+            .ag-header-cell,
+            .ag-cell {
+                border-bottom: unset;
+                flex-grow: 0;
+                flex-shrink: 0;
+                left: auto !important;
+                padding-left: 5px;
+                position: relative !important;
+                width: 38px !important;
+                display: flex;
+                height: auto !important;
+
+                &[title=Market],
+                &[title=Channel],
+                &[title=Source],
+                &[col-id=source],
+                &[col-id=market],
+                &[col-id=channel] {
+                    width: 90px !important;
+                    flex-basis: 90px;
+                }
+
+                &[title=Category],
+                &[col-id=category] {
+                    width: 160px !important;
+                    flex-basis: 160px;
+                }
+
+                &[title='Mutually Exclusive'],
+                &[col-id=isMutuallyExclusive] {
+                    width: 160px !important;
+                    flex-basis: 160px;
+                }
+
+                &[title=Attributes],
+                &[col-id=attributes] {
+                    flex-grow: 1;
+                    flex-shrink: 1;
+                    flex-basis: auto;
+                    width: auto !important;
+                }
+
+                &[title=Action],
+                &[col-id=action] {
+                    flex-basis: 175px;
+                    width: 175px !important;
+                }
+
+            }
+        }
+        .ag-row.ag-row-odd,
+        .ag-row.ag-row-even {
+            border-bottom: 1px solid #dededd;
+            .ag-cell {
+                border-right: .5px solid #dededd;
+            }
+        }
+        .ag-header-row{
+            height: 42px !important;
+        }
+    }
+
+    .ag-cell-no-focus {
+        border-bottom: 0.5px solid #dededd;
+    }
+
+    .category_view__buttons-div{
+        background-color: #dededd;
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 13px;
+        padding-bottom: 9px;
+        padding-right: 20px;
+    }
+}
+
+.category-row{
+    background: #f5f5f5;
+    border: none;
+}
+
+.category-row-error{
+    background: white;
+    border: 2px solid #f22b2d !important;
+}
+
+.category-bg{
+    background: white;
+}

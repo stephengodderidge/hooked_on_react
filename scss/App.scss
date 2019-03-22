@@ -1,0 +1,85 @@
+/* Base Application Styles */
+@import "SpexUiStyleGuide";
+
+html, body {
+    max-height: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    font-size: .8em;
+    height: 100%;
+}
+
+.container-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main {
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    min-height: 64px;
+
+}
+
+.title-bar__logo {
+    float: left;
+    background: url('../images/pete-logo.png') no-repeat;
+    background-size: 60px auto;
+    width: 60px;
+    height: 40px;
+    margin-left: 0.8em;
+    transition-property: background;
+    transition-duration: 500ms;
+}
+
+.title-bar__title {
+    margin-left: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+#app.store-count-animation {
+    .title-bar__logo {
+        background: url('../images/pete-logo-animated-charlie.gif') no-repeat;
+        background-size: 60px auto;
+    }
+}
+
+
+
+@import "Tabs";
+@import "Home";
+@import "Reporting";
+@import "Box";
+@import "BrandBoxComponent";
+@import "MenuHeaderComponent";
+@import "BrandMenuComponent";
+@import "Locations";
+@import "ButtonComponent";
+@import "AgGridTheme";
+@import "~ag-grid/src/styles/ag-grid.scss";
+@import "~ag-grid/src/styles/theme-fresh.scss";
+@import "Modal";
+@import "AddStoresComponent";
+@import "FormBoxComponent";
+@import "Fields";
+@import "Toast";
+@import "Categories";
+@import "Distros";
+@import "Attributes";
+@import "ActionAgGridComponent";
+@import "ChipAgGridComponent";
+@import "LoadingPageComponent";
+@import "ErrorPageComponent";

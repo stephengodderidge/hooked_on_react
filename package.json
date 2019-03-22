@@ -9,52 +9,64 @@
   "dependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@zeit/next-sass": "^1.0.1",
+    "@zeit/next-typescript": "^1.1.1",
+    "babel-plugin-inline-react-svg": "^1.0.1",
+    "babel-plugin-module-resolver": "^3.1.3",
+    "babel-plugin-transform-md-import-to-string": "^1.0.6",
+    "css-loader": "1.0.1",
+    "next": "^8.0.3",
+    "next-compose": "^0.0.2",
+    "node-sass": "^4.11.0",
+    "normalizr": "^3.3.0",
+    "path": "^0.12.7",
+    "polished": "^3.0.3",
+    "prop-types": "^15.6.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "reselect": "^4.0.0",
+    "sass-loader": "^7.1.0",
+    "styled-components": "^4.1.3"
+  },
+  "devDependencies": {
     "@storybook/addon-info": "^5.0.3",
     "@storybook/react": "^5.0.3",
+    "@types/jest": "^24.0.11",
     "@types/next": "^8.0.1",
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.0.11",
     "@types/react-syntax-highlighter": "^10.1.0",
     "@types/storybook__react": "^4.0.0",
     "@types/styled-components": "^4.1.12",
+    "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
-    "@zeit/next-typescript": "^1.1.1",
     "awesome-typescript-loader": "^5.2.1",
     "babel-core": "^7.0.0-0",
     "babel-loader": "^8.0.5",
-    "babel-plugin-inline-react-svg": "^1.0.1",
-    "babel-plugin-module-resolver": "^3.1.3",
     "babel-plugin-styled-components": "^1.10.0",
-    "babel-plugin-transform-md-import-to-string": "^1.0.6",
     "babel-preset-next": "^1.2.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^5.15.3",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-react": "^7.12.4",
     "husky": "^1.3.1",
     "jest": "^24.5.0",
+    "jest-styled-components": "^6.3.1",
     "lint-staged": "^8.1.5",
     "module-resolver": "^1.0.0",
-    "next": "^8.0.3",
-    "node-fetch": "^2.3.0",
-    "normalizr": "^3.3.0",
     "npm-run-all": "^4.1.5",
-    "path": "^0.12.7",
-    "polished": "^3.0.3",
     "prettier": "^1.16.4",
-    "prop-types": "^15.6.2",
     "raw-loader": "^2.0.0",
-    "react": "^16.8.4",
     "react-docgen-typescript-loader": "^3.0.1",
-    "react-dom": "^16.8.4",
     "react-markdown": "^4.0.6",
     "react-syntax-highlighter": "^10.1.3",
-    "reselect": "^4.0.0",
+    "react-testing-library": "^6.0.0",
+    "serve": "^10.1.2",
     "storybook": "^1.0.0",
-    "styled-components": "^4.1.3",
+    "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
     "ts-node": "^8.0.3",
-    "tslint-config-prettier": "^1.17.0",
-    "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^3.6.0",
     "typescript": "^3.3.3333",
     "typescript-styled-plugin": "^0.14.0",
     "webpack": "^4.29.6",
@@ -66,14 +78,22 @@
     "up": "yarn run-p front stories",
     "clean-environment": "git clean -dfx && yarn",
     "lint": "tsc --noEmit && yarn eslint \"app/**\" && lint-staged",
-    "pre-commit": "ts-node scripts/fail.master.commit.ts && yarn lint"
+    "pre-commit": "ts-node scripts/fail.master.commit.ts && yarn run-s test lint",
+    "test": "jest --coverage",
+    "build": "yarn next build",
+    "export": "yarn next export",
+    "force-install": "yarn --silent --force",
+    "build-prod": "yarn force-install --prod && yarn build && yarn export",
+    "serve-local-prod": "yarn force-insall && yarn build && yarn export && yarn serve -s out"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn pre-commit"
+      "pre-commit": "yarn pre-commit",
+      "post-checkout": "yarn force-install"
     }
   },
   "lint-staged": {
+    "concurrent": false,
     "linters": {
       "**/*.{ts,tsx}": [
         "prettier --write",
@@ -84,5 +104,22 @@
         "git add"
       ]
     }
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./setup-test.js"
+    ],
+    "collectCoverageFrom": [
+      "./app/components/**",
+      "./app/modules/**",
+      "!**/stories.tsx",
+      "!**/__snapshots__/**",
+      "!**/markdown/**",
+      "!**/modules/config/**"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
   }
 }

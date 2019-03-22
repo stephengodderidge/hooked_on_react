@@ -1,23 +1,12 @@
 import { GlobalStyles } from 'modules/config/global-styles';
 import Document, { Head, Main, NextScript } from 'next/document';
 import React from 'react';
-import styled, { ServerStyleSheet } from 'styled-components';
+import { ServerStyleSheet } from 'styled-components';
 
 // inject global styles
 GlobalStyles.injectGlobalStyles();
 
-// added styles to prevent scrolling in background when modal is open
-const Body = styled.body`
-  margin: 0px;
-  height: 100vh;
-  width: 100vw;
-
-  #__next {
-    height: 100vh;
-  }
-`;
-
-/** TODO: Add comment */
+/** Root document for configuring global page setup */
 export default class MyDocument extends Document {
   render() {
     const sheet = new ServerStyleSheet();
@@ -29,11 +18,12 @@ export default class MyDocument extends Document {
         <Head>
           {styleTags}
           <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js" />
+          <link href="/static/global.css" rel="stylesheet" />
         </Head>
-        <Body>
+        <body>
           {main}
           <NextScript />
-        </Body>
+        </body>
       </html>
     );
   }

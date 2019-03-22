@@ -1,8 +1,7 @@
 import React from 'react';
-import { configure, addDecorator } from '@storybook/react';
+import { configure, addDecorator, addParameters } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { withOptions } from '@storybook/addon-options';
-import { theme } from 'components/atoms';
+import { theme } from 'components';
 
 Object.values = obj => Object.keys(obj).map(key => obj[key]);
 
@@ -10,9 +9,8 @@ const ThemeDecorator = story => (
   <ThemeProvider theme={theme}>{story()}</ThemeProvider>
 );
 addDecorator(ThemeDecorator);
-
-withOptions({
-  sortStoriesByKind: true,
+addParameters({
+  options: { showPanel: false, sortStoriesByKind: true },
 });
 
 const req = require.context('../app', true, /stories\.tsx?$/);

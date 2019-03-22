@@ -13,7 +13,8 @@
           "types": "./app/types",
           "schemas": "./server/schemas",
           "resovers": "./server/resolvers",
-          "data": "./server/data"
+          "data": "./server/data",
+          "scss": "./scss"
         }
       }
     ],

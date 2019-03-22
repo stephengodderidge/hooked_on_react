@@ -1,4 +1,4 @@
-import { Fonts } from 'components/atoms';
+import { Body1 } from 'components';
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
@@ -37,7 +37,7 @@ interface IListProps extends IDefaultProps {
 }
 
 export const List: SFC<IListProps> = props => {
-  const renderList = () => <Fonts.Body1>{props.children}</Fonts.Body1>;
+  const renderList = () => <Body1>{props.children}</Body1>;
   return props.ordered ? (
     <OrderedList>{renderList()}</OrderedList>
   ) : (

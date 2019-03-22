@@ -1,4 +1,4 @@
-import { Fonts } from 'components/atoms';
+import { H1, H2, H3, H4, BoldnessLevels } from 'components';
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
@@ -20,25 +20,21 @@ interface IHeadingProps extends IDefaultProps {
   children: any;
 }
 
-const StyledH1 = styled(Fonts.H1)`
+const StyledH1 = styled(H1)`
   padding: 16px 0px 4px 0px;
   border-bottom: 2px solid ${props => props.theme.colors.black};
-  color: ${props => props.theme.colors.black};
 `;
 
-const StyledH2 = styled(Fonts.H2)`
+const StyledH2 = styled(H2)`
   padding: 12px 0px 4px 0px;
-  color: ${props => props.theme.colors.black};
 `;
 
-const StyledH3 = styled(Fonts.H3)`
+const StyledH3 = styled(H3)`
   padding: 8px 0px 4px 0px;
-  color: ${props => props.theme.colors.black};
 `;
 
-const StyledH4 = styled(Fonts.H4)`
+const StyledH4 = styled(H4)`
   padding: 4px 0px 4px 0px;
-  color: ${props => props.theme.colors.black};
 `;
 
 /** Heading */
@@ -47,38 +43,26 @@ export const Heading: SFC<IHeadingProps> = props => {
     switch (props.level) {
       case 1:
         return (
-          <StyledH1
-            boldness={Fonts.BoldnessLevels.Semibold}
-            className={props.className}
-          >
+          <StyledH1 boldness={BoldnessLevels.Semibold} className={props.className}>
             {props.children}
           </StyledH1>
         );
       case 2:
         return (
-          <StyledH2
-            boldness={Fonts.BoldnessLevels.Semibold}
-            className={props.className}
-          >
+          <StyledH2 boldness={BoldnessLevels.Semibold} className={props.className}>
             {props.children}
           </StyledH2>
         );
       case 3:
         return (
-          <StyledH3
-            boldness={Fonts.BoldnessLevels.Semibold}
-            className={props.className}
-          >
+          <StyledH3 boldness={BoldnessLevels.Semibold} className={props.className}>
             {props.children}
           </StyledH3>
         );
       case 4:
       default:
         return (
-          <StyledH4
-            boldness={Fonts.BoldnessLevels.Semibold}
-            className={props.className}
-          >
+          <StyledH4 boldness={BoldnessLevels.Semibold} className={props.className}>
             {props.children}
           </StyledH4>
         );

@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/react';
-import { Fonts, LayoutElements, Toggle } from 'components/atoms';
+import { Column, Body1, Toggle } from 'components/atoms';
+import { renderers } from 'components/atoms/fonts/markdown';
 import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { renderers } from '../components/atoms/fonts/markdown';
 import { ExampleWrapper } from './shared-components';
 
 const docs = `
@@ -58,10 +58,10 @@ const ToggleStory: SFC<{}> = () => (
     <ExampleWrapper>
       <Toggle>
         {({ isToggled, toggleState }) => (
-          <LayoutElements.Column>
-            <Fonts.Body1>Toggle is currently {isToggled ? 'on' : 'off'}</Fonts.Body1>
+          <Column>
+            <Body1>Toggle is currently {isToggled ? 'on' : 'off'}</Body1>
             <button onClick={toggleState}>Toggle State</button>
-          </LayoutElements.Column>
+          </Column>
         )}
       </Toggle>
     </ExampleWrapper>

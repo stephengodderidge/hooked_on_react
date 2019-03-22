@@ -6,11 +6,6 @@ import * as PropTypes from 'prop-types';
 import { Component } from 'react';
 import { FSA } from 'types/fsa';
 
-/** App Props */
-export interface IAppProps {
-  children: JSX.Element | JSX.Element[] | string;
-}
-
 /** App State */
 export interface IAppState {
   dispatch: (action: FSA) => void;
@@ -25,7 +20,7 @@ export const initialState: IAppState = {
 };
 
 /** Custom React Context Provider */
-export class ContextProvider extends Component<IAppProps, IAppState> {
+export class ContextProvider extends Component<{}, IAppState> {
   static childContextTypes = {
     dispatch: PropTypes.func,
     entities: PropTypes.object,

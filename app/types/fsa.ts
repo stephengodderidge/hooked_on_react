@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 /** Interface for Standard Action object */
-// tslint:disable-next-line:interface-name
 export interface FSA {
   type: string;
   meta?: {

@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/react';
-import { Fonts, LayoutElements } from 'components';
+import { H1, Column, Row } from 'components';
+import { renderers } from 'components/atoms/fonts/markdown';
 import React, { Component, createContext, SFC, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
-import { renderers } from '../components/atoms/fonts/markdown';
 import { ExampleWrapper } from './shared-components';
 
 const intro = `
@@ -108,9 +108,9 @@ const DropdownFilter: SFC<IMultiOptionFilter> = props => {
   return (
     <FilterContext.Consumer>
       {({ filterData, setFilterForKey }) => {
-        const selectedOption = filterData[props.filterKey] || '';
+        const selectedOption = filterData[props.title] || '';
         const setDropdownFilter = (e: React.ChangeEvent<HTMLSelectElement>) =>
-          setFilterForKey(props.filterKey, e.target.value);
+          setFilterForKey(props.title, e.target.value);
         return (
           <>
             <HeadingFont>{props.title}</HeadingFont>
@@ -223,14 +223,13 @@ const AdvancedFilters: SFC<{}> = () => {
   return (
     <FilterContext.Provider value={filterContextValue}>
       <FiltersSidebarLayout>
-        <DropdownFilter title="Brand" options={brandOptions} filterKey="brand" />
-        <CheckboxFilter title="Market" options={marketOptions} filterKey="markets" />
+        <DropdownFilter title="Brand" options={brandOptions} />
+        <CheckboxFilter title="Market" options={marketOptions} />
         <OrFilter>
           {{
             top: disabled => (
               <TextInputFilter
                 title="Search"
-                filterKey="search"
                 disabled={disabled}
               />
             ),
@@ -238,7 +237,6 @@ const AdvancedFilters: SFC<{}> = () => {
               <DropdownFilter
                 title="Hierarchy"
                 options={hierarchyOptions}
-                filterKey="hierarchy"
                 disabled={disabled}
               />
             ),
@@ -265,11 +263,11 @@ const AdvancedFilters: SFC<{}> = () => {
 `;
 
 // #region Shared Code
-const FiltersSidebar = styled(LayoutElements.PaddedColumn)`
+const FiltersSidebar = styled(Column)`
   background-color: ${props => props.theme.colors.grey1};
 `;
 
-const DemoRow = styled(LayoutElements.Row)`
+const DemoRow = styled(Row)`
   justify-content: space-between;
   width: 100%;
 `;
@@ -284,7 +282,7 @@ const CheckboxWithLabel = styled.div`
   padding-right: 16px;
 `;
 
-const FullWidthRow = styled(LayoutElements.Row)`
+const FullWidthRow = styled(Row)`
   width: 100%;
   hr {
     flex: 1;
@@ -364,7 +362,7 @@ class Filters extends Component<{}, IFiltersState> {
 
   renderBrand = () => (
     <>
-      <Fonts.H1>Brand</Fonts.H1>
+      <H1>Brand</H1>
       <select value={this.state.selectedBrand} onChange={this.updateBrand}>
         {brandOptions.map(brand => (
           <option key={brand} value={brand}>
@@ -377,8 +375,8 @@ class Filters extends Component<{}, IFiltersState> {
 
   renderMarket = () => (
     <>
-      <Fonts.H1>Market</Fonts.H1>
-      <LayoutElements.Row>
+      <H1>Market</H1>
+      <Row>
         {marketOptions.map(market => (
           <CheckboxWithLabel key={market}>
             <input
@@ -390,7 +388,7 @@ class Filters extends Component<{}, IFiltersState> {
             <label htmlFor={market}>{market}</label>
           </CheckboxWithLabel>
         ))}
-      </LayoutElements.Row>
+      </Row>
     </>
   );
 
@@ -402,7 +400,7 @@ class Filters extends Component<{}, IFiltersState> {
           isActive={this.state.isSearchActive}
           onClick={!this.state.isSearchActive ? this.toggleActiveSearch : nullFunc}
         >
-          <Fonts.H1>Search</Fonts.H1>
+          <H1>Search</H1>
           <input
             type="text"
             value={this.state.searchTerm}
@@ -420,7 +418,7 @@ class Filters extends Component<{}, IFiltersState> {
           isActive={!this.state.isSearchActive}
           onClick={this.state.isSearchActive ? this.toggleActiveSearch : nullFunc}
         >
-          <Fonts.H1>Hierarchy</Fonts.H1>
+          <H1>Hierarchy</H1>
           <select
             value={this.state.selectedHierarchy}
             onChange={this.updateHierarchy}
@@ -454,35 +452,61 @@ class Filters extends Component<{}, IFiltersState> {
 interface IFilter {
   title: string;
   disabled?: boolean;
-  filterKey: string;
 }
 
 interface IMultiOptionFilter extends IFilter {
   options: string[];
 }
 
+interface IAccordionWithComponentProps {
+  title: string;
+  children: JSX.Element;
+}
+
+const AccordionWithComponent: SFC<IAccordionWithComponentProps> = props => (
+  <>
+    <H1>{props.title}</H1>
+    {props.children}
+  </>
+);
+
+interface IDropdownProps {
+  onChange: (id: string, value: string) => void;
+  value: string;
+  disabled?: boolean;
+  id: string;
+  options: string[];
+}
+const Dropdown: SFC<IDropdownProps> = props => {
+  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
+    props.onChange(props.id, e.target.value);
+  return (
+    <select value={props.value} onChange={onChange} disabled={props.disabled}>
+      {props.options.map(o => (
+        <option key={o} value={o}>
+          {o}
+        </option>
+      ))}
+    </select>
+  );
+};
+
 const DropdownFilter: SFC<IMultiOptionFilter> = props => {
   return (
     <FilterContext.Consumer>
       {({ filterData, setFilterForKey }) => {
-        const selectedOption = filterData[props.filterKey] || '';
-        const setDropdownFilter = (e: React.ChangeEvent<HTMLSelectElement>) =>
-          setFilterForKey(props.filterKey, e.target.value);
+        const selectedOption = (filterData[props.title] as string) || '';
+
         return (
-          <>
-            <Fonts.H1>{props.title}</Fonts.H1>
-            <select
+          <AccordionWithComponent title={props.title}>
+            <Dropdown
               value={selectedOption}
-              onChange={setDropdownFilter}
               disabled={props.disabled}
-            >
-              {props.options.map(o => (
-                <option key={o} value={o}>
-                  {o}
-                </option>
-              ))}
-            </select>
-          </>
+              id={props.title}
+              options={props.options}
+              onChange={setFilterForKey}
+            />
+          </AccordionWithComponent>
         );
       }}
     </FilterContext.Consumer>
@@ -492,23 +516,19 @@ const DropdownFilter: SFC<IMultiOptionFilter> = props => {
 const CheckboxFilter: SFC<IMultiOptionFilter> = props => (
   <FilterContext.Consumer>
     {({ filterData, setFilterForKey }) => {
-      const checkboxSelections = (filterData[props.filterKey] || []) as string[];
+      const checkboxSelections = (filterData[props.title] || []) as string[];
       const setCheckboxSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
         if (checkboxSelections.includes(value)) {
-          setFilterForKey(
-            props.filterKey,
-            checkboxSelections.filter(f => f !== value),
-          );
+          setFilterForKey(props.title, checkboxSelections.filter(f => f !== value));
         } else {
-          setFilterForKey(props.filterKey, checkboxSelections.concat(value));
+          setFilterForKey(props.title, checkboxSelections.concat(value));
         }
       };
       return (
-        <>
-          <Fonts.H1>{props.title}</Fonts.H1>
-          <LayoutElements.Row>
+        <AccordionWithComponent title={props.title}>
+          <Row>
             {props.options.map(o => (
               <CheckboxWithLabel key={o}>
                 <input
@@ -520,8 +540,8 @@ const CheckboxFilter: SFC<IMultiOptionFilter> = props => (
                 <label htmlFor={o}>{o}</label>
               </CheckboxWithLabel>
             ))}
-          </LayoutElements.Row>
-        </>
+          </Row>
+        </AccordionWithComponent>
       );
     }}
   </FilterContext.Consumer>
@@ -530,12 +550,11 @@ const CheckboxFilter: SFC<IMultiOptionFilter> = props => (
 const TextInputFilter: SFC<IFilter> = props => (
   <FilterContext.Consumer>
     {({ filterData, setFilterForKey }) => {
-      const textValue = filterData[props.filterKey] || '';
+      const textValue = filterData[props.title] || '';
       const setTextValue = (e: React.ChangeEvent<HTMLInputElement>) =>
-        setFilterForKey(props.filterKey, e.target.value);
+        setFilterForKey(props.title, e.target.value);
       return (
-        <>
-          <Fonts.H1>{props.title}</Fonts.H1>
+        <AccordionWithComponent title={props.title}>
           <input
             type="text"
             value={textValue}
@@ -543,7 +562,7 @@ const TextInputFilter: SFC<IFilter> = props => (
             onChange={setTextValue}
             disabled={props.disabled}
           />
-        </>
+        </AccordionWithComponent>
       );
     }}
   </FilterContext.Consumer>
@@ -635,28 +654,26 @@ const AdvancedFilters: SFC<{}> = () => {
     ...filtersState,
     setFilterForKey: setFilter,
   };
+
+  const renderTop = (disabled: boolean) => (
+    <TextInputFilter title="Search" disabled={disabled} />
+  );
+  const renderBottom = (disabled: boolean) => (
+    <DropdownFilter
+      title="Hierarchy"
+      options={hierarchyOptions}
+      disabled={disabled}
+    />
+  );
   return (
     <FilterContext.Provider value={filterContextValue}>
       <FiltersSidebarLayout>
-        <DropdownFilter title="Brand" options={brandOptions} filterKey="brand" />
-        <CheckboxFilter title="Market" options={marketOptions} filterKey="markets" />
+        <DropdownFilter title="Brand" options={brandOptions} />
+        <CheckboxFilter title="Market" options={marketOptions} />
         <OrFilter>
           {{
-            top: disabled => (
-              <TextInputFilter
-                title="Search"
-                filterKey="search"
-                disabled={disabled}
-              />
-            ),
-            bottom: disabled => (
-              <DropdownFilter
-                title="Hierarchy"
-                options={hierarchyOptions}
-                filterKey="hierarchy"
-                disabled={disabled}
-              />
-            ),
+            top: renderTop,
+            bottom: renderBottom,
           }}
         </OrFilter>
       </FiltersSidebarLayout>

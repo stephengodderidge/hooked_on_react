@@ -5,7 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import rowDocs from './docs/row-docs.mkd';
 import rowWithPaddingDocs from './docs/row-with-padding-docs.mkd';
-import { LayoutElements } from './elements';
+import { Column, Row } from './';
 
 const Tile = styled.div`
   height: 16px;
@@ -17,13 +17,11 @@ const elements = Object.keys(greys).map(grey => (
   <Tile color={greys[grey]} key={grey} />
 ));
 
-const row = <LayoutElements.Row>{elements}</LayoutElements.Row>;
-const rowWithPadding = (
-  <LayoutElements.RowWithPadding>{elements}</LayoutElements.RowWithPadding>
-);
-const column = <LayoutElements.Column>{elements}</LayoutElements.Column>;
+const row = <Row>{elements}</Row>;
+const rowWithPadding = <Row childSpacing={16}>{elements}</Row>;
+const column = <Column childSpacing={16}>{elements}</Column>;
 
-storiesOf('Layout Elements', module)
+storiesOf('Layout', module)
   .add(
     'Row',
     withInfo({
@@ -36,7 +34,7 @@ storiesOf('Layout Elements', module)
     })(() => row),
   )
   .add(
-    'Row With Padding',
+    'Row With Equally Spaced Children',
     withInfo({
       text: rowWithPaddingDocs,
       source: false,

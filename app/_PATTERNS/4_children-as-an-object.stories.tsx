@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/react';
-import { Fonts, LayoutElements } from 'components';
+import { Column, H1, Row } from 'components';
+import { renderers } from 'components/atoms/fonts/markdown';
 import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
-import { renderers } from '../components/atoms/fonts/markdown';
 import { ExampleWrapper } from './shared-components';
 
 const docs = `
@@ -75,7 +75,7 @@ const docs2 = `
   will yield:
 `;
 
-const FiltersWrapper = styled(LayoutElements.PaddedColumn)`
+const FiltersWrapper = styled(Column)`
   background-color: ${props => props.theme.colors.grey1};
 `;
 
@@ -91,8 +91,8 @@ interface IFilter {
 }
 
 const BrandComponent: SFC<IFilter> = props => (
-  <LayoutElements.Column>
-    <Fonts.H1>Brand</Fonts.H1>
+  <Column>
+    <H1>Brand</H1>
     <select>
       {props.options.map(option => (
         <option key={option} value={option}>
@@ -100,21 +100,21 @@ const BrandComponent: SFC<IFilter> = props => (
         </option>
       ))}
     </select>
-  </LayoutElements.Column>
+  </Column>
 );
 
 const MarketComponent: SFC<IFilter> = props => (
-  <LayoutElements.Column>
-    <Fonts.H1>Market</Fonts.H1>
-    <LayoutElements.RowWithPadding>
+  <Column>
+    <H1>Market</H1>
+    <Row childSpacing={16}>
       {props.options.map(option => (
         <React.Fragment key={option}>
           <input type="checkbox" value={option} name={option} />
           <label htmlFor={option}>{option}</label>
         </React.Fragment>
       ))}
-    </LayoutElements.RowWithPadding>
-  </LayoutElements.Column>
+    </Row>
+  </Column>
 );
 
 interface INamedSlotsLayoutProps {
@@ -128,14 +128,14 @@ interface INamedSlotsLayoutProps {
 const NamedSlotsLayout: SFC<INamedSlotsLayoutProps> = props => {
   const { Top, Bottom, Right } = props.children;
   return (
-    <LayoutElements.Row>
+    <Row>
       <FiltersWrapper>
         {Top || null}
         <Hr />
         {Bottom || null}
       </FiltersWrapper>
       {Right || null}
-    </LayoutElements.Row>
+    </Row>
   );
 };
 
@@ -168,11 +168,11 @@ const customComponentExample = (
         Top: <BrandComponent {...brand} />,
         Bottom: <MarketComponent {...market} />,
         Right: (
-          <LayoutElements.PaddedColumn>
+          <Column>
             {['One', 'Two', 'Three'].map(s => (
-              <Fonts.H1 key={s}>{s}</Fonts.H1>
+              <H1 key={s}>{s}</H1>
             ))}
-          </LayoutElements.PaddedColumn>
+          </Column>
         ),
       }}
     </NamedSlotsLayout>

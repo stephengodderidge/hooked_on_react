@@ -1,9 +1,9 @@
-import { Fonts } from 'components/atoms';
+import { Link3 } from 'components';
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
 
-const LinkFont = styled(Fonts.Link3)`
+const LinkFont = styled(Link3)`
   margin: 16px 0px;
 `;
 
@@ -25,7 +25,7 @@ interface ILinkProps extends IDefaultProps {
 }
 
 export const Link: SFC<ILinkProps> = props => (
-  <LinkFont className={props.className} tag="a" linkUrl={props.href}>
+  <LinkFont className={props.className} linkUrl={props.href} target="_">
     {props.children}
   </LinkFont>
 );

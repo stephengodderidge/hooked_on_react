@@ -1,14 +1,14 @@
 import { storiesOf } from '@storybook/react';
-import { Fonts, LayoutElements } from 'components/atoms';
+import { Column, H2, Row } from 'components';
 import { colors, TColorNames } from 'modules/config/colors';
 import React from 'react';
 import styled from 'styled-components';
 
-const TileRow = styled(LayoutElements.Row)`
+const TileRow = styled(Row)`
   padding: 4px;
 `;
 
-const ColorHeading = styled(Fonts.H2)`
+const ColorHeading = styled(H2)`
   margin: 4px;
 `;
 
@@ -28,6 +28,6 @@ const SmallTiles = tileColors.map(color => (
     <ColorHeading>{color}</ColorHeading>
   </TileRow>
 ));
-const story = <LayoutElements.Column>{SmallTiles}</LayoutElements.Column>;
+const story = <Column>{SmallTiles}</Column>;
 
 storiesOf('Colors', module).add('All', () => story);

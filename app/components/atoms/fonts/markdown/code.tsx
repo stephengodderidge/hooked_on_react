@@ -1,4 +1,4 @@
-import { Fonts } from 'components/atoms';
+import { Body1 } from 'components';
 import React, { SFC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { hopscotch } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -27,7 +27,7 @@ interface ICodeProps extends IDefaultProps {
   value?: string;
 }
 
-const InlineCode = styled(Fonts.Body1)`
+const InlineCode = styled(Body1)`
   color: ${props => props.theme.colors.red};
   background-color: ${props => props.theme.colors.grey1};
   padding: 0px 4px;

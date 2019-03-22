@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/react';
-import { Fonts, LayoutElements } from 'components/atoms';
+import { Column, H1 } from 'components/atoms';
+import { renderers } from 'components/atoms/fonts/markdown';
 import React, { SFC, useContext, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { renderers } from '../components/atoms/fonts/markdown';
 import { ExampleWrapper } from './shared-components';
 
 const docs = `
@@ -88,18 +88,18 @@ const ButtonClickCounter: SFC<{}> = () => {
 
 const CountDisplay: SFC<{}> = () => {
   const { count } = useContext(CounterContext);
-  return <Fonts.H1>Button has been clicked {count} times</Fonts.H1>;
+  return <H1>Button has been clicked {count} times</H1>;
 };
 
 const ContextProvider: SFC<{}> = props => {
   const [count, setCount] = useState(0);
   const increment = () => setCount(count + 1);
   return (
-    <LayoutElements.Column>
+    <Column>
       <CounterContext.Provider value={{ count, increment }}>
         {props.children}
       </CounterContext.Provider>
-    </LayoutElements.Column>
+    </Column>
   );
 };
 

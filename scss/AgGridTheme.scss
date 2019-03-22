@@ -1,0 +1,231 @@
+@import "SpexUiStyleGuide";
+
+$ag-root-font-family: "Roboto-Regular",sans-serif;
+$ag-root-font-size: 12px; // Should remain at 12px.  Any change here will alter the column width calculations.
+$ag-border-1: 1px solid white;
+$ag-header-foreground-1: white;
+$ag-cell-ltr-no-focus-border-right: 0.5px solid #efefed;
+$ag-cell-no-focus-border-top: none;
+$ag-cell-no-focus-border-bottom: 0.5px solid #efefed;
+$ag-cell-ltr-no-focus-border-left: none;
+$ag-cell-rtl-no-focus-border-right: none;
+$ag-row-selected-background-color: #dededd;
+$ag-cell-focused-border: none;
+$ag-separator-color: #d3d3d3;
+$ag-header-background-1: #0084d7;
+$ag-tab-border: 1px solid #d3d3d3;
+$ag-row-odd-background-color: #ebebeb;
+$ag-row-even-background-color: #f5f5f5;
+$ag-row-floating-background-color: #f0f0f0;
+$ag-row-stub-background-color: #f0f0f0;
+$ag-background-1: white;
+
+/* forçe ag-grid follow this styles*/
+.ag-icon-checkbox-checked, .ag-icon-checkbox-indeterminate, .ag-icon-checkbox-unchecked{
+    width: 16px !important;
+    height: 16px !important;
+    background-size: 16px !important;
+}
+
+.checkbox-grid:not(.ag-header-cell){
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0px !important;
+    padding-top:4px !important;
+}
+.ag-header-cell-sortable.checkbox-grid {
+    padding-right: 4px !important;
+}
+
+.ag-header-cell, .ag-header-group-cell{
+    padding-top: 12px !important;
+    padding-left: 4px !important;
+}
+
+.location-header-cell {
+    padding-top: 4px !important;
+    padding-left: 4px !important;
+}
+.main__locations-div .location__stores__wrapper-div .ag-header-row .ag-header-cell, .location-header-cell .location-full-width {
+    top: 0px !important;
+    height: 42px !important;
+    display: inline-grid;
+}
+.location-header-cell > .ag-cell-label-container {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.category-header-cell > .ag-cell-label-container {
+    width: 100%;
+}
+
+.ag-header-cell-text {
+//    font-size: .8em;
+}
+
+.ag-fresh .ag-header-cell-label .ag-header-cell-text {
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    line-height: 1.4;
+}
+.ag-header-icon {
+    line-height: 1.2;
+}
+
+.content-grid{
+    //display: flex !important;
+    align-items: center !important;
+    color: $grey !important;
+    font-size: 12px !important;
+    //padding-top: 7px !important;
+    justify-content: left !important;
+}
+
+.ag-header-select-all, .ag-selection-checkbox{
+    padding-right: 0px !important;
+}
+
+.ag-grid-formula::after {
+    content: "\200B";
+}
+
+.ag-cell:focus{
+    outline: none;
+}
+
+.ag-react-container{
+    width: 100%;
+
+    input{
+        width: 100%;
+    }
+    select{
+        width: 100%;
+    }
+}
+
+$color_1: #000000;
+$color_2: #ffffff;
+$font_1: 12px;
+
+.header-subhead {
+    font-size: $font_1;
+}
+
+.header-group-empty {
+    background-color: #dededd;
+}
+
+.header-group-1, .header-group-2, .header-group-3 {
+    font-weight: bold;
+}
+
+.header-group-1 {
+    color: $color_1;
+    background-color: #e2f2fe;
+    font-size: $font_1;
+    text-align: center;
+}
+
+.header-group-1-1 {
+    color: $color_2;
+    background-color: #0084d7;
+    font-size: $font_1;
+}
+
+.header-group-2 {
+    color: $color_1;
+    background-color: #d7f3ee;
+    font-size: $font_1;
+    text-align: center;
+}
+
+.header-group-2-1 {
+    color: $color_2;
+    background-color: #5ccbb9;
+    font-size: $font_1;
+}
+
+.header-group-2-2 {
+    color: $color_1;
+    background-color: #82d7c9;
+    font-size: $font_1;
+}
+
+.header-group-2-3 {
+    color: $color_1;
+    background-color: #a9e4da;
+    font-size: $font_1;
+}
+
+.header-group-2-4 {
+    color: $color_1;
+    background-color: #c8ede7;
+    font-size: $font_1;
+}
+
+.header-group-2-5 {
+    color: $color_1;
+    background-color: #e6f7f4;
+    font-size: $font_1;
+}
+
+.header-group-3 {
+    color: $color_1;
+    background-color: #d1d5f4;
+    font-size: $font_1;
+    text-align: center;
+}
+
+.header-group-3-1 {
+    color: $color_2;
+    background-color: #99a2e8;
+    font-size: $font_1;
+}
+
+.header-group-3-2 {
+    color: $color_1;
+    background-color: #b9bfef;
+    font-size: $font_1;
+}
+
+.header-group-3-3 {
+    color: $color_1;
+    background-color: #ccd2ff;
+    font-size: $font_1;
+}
+
+.header-group-3-4 {
+    color: $color_1;
+    background-color: #d9dcf6;
+    font-size: $font_1;
+}
+
+.header-group-3-5 {
+    color: $color_1;
+    background-color: #e9ebfa;
+    font-size: $font_1;
+}
+
+.ag-fresh .ag-ltr .ag-cell-no-focus {
+    border-right: 1px solid #dededd ;
+}
+
+.ag-fresh .ag-cell-no-focus {
+    border-bottom: 1px solid #dededd;
+}
+
+.ag-bl-east, .ag-bl-normal-east{
+    display: none;
+}
+
+.ag-cell-error{
+    border: 2px solid red !important;
+    border-bottom-width: 2px !important;
+}
+.ag-fresh .ag-menu {
+    z-index: 2147483647;
+}

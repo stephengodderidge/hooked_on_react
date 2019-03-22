@@ -1,0 +1,155 @@
+[Jest](https://jestjs.io/en/) is a powerful JavaScript testing library which can test both vanilla JS and React.
+
+To run tests, use the command `yarn test`. Jest will find and execute all files with `test` in the filename. Alternatively, running `yarn test --watch` will start a process that executes all tests and only reruns tests associated with code that changes.
+
+When following TDD practices, it is recommended to invoke the `watch` command instead of re-executing the `test` command after each change.
+
+## Types of Tests
+
+### Snapshot
+
+Snapshot tests generate static snapshots of the argument passed to the `expect` callback provided by Jest. This type of test is best used for small, simple components which should always return the same DOM structure for a given implementation:
+
+```jsx
+const SimpleComponent = props => <div {...props} />;
+
+test('Simple Component Test', () => {
+  expect(<SimpleComponent>Lorem ipsum</SimpleComponent>).toMatchSnapshot();
+});
+```
+
+Running Jest will generate the following snapshot in a `__snapshots__` folder for the above test:
+
+```
+exports[`Simple Component Test 1`] = `
+<SimpleComponent>
+  Lorem ipsum
+</SimpleComponent>
+`;
+```
+
+### Unit
+
+Unit tests are used to test functions and components in isolation. A unit test should be small, fast, and should thoroughly test all possible branches/outputs for a given function or component.
+
+#### **Function Unit Test**
+
+```js
+const thisOrThat = chooseThis => {
+  if (this) {
+    return 'You chose this!';
+  }
+  return 'You chose that!';
+};
+
+describe('Function Unit Test', () => {
+  test('thisOrThat - true', () => {
+    expect(thisOrThat(true)).toMatchSnapshot();
+  });
+  test('thisOrThat - false', () => {
+    expect(thisOrThat(false)).toMatchSnapshot();
+  });
+});
+```
+
+#### **Component Unit Test**
+
+Component Unit Tests come in two inclusive flavors: **Static** and **Functional**. **Static** tests generally use `toMatchSnapshot()` and are responsible for ensuring a component consistently renders the same DOM structure give the same props:
+
+**NOTE: UPDATE TEST TO USE ENZYME OR REACT TESTING LIBRARY TO DEMONSTRATE ACTUAL SNAPSHOT**
+
+```jsx
+const StaticComponent = props => (
+  <>
+    <div>Name: {props.name}</div>
+    <div>Age: {props.age}</div>
+  </>
+);
+test('StaticComponent Test', () => {
+  expect(<StaticComponent name="Bob Ross" age={50} />).toMatchSnapshot();
+});
+```
+
+**Functional** tests involve DOM manipulations or simulating user interactions through the use of mocked functions or DOM queries. This type of test requires additional libraries such as [Enzyme](https://airbnb.io/enzyme/) or [React Testing Library](https://testing-library.com/react):
+
+```jsx
+import { render, fireEvent } from 'react-testing-library';
+
+const FunctionalComponent = props => (
+  <>
+    <div>Counter is at {props.counter}</div>
+    <button onClick={props.onClick}>Increment Counter</button>
+  </>
+);
+
+test('FunctionalComponent Test', () => {
+  const onClick = jest.fn();
+  const { getByText } = render(
+    <FunctionalComponent counter={0} onClick={onClick} />,
+  );
+  fireEvent.click(getByText('Increment Counter'));
+  expect(onClick).toHaveBeenCalledTimes(1);
+});
+```
+
+### Integration
+
+Integration tests are used to test functions and components together. Integration tests should test the integration of multiple functions or components and should target core business logic.
+
+#### **Function Integration Test**
+
+```js
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+
+const calculateValue = (addValues, a, b) => {
+  if (addValues) {
+    return add(a, b);
+  }
+  return subtract(a, b);
+};
+
+describe('Function Integration Test', () => {
+  test('Calculate Values - Add)', () => {
+    const value = calculateValue(true, 1, 2);
+    expect(value).toBe(3);
+  });
+  test('Calculate Values - Subtract)', () => {
+    const value = calculateValue(false, 1, 2);
+    expect(value).toBe(-1);
+  });
+});
+```
+
+#### **Component Integration Test**
+
+```jsx
+import { render, fireEvent } from 'react-testing-library';
+
+const ButtonComponent = (props: any) => <button {...props} />;
+const DisplayComponent = (props: any) => (
+  <div {...props}>Counter is at {props.counter}</div>
+);
+
+const IntegrationComponent = () => {
+  const [counter, setCount] = useState(0);
+  return (
+    <>
+      <DisplayComponent data-testid="DisplayComponent" counter={counter} />
+      <ButtonComponent
+        data-testid="ButtonComponent"
+        onClick={() => setCount(counter + 1)}
+      >
+        Increment Counter
+      </ButtonComponent>
+    </>
+  );
+};
+
+test('Component Integraion Test', () => {
+  const { getByTestId } = render(<IntegrationComponent />);
+  expect(getByTestId('DisplayComponent').textContent).toContain('0');
+  fireEvent.click(getByTestId('ButtonComponent'));
+  expect(getByTestId('DisplayComponent').textContent).toContain('1');
+});
+```

@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/react';
-import { Fonts } from 'components/atoms';
+import { Body1 } from 'components/atoms';
 import React, { SFC, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { renderers } from '../components/atoms/fonts/markdown';
+import { renderers } from 'components/atoms/fonts/markdown';
 import { ExampleWrapper } from './shared-components';
 
 const docs = `
@@ -57,22 +57,25 @@ const useCounter = (initialCount = 0) => {
   const [counter, setCounter] = useState(initialCount);
   const increment = () => setCounter(counter + 1);
   const decrement = () => setCounter(counter - 1);
+  const setTo10 = () => setCounter(10);
   return {
     counter,
     increment,
     decrement,
+    setTo10,
   };
 };
 
 const HooksStory: SFC<{}> = () => {
-  const { counter, increment, decrement } = useCounter();
+  const { counter, increment, decrement, setTo10 } = useCounter();
   return (
     <>
       <ReactMarkdown renderers={renderers} source={docs} />
       <ExampleWrapper>
-        <Fonts.Body1>Counter is currently at {counter}</Fonts.Body1>
+        <Body1>Counter is currently at {counter}</Body1>
         <button onClick={increment}>Increment</button>
         <button onClick={decrement}>Decrement</button>
+        <button onClick={setTo10}>Set to 10</button>
       </ExampleWrapper>
     </>
   );

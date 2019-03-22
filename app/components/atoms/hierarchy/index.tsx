@@ -1,9 +1,8 @@
-import { Fonts, LayoutElements } from 'components';
-import { Toggle } from 'components/atoms';
+import { Column, Body1, Row, Toggle } from 'components/atoms';
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 
-const HoverableText = styled(Fonts.Body1)`
+const HoverableText = styled(Body1)`
   &:hover {
     cursor: pointer;
   }
@@ -55,7 +54,7 @@ export const Hierarchy: SFC<IHierarchyProps> = props => {
       <Toggle>
         {renderProps => {
           return (
-            <LayoutElements.Column>
+            <Column>
               <HierarchyNode
                 isExpanded={renderProps.isToggled}
                 onClick={renderProps.toggleState}
@@ -64,17 +63,17 @@ export const Hierarchy: SFC<IHierarchyProps> = props => {
               </HierarchyNode>
               {renderProps.isToggled &&
                 props.children.children.map(child => (
-                  <LayoutElements.Row key={child.name}>
+                  <Row key={child.name}>
                     <Spacer />
                     <Hierarchy>{child}</Hierarchy>
-                  </LayoutElements.Row>
+                  </Row>
                 ))}
-            </LayoutElements.Column>
+            </Column>
           );
         }}
       </Toggle>
     ) : (
-      <Fonts.Body1>{props.children.name}</Fonts.Body1>
+      <Body1>{props.children.name}</Body1>
     );
   }
   return null;

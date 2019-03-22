@@ -3,7 +3,6 @@ import { normalize } from 'polished';
 import { createGlobalStyle } from 'styled-components';
 
 const injectGlobalStyles = (): void => {
-  // tslint:disable:no-unused-expression
   createGlobalStyle`
     ${normalize()}
 
@@ -21,7 +20,6 @@ const injectGlobalStyles = (): void => {
       }
     }
   `;
-  // tslint:enable:no-unused-expression
 };
 
 /**

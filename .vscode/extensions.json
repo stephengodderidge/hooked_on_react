@@ -6,6 +6,7 @@
     "esbenp.prettier-vscode",
     "rebornix.project-snippets",
     "ms-vscode.vscode-typescript-tslint-plugin",
-    "jpoissonnier.vscode-styled-components"
+    "jpoissonnier.vscode-styled-components",
+    "kevinkyang.auto-comment-blocks"
   ]
 }

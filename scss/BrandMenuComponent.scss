@@ -1,0 +1,40 @@
+.brand__menu-component > label{
+        font-size: 18px;
+        color: white;
+}
+
+.brand__menu-component{
+    margin-left: 15px;
+
+    .brand__selected-menu{
+        font-family: 'Roboto-Light', sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.3px;
+        color: #ffffff;
+        display: flex;
+    }
+
+    .brand__menu__box-component{
+        background-color: white;
+        position: absolute;
+        top: 56px;
+        width: 150px;
+        left: 69px;
+        border: solid 1px #00a5fa;
+        min-width: 193px;
+        z-index: 3 !important;
+
+        ul{
+            li{
+                padding: 10px 5px 10px 15px;
+
+                label{
+                    color: black;
+                }
+            }
+            li:hover{
+                background-color: #f5f5f5;
+            }
+        }
+    }
+}

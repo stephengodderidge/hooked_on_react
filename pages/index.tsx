@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 /** Home Page */
 class Home extends Component<{}, {}> {
   render() {
-    return <App>Home</App>;
+    return <App />;
   }
 }
 

@@ -1,9 +1,9 @@
 import { storiesOf } from '@storybook/react';
-import { Fonts, LayoutElements } from 'components/atoms';
+import { Row } from 'components/atoms';
+import { renderers } from 'components/atoms/fonts/markdown';
 import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
-import { renderers } from '../components/atoms/fonts/markdown';
 import { ExampleWrapper } from './shared-components';
 
 const docs = `
@@ -77,45 +77,22 @@ const docs = `
 
 `;
 
-const docs2 = `
-  ## Example Implementation - Sorted RowWithPadding for evenly spaced, sorted children
-  \`\`\`tsx
-  const sortedRowWithPadding = (
-    <SortedRowWithPadding>
-      <BodyFont key="zebra">Zebra</BodyFont>
-      <BodyFont key="monkey">Monkey</BodyFont>
-      <BodyFont key="alligator">Alligator</BodyFont>
-    </SortedRowWithPadding>
-  );
-  \`\`\`
-`;
-
 const Button = styled.button`
   padding: 8px 16px;
 `;
 
 const rowWithPadding = (
-  <LayoutElements.RowWithPadding>
+  <Row childSpacing={16}>
     <Button key="back">Back</Button>
     <Button key="cancel">Cancel</Button>
     <Button key="ok">Ok</Button>
-  </LayoutElements.RowWithPadding>
-);
-
-const sortedRowWithPadding = (
-  <LayoutElements.SortedRowWithPadding>
-    <Fonts.Body1 key="zebra">Zebra</Fonts.Body1>
-    <Fonts.Body1 key="monkey">Monkey</Fonts.Body1>
-    <Fonts.Body1 key="alligator">Alligator</Fonts.Body1>
-  </LayoutElements.SortedRowWithPadding>
+  </Row>
 );
 
 const ChildArrayStory: SFC<{}> = () => (
   <React.Fragment>
     <ReactMarkdown renderers={renderers} source={docs} />
     <ExampleWrapper>{rowWithPadding}</ExampleWrapper>
-    <ReactMarkdown renderers={renderers} source={docs2} />
-    <ExampleWrapper>{sortedRowWithPadding}</ExampleWrapper>
   </React.Fragment>
 );
 
