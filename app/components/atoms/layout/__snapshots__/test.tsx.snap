@@ -288,6 +288,26 @@ exports[`Layout Atoms Column Renders Column with Content Justification - START 1
 </div>
 `;
 
+exports[`Layout Atoms Inject Element Injects Correct Number of Elements 1`] = `
+<div>
+  <div>
+    hello
+  </div>
+  <hr
+    data-testid="hr"
+  />
+  <div>
+    hello
+  </div>
+  <hr
+    data-testid="hr"
+  />
+  <div>
+    hello
+  </div>
+</div>
+`;
+
 exports[`Layout Atoms Row Renders Row 1`] = `
 .c1 {
   display: -webkit-box;

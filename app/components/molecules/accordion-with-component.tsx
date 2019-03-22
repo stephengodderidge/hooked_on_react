@@ -1,4 +1,4 @@
-import { Column, H1, Row, Toggle } from 'components';
+import { Column, H1, Row, useToggle } from 'components';
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { IDefaultProps } from 'types/default-props';
@@ -18,16 +18,15 @@ interface IAccordionWithComponentProps extends IDefaultProps {
   title: string;
 }
 
-export const AccordionWithComponent: SFC<IAccordionWithComponentProps> = props => (
-  <Toggle>
-    {({ isToggled, toggleState }) => (
-      <AccordionWrapper>
-        <AccordionTitle childSpacing={10}>
-          <H1>{props.title}</H1>
-          <button onClick={toggleState}>Toggle</button>
-        </AccordionTitle>
-        {!!isToggled && props.children}
-      </AccordionWrapper>
-    )}
-  </Toggle>
-);
+export const AccordionWithComponent: SFC<IAccordionWithComponentProps> = props => {
+  const { isToggled, toggleState } = useToggle();
+  return (
+    <AccordionWrapper>
+      <AccordionTitle childSpacing={10}>
+        <H1>{props.title}</H1>
+        <button onClick={toggleState}>Toggle</button>
+      </AccordionTitle>
+      {!!isToggled && props.children}
+    </AccordionWrapper>
+  );
+};

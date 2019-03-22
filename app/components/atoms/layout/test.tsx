@@ -37,7 +37,7 @@ const getRow = (
 describe('Layout Atoms', () => {
   describe('Inject Element', () => {
     test('Injects Correct Number of Elements', () => {
-      const { getAllByTestId } = render(
+      const { getAllByTestId, container } = render(
         <InjectElement element={<hr data-testid="hr" />}>
           <div key={1}>hello</div>
           <div key={2}>hello</div>
@@ -45,6 +45,7 @@ describe('Layout Atoms', () => {
         </InjectElement>,
       );
       expect(getAllByTestId('hr').length).toEqual(2);
+      expect(container).toMatchSnapshot();
     });
   });
 

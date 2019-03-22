@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react';
-import { Column, Body1, Toggle } from 'components/atoms';
+import { Column, Body1, useToggle } from 'components/atoms';
 import { renderers } from 'components/atoms/fonts/markdown';
 import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -52,21 +52,22 @@ const docs = `
   ## Example Implementation - On / Off Toggle
 `;
 
-const ToggleStory: SFC<{}> = () => (
-  <React.Fragment>
-    <ReactMarkdown renderers={renderers} source={docs} />
-    <ExampleWrapper>
-      <Toggle>
-        {({ isToggled, toggleState }) => (
+const ToggleStory: SFC<{}> = () => {
+  const { isToggled, toggleState } = useToggle();
+  return (
+    <React.Fragment>
+      <ReactMarkdown renderers={renderers} source={docs} />
+      <ExampleWrapper>
+        <>
           <Column>
+            <button onClick={toggleState}>Toggle</button>
             <Body1>Toggle is currently {isToggled ? 'on' : 'off'}</Body1>
-            <button onClick={toggleState}>Toggle State</button>
           </Column>
-        )}
-      </Toggle>
-    </ExampleWrapper>
-  </React.Fragment>
-);
+        </>
+      </ExampleWrapper>
+    </React.Fragment>
+  );
+};
 
 storiesOf('_PATTERNS', module).add('2 - Children as a Function', () => (
   <ToggleStory />

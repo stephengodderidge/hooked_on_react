@@ -1,4 +1,4 @@
-import { Column, Body1, Row, Toggle } from 'components/atoms';
+import { Column, Body1, Row, useToggle } from 'components/atoms';
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 
@@ -49,29 +49,22 @@ const childHasChildren = (child: IMyObject) =>
 
 /** Generates a Hierarchical structure for a nested object */
 export const Hierarchy: SFC<IHierarchyProps> = props => {
+  const { isToggled, toggleState } = useToggle();
+
   if (childIsMyObject(props.children)) {
     return childHasChildren(props.children) ? (
-      <Toggle>
-        {renderProps => {
-          return (
-            <Column>
-              <HierarchyNode
-                isExpanded={renderProps.isToggled}
-                onClick={renderProps.toggleState}
-              >
-                {props.children.name}
-              </HierarchyNode>
-              {renderProps.isToggled &&
-                props.children.children.map(child => (
-                  <Row key={child.name}>
-                    <Spacer />
-                    <Hierarchy>{child}</Hierarchy>
-                  </Row>
-                ))}
-            </Column>
-          );
-        }}
-      </Toggle>
+      <Column>
+        <HierarchyNode isExpanded={isToggled} onClick={toggleState}>
+          {props.children.name}
+        </HierarchyNode>
+        {isToggled &&
+          props.children.children.map(child => (
+            <Row key={child.name}>
+              <Spacer />
+              <Hierarchy>{child}</Hierarchy>
+            </Row>
+          ))}
+      </Column>
     ) : (
       <Body1>{props.children.name}</Body1>
     );
