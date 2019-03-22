@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import 'scss/ButtonComponent.scss';
+//import 'scss/ButtonComponent.scss';
 
 export enum ButtonColor {
   PRIMARY = 'button-blue',
