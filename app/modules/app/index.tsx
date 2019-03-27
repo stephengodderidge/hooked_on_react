@@ -1,4 +1,3 @@
-import { MainGrid } from 'components';
 import { stateReducer } from 'modules/app/state-reducer';
 import React, { createContext } from 'react';
 import { FSA } from 'types/fsa';
@@ -36,13 +35,7 @@ export class App extends AppState.ContextProvider {
     updateLocalStorage(this.state);
     return (
       <AppContext.Provider value={this.getContextValue()}>
-        <MainGrid>
-          {{
-            FilterBar: <div>Filter Bar</div>,
-            ActionBar: <div>Action Bar</div>,
-            PageContent: <div>Page Content</div>,
-          }}
-        </MainGrid>
+        Layout Template goes here!
       </AppContext.Provider>
     );
   }

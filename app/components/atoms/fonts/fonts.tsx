@@ -5,11 +5,9 @@ import { colors } from 'modules/config/colors';
 import { IDefaultProps } from 'types/default-props';
 
 export enum BoldnessLevels {
-  Light,
-  Normal,
-  Medium,
-  Semibold,
-  Bold,
+  LIGHT = 1,
+  MEDIUM,
+  BOLD,
 }
 
 export enum FontColor {
@@ -19,9 +17,9 @@ export enum FontColor {
 
 interface IFontProps extends IDefaultProps {
   /**
-   * [optional] specify the boldness level.
-   * Use the BoldnessLevels enum.
-   * Default is Normal if not specified
+   * [optional] specifies the font boldness level
+   *
+   * @default MEDIUM
    */
   boldness?: BoldnessLevels;
 
@@ -58,17 +56,13 @@ const Font = (props: IFontProps) => {
 
 const getBoldness = (boldnessLevel: BoldnessLevels): number => {
   switch (boldnessLevel) {
-    case BoldnessLevels.Light:
-    case BoldnessLevels.Normal:
-      return 400;
-    case BoldnessLevels.Medium:
-      return 500;
-    case BoldnessLevels.Semibold:
-      return 600;
-    case BoldnessLevels.Bold:
+    case BoldnessLevels.LIGHT:
+      return 300;
+    case BoldnessLevels.BOLD:
       return 700;
+    case BoldnessLevels.MEDIUM:
     default:
-      return 400;
+      return 500;
   }
 };
 
@@ -89,7 +83,7 @@ const BaseFont = styled(Font)`
   font-family: ${FONT};
   font-weight: ${(props: IFontProps) =>
     getBoldness(
-      props.boldness !== undefined ? props.boldness : BoldnessLevels.Normal,
+      props.boldness !== undefined ? props.boldness : BoldnessLevels.MEDIUM,
     )};
 `;
 
@@ -122,11 +116,6 @@ export const H2 = styled(BaseFont)`
 
 export const H3 = styled(BaseFont)`
   font-size: 20px;
-  line-height: 30px;
-`;
-
-export const H4 = styled(BaseFont)`
-  font-size: 18px;
   line-height: 30px;
 `;
 

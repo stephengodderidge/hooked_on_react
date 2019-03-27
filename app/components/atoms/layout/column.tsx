@@ -1,21 +1,21 @@
 import React, { SFC } from 'react';
 import styled from 'styled-components';
-import { InjectElement, IFlexDivProps, Spacer, generateSharedLayoutStyle } from './';
+import { IFlexboxComponentProps, Spacer, InjectElement, getFlexboxStyles } from '.';
 
 const FlexColumn = styled.div`
   display: inline-flex;
   flex-direction: column;
 `;
 
-const EvenlySpacedColumn: SFC<IFlexDivProps> = props => (
-  <FlexColumn className={props.className}>
-    <InjectElement element={<Spacer height={props.childSpacing} />}>
+const EvenlySpacedColumn: SFC<IFlexboxComponentProps> = props => (
+  <FlexColumn>
+    <InjectElement element={<Spacer width={props.childSpacing} />}>
       {props.children}
     </InjectElement>
   </FlexColumn>
 );
 
-const BaseColumn: SFC<IFlexDivProps> = props => {
+const BaseColumn: SFC<IFlexboxComponentProps> = ({ bgColor, ...props }) => {
   if (!!props.childSpacing) {
     return <EvenlySpacedColumn {...props} />;
   }
@@ -24,5 +24,5 @@ const BaseColumn: SFC<IFlexDivProps> = props => {
 
 /** Flex Column */
 export const Column = styled(BaseColumn)`
-  ${props => generateSharedLayoutStyle(props)}
+  ${props => getFlexboxStyles(props)}
 `;

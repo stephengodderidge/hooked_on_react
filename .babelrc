@@ -1,5 +1,11 @@
 {
-  "presets": ["@babel/preset-env", "next/babel", "@zeit/next-typescript/babel"],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-typescript",
+    "@babel/preset-react",
+    "next/babel",
+    "@zeit/next-typescript/babel"
+  ],
   "plugins": [
     [
       "module-resolver",
@@ -10,11 +16,7 @@
           "modules": "./app/modules",
           "pages": "./pages",
           "static": "./static",
-          "types": "./app/types",
-          "schemas": "./server/schemas",
-          "resovers": "./server/resolvers",
-          "data": "./server/data",
-          "scss": "./scss"
+          "types": "./app/types"
         }
       }
     ],

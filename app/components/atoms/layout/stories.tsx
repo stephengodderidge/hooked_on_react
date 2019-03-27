@@ -5,7 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import rowDocs from './docs/row-docs.mkd';
 import rowWithPaddingDocs from './docs/row-with-padding-docs.mkd';
-import { Column, Row } from './';
+import { Column, Row } from '.';
 
 const Tile = styled.div`
   height: 16px;

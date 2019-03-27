@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react';
-import { Column, H1, Row } from 'components';
+import { Column, H1, Row, LayoutBgColor } from 'components';
 import { renderers } from 'components/atoms/fonts/markdown';
 import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -75,10 +75,6 @@ const docs2 = `
   will yield:
 `;
 
-const FiltersWrapper = styled(Column)`
-  background-color: ${props => props.theme.colors.grey1};
-`;
-
 const Hr = styled.hr`
   border-style: solid;
   border: 1px solid ${props => props.theme.colors.black};
@@ -129,24 +125,24 @@ const NamedSlotsLayout: SFC<INamedSlotsLayoutProps> = props => {
   const { Top, Bottom, Right } = props.children;
   return (
     <Row>
-      <FiltersWrapper>
+      <Column bgColor={LayoutBgColor.GREY}>
         {Top || null}
         <Hr />
         {Bottom || null}
-      </FiltersWrapper>
+      </Column>
       {Right || null}
     </Row>
   );
 };
 
 const brand = {
-  selected: 'Banana Republic',
-  options: ['Banana Republic', 'Gap', 'Old Navy'],
+  selected: 'Brand 1',
+  options: ['Brand 1', 'Brand 2', 'Brand 3'],
 };
 
 const market = {
-  selected: ['US', 'Canada'],
-  options: ['US', 'Canada', 'Japan'],
+  selected: ['Market 1', 'Market 2'],
+  options: ['Market 1', 'Market 1', 'Market 1'],
 };
 
 const basicExample = (

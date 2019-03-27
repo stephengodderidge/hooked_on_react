@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 import styled from 'styled-components';
-import { InjectElement, IFlexDivProps, Spacer, generateSharedLayoutStyle } from './';
+import { IFlexboxComponentProps, Spacer, InjectElement, getFlexboxStyles } from '.';
 
 const FlexRow = styled.div`
   display: flex;
@@ -8,15 +8,15 @@ const FlexRow = styled.div`
   align-items: center;
 `;
 
-const EvenlySpacedRow: SFC<IFlexDivProps> = props => (
-  <FlexRow className={props.className}>
+const EvenlySpacedRow: SFC<IFlexboxComponentProps> = props => (
+  <FlexRow>
     <InjectElement element={<Spacer width={props.childSpacing} />}>
       {props.children}
     </InjectElement>
   </FlexRow>
 );
 
-const BaseRow: SFC<IFlexDivProps> = props => {
+const BaseRow: SFC<IFlexboxComponentProps> = ({ bgColor, ...props }) => {
   if (!!props.childSpacing) {
     return <EvenlySpacedRow {...props} />;
   }
@@ -25,5 +25,5 @@ const BaseRow: SFC<IFlexDivProps> = props => {
 
 /** Flex Row */
 export const Row = styled(BaseRow)`
-  ${props => generateSharedLayoutStyle(props)}
+  ${props => getFlexboxStyles(props)};
 `;

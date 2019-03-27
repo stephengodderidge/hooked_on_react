@@ -3,7 +3,9 @@ import { configure, addDecorator, addParameters } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'components';
 
-Object.values = obj => Object.keys(obj).map(key => obj[key]);
+// material ui typeface
+import 'typeface-roboto';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const ThemeDecorator = story => (
   <ThemeProvider theme={theme}>{story()}</ThemeProvider>

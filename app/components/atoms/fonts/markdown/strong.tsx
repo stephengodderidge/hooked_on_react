@@ -20,7 +20,7 @@ interface IStrongProps extends IDefaultProps {
 }
 
 export const Strong: SFC<IStrongProps> = props => (
-  <StrongFont boldness={BoldnessLevels.Semibold} className={props.className}>
+  <StrongFont boldness={BoldnessLevels.BOLD} className={props.className}>
     {props.children}
   </StrongFont>
 );

@@ -7,7 +7,6 @@ import {
   H1,
   H2,
   H3,
-  H4,
   Body1,
   Body2,
   Body3,
@@ -44,7 +43,6 @@ const standardFonts = (
     <H1>Heading 1</H1>
     <H2>Heading 2</H2>
     <H3>Heading 3</H3>
-    <H4>Heading 4</H4>
     <Body1>Body 1</Body1>
     <Body2>Body 2</Body2>
     <Body3>Body 3</Body3>
@@ -70,7 +68,6 @@ storiesOf('Fonts', module)
         H1,
         H2,
         H3,
-        H4,
         Body1,
         Body2,
         Body3,

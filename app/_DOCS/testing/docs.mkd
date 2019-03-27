@@ -1,3 +1,5 @@
+# Testing
+
 [Jest](https://jestjs.io/en/) is a powerful JavaScript testing library which can test both vanilla JS and React.
 
 To run tests, use the command `yarn test`. Jest will find and execute all files with `test` in the filename. Alternatively, running `yarn test --watch` will start a process that executes all tests and only reruns tests associated with code that changes.

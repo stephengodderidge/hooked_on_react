@@ -5,7 +5,7 @@ import { Checkbox, Dropdown, RadioButton, TextInput } from './';
 // @ts-ignore
 const onChange = (value: string): null => null;
 
-const options = ['Athleta', 'Banana Republic', 'Gap', 'Old Navy'];
+const options = ['Option 1', 'Option 1', 'Option 1', 'Option 1'];
 
 const StoryDropdown: SFC<{
   value: string;

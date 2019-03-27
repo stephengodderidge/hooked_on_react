@@ -1,0 +1,16 @@
+# API Requests & Data Layer
+
+## External Sources
+
+- [useEffect + Axios](https://www.robinwieruch.de/react-hooks-fetch-data/)
+  - This article covers just about everything we're looking for in an API layer
+  - Instead of using a hook inside of a component, we write a hook to fetch data and use it in other components (shown ~50% down article)
+  - Context should be used to provide access to fetched data within component hierarchy
+  - Take note of `useReducer` hook. We want to use this to manage state updates
+
+## General Architecture
+
+- Use hooks (`useState` + `useEffect`) to ecapsulate fetch logic
+  - Hook should return normalized data from endpoint
+  - For some API requests, data should be stored in local storage to support persistent, stateful data (i.e. Filters)
+- Use `normalizr` schemas to flatten data

@@ -1,11 +1,15 @@
 import React, { SFC } from 'react';
-import { IDefaultProps } from 'types/default-props';
 
-interface IInjectElementProps extends IDefaultProps {
+export interface IInjectElementProps {
   /**
-   * [required] An element to add as dividers between children
+   * [required] Element to be injected between each child
    */
   element: JSX.Element;
+  /**
+   * [required] Children of this component must be an array
+   * of JSX Elements
+   */
+  children: JSX.Element[];
 }
 
 export const InjectElement: SFC<IInjectElementProps> = props => (

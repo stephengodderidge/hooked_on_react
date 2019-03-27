@@ -23,14 +23,9 @@ module.exports = ({ config, mode }) => {
     test: /\.mkd$/,
     loader: require.resolve('raw-loader'),
   });
-  config.module.rules.push({
-    test: /\.scss$/,
-    loaders: ['style-loader', 'css-loader', 'sass-loader'],
-  });
   config.resolve.extensions.push('.ts', '.tsx', 'json', '.js', '.jsx');
   config.resolve.modules.push(path.resolve('./node_modules'));
   config.resolve.modules.push(path.resolve('./app'));
   config.resolve.modules.push(path.resolve('./static'));
-  config.resolve.modules.push(path.resolve('./scss'));
   return config;
 };

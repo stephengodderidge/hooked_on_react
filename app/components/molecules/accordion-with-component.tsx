@@ -19,14 +19,14 @@ interface IAccordionWithComponentProps extends IDefaultProps {
 }
 
 export const AccordionWithComponent: SFC<IAccordionWithComponentProps> = props => {
-  const { isToggled, toggleState } = useToggle();
+  const { isOn, toggleState } = useToggle();
   return (
     <AccordionWrapper>
       <AccordionTitle childSpacing={10}>
         <H1>{props.title}</H1>
         <button onClick={toggleState}>Toggle</button>
       </AccordionTitle>
-      {!!isToggled && props.children}
+      {isOn && props.children}
     </AccordionWrapper>
   );
 };

@@ -1,14 +1,12 @@
-import { IDefaultProps } from 'types/default-props';
 import styled from 'styled-components';
 
-interface ISpacerProps extends IDefaultProps {
+interface ISpacerProps {
   /**
-   * [optional] spacer width between items (used to add space in row)
+   * [optional] Fixed width spacer should be
    */
   width?: number;
-
   /**
-   * [optional] spacer height between items (used to add space in column)
+   * [optional] Fixed height spacer should be
    */
   height?: number;
 }

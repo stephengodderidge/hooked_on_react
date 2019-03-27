@@ -4,7 +4,6 @@ export * from './checkbox';
 export * from './dropdown';
 export * from './radio-button';
 export * from './text-input';
-// todo add export star from file i make
 
 export interface IFormElementProps extends IDefaultProps {
   /**

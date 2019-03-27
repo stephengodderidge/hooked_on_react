@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react';
-import { H1, Column, Row } from 'components';
+import { H1, Column, Row, LayoutBgColor } from 'components';
 import { renderers } from 'components/atoms/fonts/markdown';
 import React, { Component, createContext, SFC, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -29,8 +29,8 @@ const intro2 = `
     state = {
       isSearchActive: true,
       searchTerm: '',
-      selectedBrand: 'Gap',
-      selectedMarkets: ['US'],
+      selectedBrand: 'Brand 1',
+      selectedMarkets: ['Market 1'],
       selectedHierarchy: 'Legacy',
     };
   
@@ -42,13 +42,13 @@ const intro2 = `
   
     render() {
       return (
-        <FiltersSidebar>
+        <Column bgColor={LayoutBgColor.GREY}>
           {/* Render Brand Here */}
           <Hr />
           {/* Render Market Here */}
           <Hr />
           {/* Render Search or Hierarchy Here */}
-        </FiltersSidebar>
+        </Column>
       );
     }
   }
@@ -73,13 +73,13 @@ const intro2 = `
 
   render() {
     return (
-      <FiltersSidebar>
+      <Column bgColor={LayoutBgColor.GREY}>
         {this.renderBrand()}
         <Hr />
         {this.renderMarket()}
         <Hr />
         {this.renderSearchOrHierarchy()}
-      </FiltersSidebar>
+      </Column>
     );
   }
   \`\`\`
@@ -184,12 +184,12 @@ const OrFilter: SFC<IOrFilter> = props => {
 
 ### Step 4 - Children as an Array
 \`\`\`tsx
-interface IFiltersSidebarLayout {
+interface IColumnLayout {
   children: JSX.Element[];
 }
 
-const FiltersSidebarLayout: SFC<IFiltersSidebarLayout> = props => (
-  <FiltersSidebar>
+const ColumnLayout: SFC<IColumnLayout> = props => (
+  <Column bgColor={LayoutBgColor.GREY}>
     {React.Children.toArray(props.children).map(
       (child: JSX.Element, index: number) =>
         index < props.children.length - 1 ? (
@@ -201,7 +201,7 @@ const FiltersSidebarLayout: SFC<IFiltersSidebarLayout> = props => (
           child
         ),
     )}
-  </FiltersSidebar>
+  </Column>
 );
 \`\`\`
 
@@ -222,7 +222,7 @@ const AdvancedFilters: SFC<{}> = () => {
   };
   return (
     <FilterContext.Provider value={filterContextValue}>
-      <FiltersSidebarLayout>
+      <ColumnLayout>
         <DropdownFilter title="Brand" options={brandOptions} />
         <CheckboxFilter title="Market" options={marketOptions} />
         <OrFilter>
@@ -242,7 +242,7 @@ const AdvancedFilters: SFC<{}> = () => {
             ),
           }}
         </OrFilter>
-      </FiltersSidebarLayout>
+      </ColumnLayout>
     </FilterContext.Provider>
   );
 };
@@ -263,10 +263,6 @@ const AdvancedFilters: SFC<{}> = () => {
 `;
 
 // #region Shared Code
-const FiltersSidebar = styled(Column)`
-  background-color: ${props => props.theme.colors.grey1};
-`;
-
 const DemoRow = styled(Row)`
   justify-content: space-between;
   width: 100%;
@@ -313,8 +309,8 @@ const FilterWrapper = styled.div<IActiveFilter>`
   `}
 `;
 
-const brandOptions = ['Gap', 'Old Navy', 'Banana Republic'];
-const marketOptions = ['US', 'Canada', 'Japan', 'Europe'];
+const brandOptions = ['Brand 1', 'Brand 2', 'Brand 3'];
+const marketOptions = ['Market 1', 'Market 2', 'Market 3'];
 const hierarchyOptions = ['Legacy', 'Universal'];
 // #endregion Shared Code
 // #region Initial Filters Architecture
@@ -330,8 +326,8 @@ class Filters extends Component<{}, IFiltersState> {
   state = {
     isSearchActive: true,
     searchTerm: '',
-    selectedBrand: 'Gap',
-    selectedMarkets: ['US'],
+    selectedBrand: 'Brand 1',
+    selectedMarkets: ['Market 1'],
     selectedHierarchy: 'Legacy',
   };
 
@@ -404,7 +400,7 @@ class Filters extends Component<{}, IFiltersState> {
           <input
             type="text"
             value={this.state.searchTerm}
-            placeholder="Enter CCs or SKUs or STYLEs"
+            placeholder="Enter search term"
             onChange={this.updateSearch}
             disabled={!this.state.isSearchActive}
           />
@@ -437,13 +433,13 @@ class Filters extends Component<{}, IFiltersState> {
 
   render() {
     return (
-      <FiltersSidebar>
+      <Column bgColor={LayoutBgColor.GREY} padding={16}>
         {this.renderBrand()}
         <Hr />
         {this.renderMarket()}
         <Hr />
         {this.renderSearchOrHierarchy()}
-      </FiltersSidebar>
+      </Column>
     );
   }
 }
@@ -558,7 +554,7 @@ const TextInputFilter: SFC<IFilter> = props => (
           <input
             type="text"
             value={textValue}
-            placeholder="Enter CCs or SKUs or STYLEs"
+            placeholder="Enter search term"
             onChange={setTextValue}
             disabled={props.disabled}
           />
@@ -606,12 +602,12 @@ const OrFilter: SFC<IOrFilter> = props => {
   );
 };
 
-interface IFiltersSidebarLayout {
+interface IColumnLayout {
   children: JSX.Element[];
 }
 
-const FiltersSidebarLayout: SFC<IFiltersSidebarLayout> = props => (
-  <FiltersSidebar>
+const ColumnLayout: SFC<IColumnLayout> = props => (
+  <Column bgColor={LayoutBgColor.GREY} padding={16}>
     {React.Children.toArray(props.children).map(
       (child: JSX.Element, index: number) =>
         index < props.children.length - 1 ? (
@@ -623,7 +619,7 @@ const FiltersSidebarLayout: SFC<IFiltersSidebarLayout> = props => (
           child
         ),
     )}
-  </FiltersSidebar>
+  </Column>
 );
 
 type TSetFilterCallback = (key: string, value: string | string[]) => void;
@@ -667,7 +663,7 @@ const AdvancedFilters: SFC<{}> = () => {
   );
   return (
     <FilterContext.Provider value={filterContextValue}>
-      <FiltersSidebarLayout>
+      <ColumnLayout>
         <DropdownFilter title="Brand" options={brandOptions} />
         <CheckboxFilter title="Market" options={marketOptions} />
         <OrFilter>
@@ -676,7 +672,7 @@ const AdvancedFilters: SFC<{}> = () => {
             bottom: renderBottom,
           }}
         </OrFilter>
-      </FiltersSidebarLayout>
+      </ColumnLayout>
     </FilterContext.Provider>
   );
 };

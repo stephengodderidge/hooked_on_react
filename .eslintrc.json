@@ -1,6 +1,6 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "react"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks"],
   "parserOptions": {
     "project": "./tsconfig.json",
     "tsconfigRootDir": "./",
@@ -19,7 +19,9 @@
     "@typescript-eslint/interface-name-prefix": [2, "always"],
     "@typescript-eslint/no-unused-vars": 0,
     "react/prop-types": [0],
-    "@typescript-eslint/no-explicit-any": 0
+    "@typescript-eslint/no-explicit-any": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "settings": {
     "react": {

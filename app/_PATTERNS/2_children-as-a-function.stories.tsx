@@ -1,12 +1,13 @@
 import { storiesOf } from '@storybook/react';
-import { Column, Body1, useToggle } from 'components/atoms';
+import { Column, Body1 } from 'components/atoms';
+import { useToggle } from 'components/hooks';
 import { renderers } from 'components/atoms/fonts/markdown';
 import React, { SFC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { ExampleWrapper } from './shared-components';
 
 const docs = `
-  # Children as a Function
+  # Children as a Function (DEPRECATED IN FAVOR OF HOOKS!)
   The **Children as a Function** pattern is most commonly referred to as **Render Props** and
   is preferred over a similar, likely-to-be-deprecated pattern called **Higher Order Components
   (HOC)**.  An [example](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)
@@ -39,31 +40,35 @@ const docs = `
   will be passed arguments by the \`Toggle\`.  JavaScript's object destructuring syntax allows us
   to specify which parameters we want to use:
   \`\`\`tsx
-  <Toggle>
-    {({ isToggled, toggleState }) => (
-      <Column>
-        <BodyFont>Toggle is currently {isToggled ? 'on' : 'off'}</BodyFont>
-        <button onClick={toggleState}>Toggle State</button>
-      </Column>
-    )}
-  </Toggle>
+  const ToggleStory: SFC<{}> = () => {
+    const { isOn, toggleState } = useToggle();
+    return (
+      <React.Fragment>
+        <ReactMarkdown renderers={renderers} source={docs} />
+        <ExampleWrapper>
+          <Column>
+            <Body1>Toggle is currently {isOn ? 'on' : 'off'}</Body1>
+            <button onClick={toggleState}>Toggle State</button>
+          </Column>
+        </ExampleWrapper>
+      </React.Fragment>
+    );
+  };
   \`\`\`
 
   ## Example Implementation - On / Off Toggle
 `;
 
 const ToggleStory: SFC<{}> = () => {
-  const { isToggled, toggleState } = useToggle();
+  const { isOn, toggleState } = useToggle();
   return (
     <React.Fragment>
       <ReactMarkdown renderers={renderers} source={docs} />
       <ExampleWrapper>
-        <>
-          <Column>
-            <button onClick={toggleState}>Toggle</button>
-            <Body1>Toggle is currently {isToggled ? 'on' : 'off'}</Body1>
-          </Column>
-        </>
+        <Column>
+          <Body1>Toggle is currently {isOn ? 'on' : 'off'}</Body1>
+          <button onClick={toggleState}>Toggle State</button>
+        </Column>
       </ExampleWrapper>
     </React.Fragment>
   );
