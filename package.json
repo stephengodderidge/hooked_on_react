@@ -83,7 +83,7 @@
     "stories": "start-storybook --ci -p 4000 -c .storybook",
     "up": "yarn run-p front stories",
     "clean-environment": "git clean -dfx && yarn",
-    "lint": "tsc --noEmit && yarn eslint \"app/**\" && lint-staged",
+    "lint": "tsc && yarn eslint \"app/**\" && lint-staged",
     "pre-commit": "ts-node scripts/fail.master.commit.ts && yarn run-s test lint",
     "test": "jest --coverage",
     "build": "yarn next build",
@@ -94,7 +94,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn pre-commit"
+      "pre-commit": "yarn pre-commit",
+      "post-checkout": "git pull && yarn force-install"
     }
   },
   "lint-staged": {

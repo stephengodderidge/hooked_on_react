@@ -7,6 +7,7 @@
       "type": "typescript",
       "tsconfig": "tsconfig.json",
       "problemMatcher": ["$tsc"],
+      "option": "watch",
       "group": {
         "kind": "build",
         "isDefault": true
