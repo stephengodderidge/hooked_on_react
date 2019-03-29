@@ -34,6 +34,7 @@ const generateMaterialCheckboxStory = (
         <Row key={color} childSpacing={8}>
           <H3>{capitalizeFirstLetter(color)} Styles: </H3>
           <FormElement
+            data-testid="test"
             value={color}
             onChange={onClick}
             color={MaterialFormElements.MaterialFormElementColors[color]}
