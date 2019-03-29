@@ -7,6 +7,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 import { ISharedMaterialFormElementProps } from './material';
 
 // #region Helpers
+// @ts-ignore
 const onClick = (value: string, checked: boolean): null => null;
 
 const StoryWrapper = (props: {

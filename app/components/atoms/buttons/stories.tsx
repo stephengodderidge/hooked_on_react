@@ -26,13 +26,18 @@ const generateMaterialButtonStory = (
   <StoryWrapper label={label} key={label}>
     {Object.keys(MaterialButtons.ButtonColor).map(
       (color: keyof typeof MaterialButtons.ButtonColor) => (
-        <Button
-          key={color}
-          onClick={onClick}
-          color={MaterialButtons.ButtonColor[color]}
-        >
-          {color} Button
-        </Button>
+        <Column key={color} childSpacing={8}>
+          <Button onClick={onClick} color={MaterialButtons.ButtonColor[color]}>
+            {color} Button
+          </Button>
+          <Button
+            onClick={onClick}
+            color={MaterialButtons.ButtonColor[color]}
+            disabled
+          >
+            {color} Button
+          </Button>
+        </Column>
       ),
     )}
   </StoryWrapper>
@@ -46,15 +51,25 @@ const generateMaterialActionButtonStory = (
   <StoryWrapper label={label} key={label}>
     {Object.keys(MaterialButtons.ButtonColor).map(
       (color: keyof typeof MaterialButtons.ButtonColor) => (
-        <Button
-          key={color}
-          onClick={onClick}
-          color={MaterialButtons.ButtonColor[color]}
-          extended={extended}
-        >
-          {color}
-          {!!extended && ' Button'}
-        </Button>
+        <Column key={color} childSpacing={8}>
+          <Button
+            onClick={onClick}
+            color={MaterialButtons.ButtonColor[color]}
+            extended={extended}
+          >
+            {color}
+            {!!extended && ' Button'}
+          </Button>
+          <Button
+            onClick={onClick}
+            color={MaterialButtons.ButtonColor[color]}
+            extended={extended}
+            disabled
+          >
+            {color}
+            {!!extended && ' Button'}
+          </Button>
+        </Column>
       ),
     )}
   </StoryWrapper>

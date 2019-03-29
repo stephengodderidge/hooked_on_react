@@ -2,7 +2,6 @@ import React, { SFC } from 'react';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import { IBaseButtonProps } from '.';
-import { withTheme } from '@material-ui/core';
 
 // #region Styling
 export enum ButtonColor {
