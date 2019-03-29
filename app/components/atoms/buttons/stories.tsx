@@ -2,11 +2,13 @@ import { storiesOf } from '@storybook/react';
 import React from 'react';
 import { MaterialButtons, SemanticButtons, ReactstrapButtons } from './';
 import { Column, H1, Row } from 'components';
+import { materialUiTheme } from 'modules/config/material-ui-theme';
+import { MuiThemeProvider } from '@material-ui/core';
 
 // #region Helpers
 const onClick = (): null => null;
 
-const ButtonStoryWrapper = (props: {
+const StoryWrapper = (props: {
   label: string;
   children: JSX.Element | JSX.Element[];
 }) => (
@@ -21,7 +23,7 @@ const generateMaterialButtonStory = (
   Button: React.ComponentType<MaterialButtons.TMaterialButtonProps>,
   label: string,
 ) => (
-  <ButtonStoryWrapper label={label} key={label}>
+  <StoryWrapper label={label} key={label}>
     {Object.keys(MaterialButtons.ButtonColor).map(
       (color: keyof typeof MaterialButtons.ButtonColor) => (
         <Button
@@ -33,7 +35,7 @@ const generateMaterialButtonStory = (
         </Button>
       ),
     )}
-  </ButtonStoryWrapper>
+  </StoryWrapper>
 );
 
 const generateMaterialActionButtonStory = (
@@ -41,7 +43,7 @@ const generateMaterialActionButtonStory = (
   label: string,
   extended: boolean,
 ) => (
-  <ButtonStoryWrapper label={label} key={label}>
+  <StoryWrapper label={label} key={label}>
     {Object.keys(MaterialButtons.ButtonColor).map(
       (color: keyof typeof MaterialButtons.ButtonColor) => (
         <Button
@@ -55,7 +57,7 @@ const generateMaterialActionButtonStory = (
         </Button>
       ),
     )}
-  </ButtonStoryWrapper>
+  </StoryWrapper>
 );
 
 const materialPrimary = generateMaterialButtonStory(
@@ -86,7 +88,7 @@ const generateSemanticButtonStory = (
   Button: React.ComponentType<SemanticButtons.ISemanticButtonProps>,
   label: string,
 ) => (
-  <ButtonStoryWrapper label={label} key={label}>
+  <StoryWrapper label={label} key={label}>
     {Object.keys(SemanticButtons.ButtonColor).map(
       (color: keyof typeof SemanticButtons.ButtonColor) => (
         <Button
@@ -98,7 +100,7 @@ const generateSemanticButtonStory = (
         </Button>
       ),
     )}
-  </ButtonStoryWrapper>
+  </StoryWrapper>
 );
 const semanticPrimary = generateSemanticButtonStory(
   SemanticButtons.PrimaryButton,
@@ -118,7 +120,7 @@ const generateReactstrapButtonStory = (
   Button: React.ComponentType<ReactstrapButtons.IReactstrapButtonProps>,
   label: string,
 ) => (
-  <ButtonStoryWrapper label={label} key={label}>
+  <StoryWrapper label={label} key={label}>
     {Object.keys(ReactstrapButtons.ButtonColor).map(
       (color: keyof typeof ReactstrapButtons.ButtonColor) => (
         <Button
@@ -130,7 +132,7 @@ const generateReactstrapButtonStory = (
         </Button>
       ),
     )}
-  </ButtonStoryWrapper>
+  </StoryWrapper>
 );
 const reactstrapPrimary = generateReactstrapButtonStory(
   ReactstrapButtons.PrimaryButton,
@@ -145,13 +147,15 @@ const reactstrapSecondary = generateReactstrapButtonStory(
 storiesOf('Buttons', module)
   .add('Material UI', () => (
     <Column>
-      {[
-        materialPrimary,
-        materialSecondary,
-        materialTertiary,
-        materialAction,
-        materialExtendedAction,
-      ]}
+      <MuiThemeProvider theme={materialUiTheme}>
+        {[
+          materialPrimary,
+          materialSecondary,
+          materialTertiary,
+          materialAction,
+          materialExtendedAction,
+        ]}
+      </MuiThemeProvider>
     </Column>
   ))
   .add('Semantic UI', () => (

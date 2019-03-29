@@ -4,7 +4,7 @@ This repo is intended to serve as a bootstrap / accelerator for building React w
 
 ## Getting Started
 
-**NOTE:** Node version 8.10.0 is required for the package `typescrip-eslint/parser`. Until this package is upgraded, please ensure you are using this version of node
+**NOTE:** Node version 8.10.0 is required for the package `typescript-eslint/parser`. Until this package is upgraded, please ensure you are using this version of node
 
 1. Clone repo: `git clone https://{{YOUR_USERNAME}}@bitbucket.org/parivedasolutions/react-accelerator.git`
 2. Install `yarn` (and [homebrew](https://brew.sh/) if not already installed) inside the react-accelerator repositiory: `brew install yarn`

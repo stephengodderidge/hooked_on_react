@@ -4,7 +4,6 @@ exports[`Buttons Material Primary Button Renders Action Style - GREEN 1`] = `
 <div>
   <button
     class="MuiButtonBase-root-27 MuiFab-root-37"
-    style="background: rgb(32, 191, 107); color: rgb(245, 246, 250);"
     tabindex="0"
     type="button"
   >
@@ -62,7 +61,6 @@ exports[`Buttons Material Primary Button Renders Primary Style - GREEN 1`] = `
 <div>
   <button
     class="MuiButtonBase-root-27 MuiButton-root-1 MuiButton-contained-12 MuiButton-raised-15"
-    style="background: rgb(32, 191, 107); color: rgb(245, 246, 250);"
     tabindex="0"
     type="button"
   >
@@ -101,7 +99,6 @@ exports[`Buttons Material Primary Button Renders Secondary Style - GREEN 1`] = `
 <div>
   <button
     class="MuiButtonBase-root-27 MuiButton-root-1 MuiButton-outlined-9"
-    style="color: rgb(32, 191, 107); border-color: #20bf6b;"
     tabindex="0"
     type="button"
   >

@@ -1,9 +1,8 @@
 import { storiesOf } from '@storybook/react';
-import { Body1 } from 'components/atoms';
+import { Body1, Column, Row } from 'components/atoms';
 import React, { SFC, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { renderers } from 'components/atoms/fonts/markdown';
-import { ExampleWrapper } from './shared-components';
 
 const docs = `
   # Hooks
@@ -71,12 +70,14 @@ const HooksStory: SFC<{}> = () => {
   return (
     <>
       <ReactMarkdown renderers={renderers} source={docs} />
-      <ExampleWrapper>
+      <Column padding={16}>
         <Body1>Counter is currently at {counter}</Body1>
-        <button onClick={increment}>Increment</button>
-        <button onClick={decrement}>Decrement</button>
-        <button onClick={setTo10}>Set to 10</button>
-      </ExampleWrapper>
+        <Row childSpacing={8}>
+          <button onClick={increment}>Increment</button>
+          <button onClick={decrement}>Decrement</button>
+          <button onClick={setTo10}>Set to 10</button>
+        </Row>
+      </Column>
     </>
   );
 };
