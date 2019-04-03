@@ -13,4 +13,11 @@ export const materialUiTheme = createMuiTheme({
     secondary: red,
     error: red,
   },
+  overrides: {
+    MuiIconButton: {
+      root: {
+        padding: '0px',
+      },
+    },
+  },
 });

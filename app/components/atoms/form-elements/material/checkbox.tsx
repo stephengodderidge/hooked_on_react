@@ -1,8 +1,8 @@
 import React, { SFC, ChangeEvent } from 'react';
 import MaterialCheckbox from '@material-ui/core/Checkbox';
-import { ISharedMaterialFormElementProps, MaterialFormElementColors } from '.';
+import { MaterialFormElementColors, IMaterialFormToggleElementProps } from '.';
 
-export const Checkbox: SFC<ISharedMaterialFormElementProps> = props => {
+export const Checkbox: SFC<IMaterialFormToggleElementProps> = props => {
   const onChange = (e: ChangeEvent<HTMLInputElement>, checked: boolean) =>
     props.onChange(e.target.value, checked);
   return (
