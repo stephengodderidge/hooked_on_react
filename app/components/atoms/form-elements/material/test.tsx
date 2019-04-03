@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, fireEvent } from 'react-testing-library';
-import { MaterialFormElements } from './';
+import { MaterialFormElements } from '..';
 
 const onClick = jest.fn();
 
-describe('Form Elements', () => {
+describe('Form Elements - Material', () => {
   afterEach(() => {
     onClick.mockClear();
   });
@@ -53,6 +53,33 @@ describe('Form Elements', () => {
       fireEvent.click(getByTestId(testId).querySelector('input'));
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(getByTestId(testId).className.includes('checked')).toBe(true);
+    });
+  });
+  // #endregion Radio Button
+  // #region Radio Button
+  describe('Text Input', () => {
+    test('Renders', () => {
+      const { container } = render(
+        <MaterialFormElements.TextInput onChange={onClick} value="" />,
+      );
+      expect(container).toMatchSnapshot();
+    });
+    test('Handles User Input', () => {
+      const testId = 'radio-button';
+      const testValue = 'Input test';
+      const { getByTestId } = render(
+        <MaterialFormElements.TextInput
+          onChange={onClick}
+          value=""
+          data-testid={testId}
+        />,
+      );
+      fireEvent.change(getByTestId(testId).getElementsByTagName('input')[0], {
+        target: { value: testValue },
+      });
+      expect(getByTestId(testId).getElementsByTagName('input')[0].value).toBe(
+        testValue,
+      );
     });
   });
   // #endregion Radio Button

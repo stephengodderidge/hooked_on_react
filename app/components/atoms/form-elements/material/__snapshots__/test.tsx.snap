@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form Elements Checkbox Renders 1`] = `
+exports[`Form Elements - Material Checkbox Renders 1`] = `
 <div>
   <span
     class="MuiButtonBase-root-17 MuiIconButton-root-11 MuiPrivateSwitchBase-root-7 MuiCheckbox-root-1 MuiCheckbox-colorPrimary-5"
@@ -33,7 +33,7 @@ exports[`Form Elements Checkbox Renders 1`] = `
 </div>
 `;
 
-exports[`Form Elements Radio Button Renders 1`] = `
+exports[`Form Elements - Material Radio Button Renders 1`] = `
 <div>
   <span
     class="MuiButtonBase-root-17 MuiIconButton-root-11 MuiPrivateSwitchBase-root-7 MuiRadio-root-36 MuiRadio-colorPrimary-39"
@@ -62,5 +62,20 @@ exports[`Form Elements Radio Button Renders 1`] = `
       class="MuiTouchRipple-root-29"
     />
   </span>
+</div>
+`;
+
+exports[`Form Elements - Material Text Input Renders 1`] = `
+<div>
+  <div
+    class="MuiInputBase-root-54 MuiInput-root-41 MuiInput-underline-45"
+    color="primary"
+  >
+    <input
+      class="MuiInputBase-input-64 MuiInput-input-49"
+      type="text"
+      value=""
+    />
+  </div>
 </div>
 `;
