@@ -8,6 +8,7 @@ import {
   JustifyContent,
   LayoutBgColor,
 } from '.';
+import { Expander } from './expander';
 
 describe('Layout', () => {
   // #region Row
@@ -143,4 +144,12 @@ describe('Layout', () => {
     });
   });
   // #endregion Spacer
+  // #region Expander
+  describe('Expander', () => {
+    test('Renders w/ Width', () => {
+      const { container } = render(<Expander />);
+      expect(container).toMatchSnapshot();
+    });
+  });
+  // #endregion Expander
 });
