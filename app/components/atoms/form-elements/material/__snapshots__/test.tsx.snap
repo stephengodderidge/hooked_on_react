@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Elements - Material Checkbox Renders 1`] = `
+<div>
+  <span
+    class="MuiButtonBase-root-17 MuiIconButton-root-11 MuiPrivateSwitchBase-root-7 MuiCheckbox-root-1 MuiCheckbox-colorPrimary-5"
+  >
+    <span
+      class="MuiIconButton-label-16"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root-20"
+        focusable="false"
+        role="presentation"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+        />
+      </svg>
+      <input
+        class="MuiPrivateSwitchBase-input-10"
+        data-indeterminate="false"
+        type="checkbox"
+        value=""
+      />
+    </span>
+    <span
+      class="MuiTouchRipple-root-29"
+    />
+  </span>
+</div>
+`;
+
+exports[`Form Elements - Material Radio Button Renders 1`] = `
+<div>
+  <span
+    class="MuiButtonBase-root-17 MuiIconButton-root-11 MuiPrivateSwitchBase-root-7 MuiRadio-root-36 MuiRadio-colorPrimary-39"
+  >
+    <span
+      class="MuiIconButton-label-16"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root-20"
+        focusable="false"
+        role="presentation"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+        />
+      </svg>
+      <input
+        class="MuiPrivateSwitchBase-input-10"
+        type="radio"
+        value=""
+      />
+    </span>
+    <span
+      class="MuiTouchRipple-root-29"
+    />
+  </span>
+</div>
+`;
+
+exports[`Form Elements - Material Text Input Renders 1`] = `
+<div>
+  <div
+    class="MuiInputBase-root-54 MuiInput-root-41 MuiInput-underline-45"
+    color="primary"
+  >
+    <input
+      class="MuiInputBase-input-64 MuiInput-input-49"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;

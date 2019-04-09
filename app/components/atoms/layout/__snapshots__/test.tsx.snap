@@ -287,7 +287,7 @@ exports[`Layout Column Renders Evenly Spaced Children 1`] = `
 }
 
 .c1 {
-  width: 16px;
+  height: 16px;
 }
 
 <div>
@@ -299,12 +299,24 @@ exports[`Layout Column Renders Evenly Spaced Children 1`] = `
     </div>
     <div
       class="c1"
-      width="16"
+      height="16"
     />
     <div>
       Element 2
     </div>
   </div>
+</div>
+`;
+
+exports[`Layout Expander Renders w/ Width 1`] = `
+.c0 {
+  margin: auto;
+}
+
+<div>
+  <div
+    class="c0"
+  />
 </div>
 `;
 

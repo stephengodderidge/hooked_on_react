@@ -31,11 +31,11 @@ describe('Buttons', () => {
         );
         expect(container).toMatchSnapshot();
       });
-      test('Renders Primary Style - GREEN', () => {
+      test('Renders Primary Style - BLUE', () => {
         const { container } = render(
           <MaterialButtons.PrimaryButton
             onClick={onClick}
-            color={MaterialButtons.ButtonColor.GREEN}
+            color={MaterialButtons.ButtonColor.BLUE}
           >
             Primary
           </MaterialButtons.PrimaryButton>,
@@ -50,11 +50,11 @@ describe('Buttons', () => {
         );
         expect(container).toMatchSnapshot();
       });
-      test('Renders Secondary Style - GREEN', () => {
+      test('Renders Secondary Style - BLUE', () => {
         const { container } = render(
           <MaterialButtons.SecondaryButton
             onClick={onClick}
-            color={MaterialButtons.ButtonColor.GREEN}
+            color={MaterialButtons.ButtonColor.BLUE}
           >
             Secondary
           </MaterialButtons.SecondaryButton>,
@@ -77,11 +77,11 @@ describe('Buttons', () => {
         );
         expect(container).toMatchSnapshot();
       });
-      test('Renders Action Style - GREEN', () => {
+      test('Renders Action Style - BLUE', () => {
         const { container } = render(
           <MaterialButtons.ActionButton
             onClick={onClick}
-            color={MaterialButtons.ButtonColor.GREEN}
+            color={MaterialButtons.ButtonColor.BLUE}
           >
             Action
           </MaterialButtons.ActionButton>,

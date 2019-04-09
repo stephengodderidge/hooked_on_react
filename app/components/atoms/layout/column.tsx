@@ -9,7 +9,7 @@ const FlexColumn = styled.div`
 
 const EvenlySpacedColumn: SFC<IFlexboxComponentProps> = props => (
   <FlexColumn>
-    <InjectElement element={<Spacer width={props.childSpacing} />}>
+    <InjectElement element={<Spacer height={props.childSpacing} />}>
       {props.children}
     </InjectElement>
   </FlexColumn>

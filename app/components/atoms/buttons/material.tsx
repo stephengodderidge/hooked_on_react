@@ -1,18 +1,13 @@
 import React, { SFC } from 'react';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
-import { colors } from 'modules/config/colors';
 import { IBaseButtonProps } from '.';
 
 // #region Styling
-const GREEN = colors.green;
-const WHITE = colors.white;
-
 export enum ButtonColor {
   BLUE = 'primary',
   RED = 'secondary',
-  GREY = 'default',
-  GREEN = 'green',
+  DEFAULT = 'default',
 }
 
 export enum ButtonSize {
@@ -21,87 +16,6 @@ export enum ButtonSize {
   LARGE = 'large',
 }
 
-type TMaterialUiColor = 'default' | 'inherit' | 'primary' | 'secondary';
-
-const materialUiColors = [
-  ButtonColor.BLUE,
-  ButtonColor.GREY,
-  ButtonColor.RED,
-  null,
-  undefined,
-];
-
-const isMaterialUiColor = (
-  color: ButtonColor | TMaterialUiColor,
-): color is TMaterialUiColor => materialUiColors.includes(color as ButtonColor);
-
-const getBackgroundColor = (color: ButtonColor) => {
-  switch (color) {
-    case ButtonColor.GREEN:
-    default:
-      return GREEN;
-  }
-};
-
-const getColor = (color: ButtonColor, variant: string) => {
-  if (['text', 'outlined'].includes(variant)) {
-    switch (color) {
-      case ButtonColor.GREEN:
-      default:
-        return GREEN;
-    }
-  }
-  switch (color) {
-    case ButtonColor.GREEN:
-    default:
-      return WHITE;
-  }
-};
-
-const getBorderColor = (color: ButtonColor) => {
-  switch (color) {
-    case ButtonColor.GREEN:
-    default:
-      return GREEN;
-  }
-};
-
-const getHoverStyles = (color: ButtonColor, variant: TMaterialUiVariant) => {
-  if (['outlined'].includes(variant)) {
-    switch (color) {
-      case ButtonColor.GREEN:
-      default:
-        return {
-          background: `${GREEN}CC`,
-        };
-    }
-  }
-  return undefined;
-};
-
-const shouldHaveBackground = (variant: TMaterialUiVariant) =>
-  ['contained', 'fab', 'extendedFab'].includes(variant);
-
-const shouldHaveBorderColor = (variant: TMaterialUiVariant) =>
-  ['outlined'].includes(variant);
-
-const getStyle = (props: IMaterialBaseButtonProps) => {
-  const background = shouldHaveBackground(props.variant)
-    ? getBackgroundColor(props.color)
-    : undefined;
-  const color = getColor(props.color, props.variant);
-  const borderColor = shouldHaveBorderColor(props.variant)
-    ? getBorderColor(props.color)
-    : undefined;
-  const hoverStyles = getHoverStyles(props.color, props.variant);
-  const styles = {
-    background,
-    color,
-    borderColor,
-    '&:hover': hoverStyles,
-  };
-  return styles;
-};
 // #endregion Styling
 
 interface IMaterialButtonColorProp {
@@ -146,30 +60,13 @@ type TMaterialUiVariant = 'text' | 'outlined' | 'contained' | 'fab' | 'extendedF
 const BaseButton: SFC<IMaterialBaseButtonProps> = props => {
   const { id, color, variant, ...otherProps } = props;
   const handleClick = () => props.onClick(id || null);
-  const style = getStyle(props);
   const isFab = ['fab', 'extendedFab'].includes(variant);
   const fabVariant = isFab && variant === 'fab' ? 'round' : 'extended';
-  if (isMaterialUiColor(color)) {
-    return isFab ? (
-      <Fab
-        {...otherProps}
-        color={color}
-        onClick={handleClick}
-        variant={fabVariant}
-      />
-    ) : (
-      <Button
-        {...otherProps}
-        color={color}
-        onClick={handleClick}
-        variant={variant}
-      />
-    );
-  }
+
   return isFab ? (
-    <Fab {...otherProps} style={style} onClick={handleClick} variant={fabVariant} />
+    <Fab {...otherProps} color={color} onClick={handleClick} variant={fabVariant} />
   ) : (
-    <Button {...otherProps} style={style} onClick={handleClick} variant={variant} />
+    <Button {...otherProps} color={color} onClick={handleClick} variant={variant} />
   );
 };
 

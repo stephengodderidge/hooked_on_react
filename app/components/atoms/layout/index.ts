@@ -6,6 +6,7 @@ export * from './column';
 export * from './row';
 export * from './spacer';
 export * from './inject-element';
+export * from './expander';
 
 export enum JustifyContent {
   START = 1,
