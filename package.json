@@ -1,8 +1,8 @@
 {
-  "name": "react-accelerator",
+  "name": "hooked-on-react-meetup-talk",
   "version": "1.0.0",
-  "description": "Acclerator for bootstrapping React projects",
-  "repository": "https://bitbucket.org/ZakButcher/react-accelerator/src/master/",
+  "description": "Base for Meetup talk",
+  "repository": "https://github.com/stephengodderidge/RQReactMeetup_April",
   "author": "Zak Butcher",
   "license": "MIT",
   "private": true,
@@ -17,13 +17,11 @@
     "@types/reactstrap": "^7.1.3",
     "@types/semantic-ui": "^2.2.7",
     "@zeit/next-typescript": "^1.1.1",
-    "babel-jest": "^24.5.0",
     "babel-plugin-inline-react-svg": "^1.0.1",
     "babel-plugin-module-resolver": "^3.1.3",
     "babel-plugin-transform-md-import-to-string": "^1.0.6",
     "bootstrap": "^4.3.1",
     "eslint-plugin-react-hooks": "^1.6.0",
-    "jest-styled-components": "^6.3.1",
     "next": "^8.0.3",
     "normalizr": "^3.3.0",
     "path": "^0.12.7",
@@ -40,7 +38,6 @@
   "devDependencies": {
     "@storybook/addon-info": "^5.0.3",
     "@storybook/react": "^5.0.3",
-    "@types/jest": "^24.0.11",
     "@types/next": "^8.0.1",
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.0.11",
@@ -84,7 +81,7 @@
     "clean-environment": "git clean -dfx && yarn",
     "lint": "tsc && yarn eslint \"app/**\" && lint-staged",
     "pre-commit": "ts-node scripts/fail.master.commit.ts && yarn run-s lint",
-    "test": "jest --coverage",
+    "test": "",
     "build": "yarn next build",
     "export": "yarn next export",
     "force-install": "yarn install --force",
@@ -109,26 +106,5 @@
         "git add"
       ]
     }
-  },
-  "jest": {
-    "rootDir": "./",
-    "setupFilesAfterEnv": [
-      "<rootDir>/setup-test.js"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "collectCoverageFrom": [
-      "<rootDir>/app/components/**",
-      "<rootDir>/app/modules/**",
-      "!**/stories.tsx",
-      "!**/__snapshots__/**",
-      "!**/markdown/**",
-      "!**/modules/config/**"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
-    ]
   }
 }
