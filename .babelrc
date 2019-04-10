@@ -10,7 +10,9 @@
     [
       "module-resolver",
       {
-        "root": ["./app"],
+        "root": [
+          "./app"
+        ],
         "alias": {
           "components": "./app/components",
           "modules": "./app/modules",
@@ -20,27 +22,10 @@
         }
       }
     ],
-    ["transform-md-import-to-string"],
     [
       "styled-components",
       {
         "ssr": true
-      }
-    ],
-    [
-      "inline-react-svg",
-      {
-        "caseSensitive": true,
-        "svgo": {
-          "plugins": [
-            {
-              "cleanupIDs": false
-            },
-            {
-              "removeTitle": true
-            }
-          ]
-        }
       }
     ]
   ]
