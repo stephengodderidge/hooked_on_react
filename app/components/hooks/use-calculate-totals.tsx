@@ -106,8 +106,7 @@ export const CartComponent: SFC<{}> = () => {
     price: (product: IProduct) => product.price * product.quantity,
   };
   const { totals, dispatch } = useCalculateTotals(cart.products, calcTotalsFor);
-  console.log('totals: ', totals);
-  console.log('dispatch: ', dispatch);
+  console.table(totals);
   return <div>Bleh</div>;
 };
 
@@ -126,6 +125,7 @@ export const CharacterComponent: SFC<{}> = () => {
       {
         name: 'Helmet',
         armor: 10,
+        health: 10,
         level: 1,
       },
       {
@@ -155,7 +155,6 @@ export const CharacterComponent: SFC<{}> = () => {
     character.equipment,
     calcTotalsFor,
   );
-  console.log('totals: ', totals);
-  console.log('dispatch: ', dispatch);
+  console.table(totals);
   return <div>Bleh</div>;
 };
