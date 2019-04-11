@@ -4,6 +4,8 @@ import { FSA } from 'types/fsa';
 import * as AppState from 'types/react-context-provider';
 import { hydrateStateWithLocalStorage, updateLocalStorage } from './local-storage';
 
+import * as LayoutTemplates from 'components/templates';
+
 /** App Context - Provider & Consumer */
 export const AppContext = createContext(AppState.initialState);
 
@@ -36,6 +38,12 @@ export class App extends AppState.ContextProvider {
     return (
       <AppContext.Provider value={this.getContextValue()}>
         Layout Template goes here!
+        <LayoutTemplates.LeftRightTemplateWithLabel title="Test Label">
+          {{
+            Left: [1, 2, 3].map(n => {return n*2}),
+            Right: <div>hello world</div>
+          }}
+        </LayoutTemplates.LeftRightTemplateWithLabel>
       </AppContext.Provider>
     );
   }
