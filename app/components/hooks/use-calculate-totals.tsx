@@ -126,6 +126,7 @@ export const CharacterComponent: SFC<{}> = () => {
       {
         name: 'Helmet',
         armor: 10,
+        health: 10,
         level: 1,
       },
       {
