@@ -7,6 +7,7 @@ export * from './row';
 export * from './spacer';
 export * from './inject-element';
 export * from './expander';
+export * from './modal';
 
 export enum JustifyContent {
   START = 1,

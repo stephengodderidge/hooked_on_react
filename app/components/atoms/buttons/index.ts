@@ -1,9 +1,7 @@
 import * as MaterialButtons from './material';
-import * as SemanticButtons from './semantic';
-import * as ReactstrapButtons from './reactstrap';
 import { IDefaultProps } from 'types/default-props';
 
-export { MaterialButtons, SemanticButtons, ReactstrapButtons };
+export { MaterialButtons };
 
 export interface IBaseButtonProps extends IDefaultProps {
   /**
