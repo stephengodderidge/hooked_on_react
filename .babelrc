@@ -10,9 +10,7 @@
     [
       "module-resolver",
       {
-        "root": [
-          "./app"
-        ],
+        "root": ["./app"],
         "alias": {
           "components": "./app/components",
           "modules": "./app/modules",

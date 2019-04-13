@@ -1,11 +1,7 @@
 import React, { useReducer, FunctionComponent } from 'react';
 import { FSA } from 'types/fsa';
-import Styled from "styled-components";
-import {ActionButton, PrimaryButton, SecondaryButton, ButtonColor, ButtonSize} from '../atoms/buttons/material';
-import {LeftRightTemplateWithLabel} from '../templates/left-right-template-with-label';
 
 import { Sprites } from 'components';
-
 
 type TDispatchCallback = (action: FSA) => void;
 
@@ -66,14 +62,20 @@ export const useCalculateTotals = <T extends { [key: string]: number | string }>
 ): IUseCalculateTotals<T> => {
   const initialTotals = Object.keys(calcTotalsFor).reduce(
     (totals, calculationKey) => {
-      const total = data.reduce(
-        (currentTotal, obj) =>
-          currentTotal + getSafeTotal(calcTotalsFor[calculationKey](obj)),
-        0,
-      );
+      if (typeof calcTotalsFor[calculationKey] === 'function') {
+        const total = data.reduce(
+          (currentTotal, obj) =>
+            currentTotal + getSafeTotal(calcTotalsFor[calculationKey](obj)),
+          0,
+        );
+        return {
+          ...totals,
+          [calculationKey]: total,
+        };
+      }
       return {
         ...totals,
-        [calculationKey]: total,
+        [calculationKey]: null,
       };
     },
     {},
@@ -83,37 +85,6 @@ export const useCalculateTotals = <T extends { [key: string]: number | string }>
     totals,
     dispatch,
   };
-};
-
-export const CartComponent: FunctionComponent<{}> = () => {
-  interface IProduct {
-    name: string;
-    price: number;
-    quantity: number;
-  }
-
-  const cart = {
-    name: 'My Cart',
-    products: [
-      {
-        name: 'Soccer Ball',
-        price: 10,
-        quantity: 1,
-      },
-      {
-        name: 'Stapler',
-        price: 5,
-        quantity: 2,
-      },
-    ],
-  };
-
-  const calcTotalsFor = {
-    price: (product: IProduct) => product.price * product.quantity,
-  };
-  const { totals, dispatch } = useCalculateTotals(cart.products, calcTotalsFor);
-  console.table(totals);
-  return <div>Bleh</div>;
 };
 
 export const CharacterComponent: FunctionComponent<{}> = () => {
@@ -161,7 +132,6 @@ export const CharacterComponent: FunctionComponent<{}> = () => {
     character.equipment,
     calcTotalsFor,
   );
-  console.table(totals);
 
   return (
     <div>
@@ -171,53 +141,3 @@ export const CharacterComponent: FunctionComponent<{}> = () => {
     </div>
   );
 };
-
-// TODO: clean up
-//   <div>
-//     <ModalDiv>
-//       <ModalContent>
-//         <LeftRightTemplateWithLabel title="Cart Total">
-//           {{
-//             Left: `Hello`,
-//             Right: <div>hello world</div>
-//           }}
-//         </LeftRightTemplateWithLabel>
-//         <PrimaryButton color={ButtonColor.BLUE} size={ButtonSize.SMALL} onClick={()=>console.log("hello")}>hello</PrimaryButton>
-//       </ModalContent>
-//     </ModalDiv>
-//   </div>
-
-/**
- * components to be broken out into different files
- */
-
-export const TotalsList: FunctionComponent<{}> = () => {
-
-  return <div>Bleh</div>;
-}
-
-export const TotalsListItem: FunctionComponent<{}> = () => {
-  return <div>Bleh</div>;
-}
-
- const ModalDiv = Styled.div`
-//  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  `
-
-  const ModalContent = Styled.div`
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-  `
-

@@ -9,10 +9,11 @@ export * from './inject-element';
 export * from './expander';
 export * from './modal';
 
-export enum JustifyContent {
+export enum FlexContent {
   START = 1,
   END,
   CENTER,
+  SPACE_BETWEEN,
 }
 
 export enum LayoutBgColor {
@@ -42,7 +43,15 @@ export interface IFlexboxComponentProps extends IDefaultProps {
    *
    * @default START
    */
-  justifyContent?: JustifyContent;
+  justifyContent?: FlexContent;
+
+  /**
+   * [optional] Justification for children of Flexbox Component. Controls the value
+   * used with `align-items` css property
+   *
+   * @default START
+   */
+  alignItems?: FlexContent;
 
   /**
    * [optional] Background color for Flexbox Component.  Controls the `background-color`
@@ -72,15 +81,32 @@ export interface IFlexboxComponentProps extends IDefaultProps {
    * i.e. `padding: { top: 10, right: 20, bottom: 30, left: 40 } => padding: 10px 20px 30px 40px;`
    */
   padding?: TPaddingProp;
+
+  /**
+   * [optional] Enables `overflow-y: scroll` css style
+   */
+  scrollY?: boolean;
+
+  /**
+   * [optional] Sets height of Flexbox Component
+   */
+  height?: string;
+
+  /**
+   * [optional] Sets width of Flexbox Component
+   */
+  width?: string;
 }
 
 const getContentJustification = (props: IFlexboxComponentProps) => {
   switch (props.justifyContent) {
-    case JustifyContent.CENTER:
+    case FlexContent.CENTER:
       return 'flex-end';
-    case JustifyContent.END:
+    case FlexContent.END:
       return 'center';
-    case JustifyContent.START:
+    case FlexContent.SPACE_BETWEEN:
+      return 'space-between';
+    case FlexContent.START:
     default:
       return 'flex-start';
   }
@@ -108,11 +134,35 @@ const getPadding = (props: IFlexboxComponentProps) => {
     }
     return `${top}px ${right}px`;
   }
-  return !!props.padding && `${props.padding}px;`;
+  return !!props.padding ? `${props.padding}px;` : '';
+};
+
+const getOverflowY = (props: IFlexboxComponentProps) => {
+  if (props.scrollY) {
+    return 'scroll';
+  }
+  return 'inherit';
+};
+
+const getHeight = (props: IFlexboxComponentProps) => {
+  if (props.height) {
+    return `height: ${props.height};`;
+  }
+  return;
+};
+const getWidth = (props: IFlexboxComponentProps) => {
+  if (props.width) {
+    return `width: ${props.width};`;
+  }
+  return;
 };
 
 export const getFlexboxStyles = (props: IFlexboxComponentProps) => `
   justify-content: ${getContentJustification(props)};
+  align-items: ${getContentJustification(props)};
   background-color: ${getBackgroundColor(props)};
-  padding: ${getPadding(props)}
+  padding: ${getPadding(props)};
+  overflow-y: ${getOverflowY(props)};
+  ${getHeight(props)};
+  ${getWidth(props)};
 `;

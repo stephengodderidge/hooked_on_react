@@ -9,7 +9,7 @@ const FlexRow = styled.div`
 `;
 
 const EvenlySpacedRow: SFC<IFlexboxComponentProps> = props => (
-  <FlexRow>
+  <FlexRow {...props}>
     <InjectElement element={<Spacer width={props.childSpacing} />}>
       {props.children}
     </InjectElement>
@@ -26,4 +26,6 @@ const BaseRow: SFC<IFlexboxComponentProps> = ({ bgColor, ...props }) => {
 /** Flex Row */
 export const Row = styled(BaseRow)`
   ${props => getFlexboxStyles(props)};
+
+  /* border: 3px solid green; */
 `;

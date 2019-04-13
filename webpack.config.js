@@ -23,7 +23,7 @@ module.exports = {
       modules: path.resolve(__dirname, 'app/modules/'),
       pages: path.resolve(__dirname, 'pages/'),
       types: path.resolve(__dirname, 'app/types/'),
-      types: path.resolve(__dirname, 'static/'),
+      static: path.resolve(__dirname, 'static/'),
     },
     extensions: ['.tsx', '.ts', '.js', 'jsx'],
   },

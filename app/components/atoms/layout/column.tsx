@@ -8,7 +8,7 @@ const FlexColumn = styled.div`
 `;
 
 const EvenlySpacedColumn: SFC<IFlexboxComponentProps> = props => (
-  <FlexColumn>
+  <FlexColumn {...props}>
     <InjectElement element={<Spacer height={props.childSpacing} />}>
       {props.children}
     </InjectElement>
@@ -24,5 +24,5 @@ const BaseColumn: SFC<IFlexboxComponentProps> = ({ bgColor, ...props }) => {
 
 /** Flex Column */
 export const Column = styled(BaseColumn)`
-  ${props => getFlexboxStyles(props)}
+  ${props => getFlexboxStyles(props)} /* border: 2px solid blue; */
 `;
