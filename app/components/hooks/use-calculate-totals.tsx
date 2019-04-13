@@ -1,5 +1,6 @@
 import React, { SFC, useReducer } from 'react';
 import { FSA } from 'types/fsa';
+import { Sprites } from 'components';
 
 type TDispatchCallback = (action: FSA) => void;
 
@@ -156,5 +157,11 @@ export const CharacterComponent: SFC<{}> = () => {
     calcTotalsFor,
   );
   console.table(totals);
-  return <div>Bleh</div>;
+  return (
+    <div>
+      {Object.values(Sprites).map(Sprite => (
+        <Sprite key={Sprite.displayName} />
+      ))}
+    </div>
+  );
 };
