@@ -1,6 +1,7 @@
 import React, {SFC} from "react";
 import { Column, Row, H1 } from 'components';
 import { IDefaultProps } from 'types/default-props';
+import Styled from 'styled-components'
 
 
 
@@ -16,10 +17,16 @@ export const LeftRightTemplateWithLabel: SFC<ILeftRightTemplateWithLabelProps> =
   return (
     <Row>
       <Column>
+      <HalfWidthDiv>
         <H1>{props.title}</H1>
-        {Left[0]}
+        {Left}
+      </HalfWidthDiv>
       </Column>
       {Right}
     </Row>
   )
 }
+
+const HalfWidthDiv = Styled.div`
+  width: 50%;
+`
