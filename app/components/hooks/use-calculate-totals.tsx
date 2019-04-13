@@ -1,9 +1,11 @@
 import React, { useReducer, FunctionComponent } from 'react';
 import { FSA } from 'types/fsa';
 import Styled from "styled-components";
-
 import {ActionButton, PrimaryButton, SecondaryButton, ButtonColor, ButtonSize} from '../atoms/buttons/material';
 import {LeftRightTemplateWithLabel} from '../templates/left-right-template-with-label';
+
+import { Sprites } from 'components';
+
 
 type TDispatchCallback = (action: FSA) => void;
 
@@ -160,23 +162,30 @@ export const CharacterComponent: FunctionComponent<{}> = () => {
     calcTotalsFor,
   );
   console.table(totals);
-  return(
-  <div>
-    <ModalDiv>
-      <ModalContent>
-        <LeftRightTemplateWithLabel title="Cart Total">
-          {{
-            Left: `Hello`,
-            Right: <div>hello world</div>
-          }}
-        </LeftRightTemplateWithLabel>
-        <PrimaryButton color={ButtonColor.BLUE} size={ButtonSize.SMALL} onClick={()=>console.log("hello")}>hello</PrimaryButton>
-      </ModalContent>
-    </ModalDiv>
-  </div>
+
+  return (
+    <div>
+      {Object.values(Sprites).map(Sprite => (
+        <Sprite key={Sprite.displayName} />
+      ))}
+    </div>
   );
 };
 
+// TODO: clean up
+//   <div>
+//     <ModalDiv>
+//       <ModalContent>
+//         <LeftRightTemplateWithLabel title="Cart Total">
+//           {{
+//             Left: `Hello`,
+//             Right: <div>hello world</div>
+//           }}
+//         </LeftRightTemplateWithLabel>
+//         <PrimaryButton color={ButtonColor.BLUE} size={ButtonSize.SMALL} onClick={()=>console.log("hello")}>hello</PrimaryButton>
+//       </ModalContent>
+//     </ModalDiv>
+//   </div>
 
 /**
  * components to be broken out into different files
