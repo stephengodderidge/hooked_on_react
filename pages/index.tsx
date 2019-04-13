@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { CartSummary } from 'modules/cart-summary';
+// import { CartSummary } from 'modules/cart-summary';
+import { HeroBuilder } from 'modules/hero-builder';
 
 // #region Cart Setup
 const cart = {
@@ -19,28 +20,27 @@ const cart = {
 };
 // #endregion Cart Setup
 // #region Character Setup
-const character = {
-  name: 'My Character',
+const hero = {
+  name: 'My Hero',
   equipment: [
     {
-      name: 'Helmet',
-      armor: 10,
+      name: 'WizardHat',
       health: 10,
       level: 1,
     },
     {
-      name: 'Sword',
-      damage: 5,
-      level: 3,
+      name: 'Boots',
+      armor: 5,
+      level: 6,
     },
     {
-      name: 'Lucky Charm',
-      health: 5,
+      name: 'Glove',
+      damage: 3,
       level: 5,
     },
     {
-      name: 'Unlucky Charm',
-      health: -1,
+      name: 'Axe',
+      damage: 50,
       level: 3,
     },
   ],
@@ -50,7 +50,8 @@ const character = {
 /** Home Page */
 class Home extends Component<{}, {}> {
   render() {
-    return <CartSummary cart={cart} />;
+    // return <CartSummary cart={cart} />;
+    return <HeroBuilder hero={hero} />;
   }
 }
 
