@@ -1,7 +1,5 @@
-import React, { useReducer, FunctionComponent } from 'react';
+import { useReducer } from 'react';
 import { FSA } from 'types/fsa';
-
-import { Sprites } from 'components';
 
 type TDispatchCallback = (action: FSA) => void;
 
@@ -14,11 +12,14 @@ interface ISetTotalForKey extends FSA {
   type: 'SET_TOTAL_FOR_KEY';
   payload: {
     key: string;
-    value: number;
+    value: number | string;
   };
 }
 
-export const setTotalForKey = (key: string, value: number): ISetTotalForKey => ({
+export const setTotalForKey = (
+  key: string,
+  value: number | string,
+): ISetTotalForKey => ({
   type: 'SET_TOTAL_FOR_KEY',
   payload: {
     key,
@@ -59,7 +60,7 @@ const getSafeTotal = (value: number) => {
 export const useCalculateTotals = <T extends { [key: string]: number | string }>(
   data: T[],
   calcTotalsFor: ICalculateTotalsFor,
-): IUseCalculateTotals<T> => {
+): IUseCalculateTotals<{ [key: string]: number }> => {
   const initialTotals = Object.keys(calcTotalsFor).reduce(
     (totals, calculationKey) => {
       if (typeof calcTotalsFor[calculationKey] === 'function') {
@@ -75,7 +76,7 @@ export const useCalculateTotals = <T extends { [key: string]: number | string }>
       }
       return {
         ...totals,
-        [calculationKey]: null,
+        [calculationKey]: calcTotalsFor[calculationKey],
       };
     },
     {},
@@ -85,59 +86,4 @@ export const useCalculateTotals = <T extends { [key: string]: number | string }>
     totals,
     dispatch,
   };
-};
-
-export const CharacterComponent: FunctionComponent<{}> = () => {
-  interface ICharacterEquipment {
-    name: string;
-    health?: number;
-    armor?: number;
-    damage?: number;
-    level: number;
-  }
-
-  const character = {
-    name: 'My Character',
-    equipment: [
-      {
-        name: 'Helmet',
-        armor: 10,
-        health: 10,
-        level: 1,
-      },
-      {
-        name: 'Sword',
-        damage: 5,
-        level: 3,
-      },
-      {
-        name: 'Lucky Charm',
-        health: 5,
-        level: 5,
-      },
-      {
-        name: 'Unlucky Charm',
-        health: -1,
-        level: 3,
-      },
-    ],
-  };
-
-  const calcTotalsFor = {
-    health: (equipment: ICharacterEquipment) => equipment.health * equipment.level,
-    armor: (equipment: ICharacterEquipment) => equipment.armor * equipment.level,
-    damage: (equipment: ICharacterEquipment) => equipment.damage * equipment.level,
-  };
-  const { totals, dispatch } = useCalculateTotals(
-    character.equipment,
-    calcTotalsFor,
-  );
-
-  return (
-    <div>
-      {Object.values(Sprites).map(Sprite => (
-        <Sprite key={Sprite.displayName} />
-      ))}
-    </div>
-  );
 };

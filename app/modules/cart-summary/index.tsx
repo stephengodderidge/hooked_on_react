@@ -73,9 +73,9 @@ const calcShipping = (totalCost: number) => {
 export const CartSummary: FunctionComponent<ICartSummaryProps> = props => {
   const calcTotalsFor: any = {
     subTotal: (product: IProduct) => product.price * product.quantity,
-    taxes: null,
-    shipping: null,
-    totalCost: null,
+    taxes: 0,
+    shipping: 0,
+    totalCost: 0,
   };
 
   const { totals, dispatch } = useCalculateTotals(
@@ -83,7 +83,6 @@ export const CartSummary: FunctionComponent<ICartSummaryProps> = props => {
     calcTotalsFor,
   );
 
-  console.table(totals);
   useEffect(() => {
     /**
      * Calculate Taxes
@@ -96,7 +95,7 @@ export const CartSummary: FunctionComponent<ICartSummaryProps> = props => {
     dispatch(setTotalForKey('taxes', taxes));
     dispatch(setTotalForKey('shipping', shipping));
     dispatch(setTotalForKey('totalCost', totalCost));
-  }, totals.subTotal);
+  }, [totals.subTotal, dispatch]);
 
   return (
     <SummaryLayout title="Cart Summary">
@@ -121,10 +120,10 @@ export const CartSummary: FunctionComponent<ICartSummaryProps> = props => {
         Right: (
           <ListWrapper>
             {[
-              { name: 'Subtotal', value: totals.subTotal },
-              { name: 'Taxes', value: totals.taxes },
-              { name: 'Shipping', value: totals.shipping },
-              { name: 'Total Cost', value: totals.totalCost },
+              { name: 'Subtotal', value: totals.subTotal.toFixed(2) },
+              { name: 'Taxes', value: totals.taxes.toFixed(2) },
+              { name: 'Shipping', value: totals.shipping.toFixed(2) },
+              { name: 'Total Cost', value: totals.totalCost.toFixed(2) },
             ].map(total => (
               <React.Fragment key={total.name}>
                 <TotalsFont>{total.name}</TotalsFont>

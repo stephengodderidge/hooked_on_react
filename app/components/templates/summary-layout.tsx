@@ -19,7 +19,9 @@ export const SummaryLayout: FunctionComponent<ISummaryLayoutProps> = props => {
         </Row>
         <Column width="100%">{Left}</Column>
       </Column>
-      <Column width="30vw">{Right}</Column>
+      <Column width="30vw" height="100vh">
+        {Right}
+      </Column>
     </Row>
   );
 };

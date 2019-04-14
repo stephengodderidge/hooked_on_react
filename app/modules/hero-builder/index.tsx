@@ -66,32 +66,26 @@ interface IHeroBuilderProps {
 }
 
 export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
-  // const calcTotalsFor: any = {
-  //   subTotal: (hero: IHero) => product.price * product.quantity,
-  //   taxes: null,
-  //   shipping: null,
-  //   totalCost: null,
-  // };
+  const calcTotalsFor: any = {
+    armor: (equipment: ICharacterEquipment) => equipment.armor * equipment.level,
+    health: (equipment: ICharacterEquipment) => equipment.health * equipment.level,
+    damage: (equipment: ICharacterEquipment) => equipment.damage * equipment.level,
+    powerLevel: 0,
+  };
 
-  // const { totals, dispatch } = useCalculateTotals(
-  //   props.cart.products,
-  //   calcTotalsFor,
-  // );
+  const { totals, dispatch } = useCalculateTotals(
+    props.hero.equipment,
+    calcTotalsFor,
+  );
 
-  // useEffect(() => {
-  //   /**
-  //    * Calculate Taxes
-  //    */
-  //   const subTotal = Number(totals.subTotal as number);
-  //   const taxes = subTotal * 0.1;
-  //   const shipping = calcShipping(subTotal);
-  //   const totalCost = subTotal + taxes + shipping;
+  useEffect(() => {
+    /**
+     * Calculate Power Level
+     */
+    const powerLevel = totals.armor + totals.health + totals.damage;
 
-  //   dispatch(setTotalForKey('taxes', taxes));
-  //   dispatch(setTotalForKey('shipping', shipping));
-  //   dispatch(setTotalForKey('totalCost', totalCost));
-  // }, totals.subTotal);
-
+    dispatch(setTotalForKey('powerLevel', powerLevel));
+  }, [totals.armor, totals.health, totals.damage, dispatch]);
   return (
     <SummaryLayout title="Hero Builder">
       {{
@@ -104,8 +98,10 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
                   <React.Fragment key={item.name}>
                     <CellFont>{item.name}</CellFont>
                     <Expander />
-                    <CellFont>{item.price}</CellFont>
-                    <CellFont>{item.quantity}</CellFont>
+                    <CellFont>{item.armor || 0}</CellFont>
+                    <CellFont>{item.health || 0}</CellFont>
+                    <CellFont>{item.damage || 0}</CellFont>
+                    <CellFont>{item.level}</CellFont>
                   </React.Fragment>
                 );
               })}
@@ -113,20 +109,23 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
           </>
         ),
         Right: (
-          <ListWrapper>
-            {[
-              { name: 'Health', value: 10 },
-              { name: 'Armor', value: 2 },
-              { name: 'Damage', value: 12 },
-              { name: 'Total Power', value: 50 },
-            ].map(total => (
-              <React.Fragment key={total.name}>
-                <TotalsFont>{total.name}</TotalsFont>
-                <Expander />
-                <TotalsFont>{total.value}</TotalsFont>
-              </React.Fragment>
-            ))}
-          </ListWrapper>
+          <>
+            <Expander />
+            <ListWrapper>
+              {[
+                { name: 'Health', value: totals.health },
+                { name: 'Armor', value: totals.armor },
+                { name: 'Damage', value: totals.damage },
+                { name: 'Total Power', value: totals.powerLevel },
+              ].map(total => (
+                <React.Fragment key={total.name}>
+                  <TotalsFont>{total.name}</TotalsFont>
+                  <Expander />
+                  <TotalsFont>{total.value}</TotalsFont>
+                </React.Fragment>
+              ))}
+            </ListWrapper>
+          </>
         ),
       }}
     </SummaryLayout>

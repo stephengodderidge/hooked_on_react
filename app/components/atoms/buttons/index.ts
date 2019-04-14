@@ -1,7 +1,6 @@
-import * as MaterialButtons from './material';
 import { IDefaultProps } from 'types/default-props';
 
-export { MaterialButtons };
+export * from './material';
 
 export interface IBaseButtonProps extends IDefaultProps {
   /**

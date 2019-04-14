@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-// import { CartSummary } from 'modules/cart-summary';
+import React, { Component, FunctionComponent } from 'react';
+import { CartSummary } from 'modules/cart-summary';
 import { HeroBuilder } from 'modules/hero-builder';
+import { useToggle, PrimaryButton } from 'components';
 
 // #region Cart Setup
 const cart = {
@@ -16,6 +17,31 @@ const cart = {
       price: 5,
       quantity: 2,
     },
+    {
+      name: 'Milk',
+      price: 2,
+      quantity: 1,
+    },
+    {
+      name: 'Juice Box',
+      price: 1,
+      quantity: 1,
+    },
+    {
+      name: 'Trapper Keeper',
+      price: 15,
+      quantity: 3,
+    },
+    {
+      name: 'Latest Battle Royale',
+      price: 100,
+      quantity: 1,
+    },
+    {
+      name: 'Oreos',
+      price: 2,
+      quantity: 6,
+    },
   ],
 };
 // #endregion Cart Setup
@@ -24,13 +50,19 @@ const hero = {
   name: 'My Hero',
   equipment: [
     {
-      name: 'WizardHat',
-      health: 10,
+      name: 'Wizard Hat',
+      health: 5,
       level: 1,
     },
     {
-      name: 'Boots',
+      name: 'Silver Chest Piece',
+      health: 5,
       armor: 5,
+      level: 2,
+    },
+    {
+      name: 'Boots',
+      armor: 2,
       level: 6,
     },
     {
@@ -40,18 +72,27 @@ const hero = {
     },
     {
       name: 'Axe',
-      damage: 50,
+      damage: 7,
       level: 3,
     },
   ],
 };
 // #endregion Character Setup
 
+const AppDemo: FunctionComponent<{}> = () => {
+  const { isOn, toggleState } = useToggle(true);
+  return (
+    <>
+      {isOn ? <CartSummary cart={cart} /> : <HeroBuilder hero={hero} />}
+      <PrimaryButton onClick={toggleState}>Switch App!</PrimaryButton>
+    </>
+  );
+};
+
 /** Home Page */
 class Home extends Component<{}, {}> {
   render() {
-    // return <CartSummary cart={cart} />;
-    return <HeroBuilder hero={hero} />;
+    return <AppDemo />;
   }
 }
 
