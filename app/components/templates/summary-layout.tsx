@@ -1,6 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row, Display1 } from 'components';
 import { IDefaultProps } from 'types/default-props';
+import styled from 'styled-components';
+import { colors } from 'modules/config';
+
+const RightColumn = styled(Column)`
+  box-shadow: 5px 0px 25px ${colors.black};
+`;
 
 interface ISummaryLayoutProps extends IDefaultProps {
   /**
@@ -19,9 +25,9 @@ export const SummaryLayout: FunctionComponent<ISummaryLayoutProps> = props => {
         </Row>
         <Column width="100%">{Left}</Column>
       </Column>
-      <Column width="30vw" height="100vh">
+      <RightColumn width="30vw" height="100vh">
         {Right}
-      </Column>
+      </RightColumn>
     </Row>
   );
 };
