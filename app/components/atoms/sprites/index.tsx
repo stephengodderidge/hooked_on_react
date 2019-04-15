@@ -96,6 +96,7 @@ const Cyclops = styled<{ children: JSX.Element[] }>(SimpleCharacterSprite)`
   background-image: url('/static/characters/cyclops-sprite-sheet.png');
   background-position: -11px -40px;
   background-size: 3000px;
+  margin: auto;
 `;
 
 // should be 80 x 80, with size being 40

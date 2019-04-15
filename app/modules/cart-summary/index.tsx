@@ -15,8 +15,12 @@ import {
 
 import styled from 'styled-components';
 
+const HeaderFont = styled(H1)`
+  padding: 0px 8px;
+`;
+
 const CellFont = styled(H2)`
-  padding: 8px 16px;
+  padding: 8px 20px;
 `;
 
 const TotalsFont = styled(Body1)`
@@ -102,7 +106,12 @@ export const CartSummary: FunctionComponent<ICartSummaryProps> = props => {
       {{
         Left: (
           <>
-            <H1>Products</H1>
+            <Row width="90%" padding={16}>
+              <HeaderFont>Products</HeaderFont>
+              <Expander />
+              <HeaderFont>Price</HeaderFont>
+              <HeaderFont>Qty</HeaderFont>
+            </Row>
             <ListWrapper>
               {props.cart.products.map(product => {
                 return (

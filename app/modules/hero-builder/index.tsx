@@ -17,8 +17,12 @@ import {
 
 import styled from 'styled-components';
 
+const HeaderFont = styled(H1)`
+  padding: 0px 8px;
+`;
+
 const CellFont = styled(H2)`
-  padding: 8px 16px;
+  padding: 8px 28px;
 `;
 
 const TotalsFont = styled(Body1)`
@@ -53,24 +57,6 @@ const ListWrapper: FunctionComponent<IListWrapperProps> = props => {
           </Row>
         );
       })}
-    </Column>
-  );
-};
-
-interface IHeroWrapperProps extends IDefaultProps {
-  children: JSX.Element[];
-}
-
-const HeroWrapper: FunctionComponent<IHeroWrapperProps> = props => {
-  return (
-    <Column
-      width="100%"
-      height="100%"
-      padding={10}
-      childSpacing={8}
-      bgColor={LayoutBgColor.BLUE}
-    >
-      {props.children}
     </Column>
   );
 };
@@ -116,7 +102,14 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
       {{
         Left: (
           <>
-            <H1>Attributes</H1>
+            <Row width="90%" padding={16}>
+              <HeaderFont>Item</HeaderFont>
+              <Expander />
+              <HeaderFont>Armr</HeaderFont>
+              <HeaderFont>Hlth</HeaderFont>
+              <HeaderFont>Dmg</HeaderFont>
+              <HeaderFont>Lvl</HeaderFont>
+            </Row>
             <ListWrapper>
               {props.hero.equipment.map(item => {
                 return (
@@ -135,8 +128,7 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
         ),
         Right: (
           <>
-            {/* insert thing here */}
-            <HeroWrapper>
+            <Column width="100%" height="83%" bgColor={LayoutBgColor.BLUE}>
               <Sprites.CharacterLayout>
                 {{
                   helmet: <Sprites.WizardHat />,
@@ -147,8 +139,7 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
                   rightFoot: <Sprites.Boots />,
                 }}
               </Sprites.CharacterLayout>
-            </HeroWrapper>
-            <Expander />
+            </Column>
             <ListWrapper>
               {[
                 { name: 'Health', value: totals.health },
