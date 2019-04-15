@@ -10,6 +10,7 @@ import {
   Expander,
   LayoutBgColor,
   useCalculateTotals,
+  useList,
   setTotalForKey,
   Sprites,
 } from 'components';
@@ -56,6 +57,24 @@ const ListWrapper: FunctionComponent<IListWrapperProps> = props => {
   );
 };
 
+interface IHeroWrapperProps extends IDefaultProps {
+  children: JSX.Element[];
+}
+
+const HeroWrapper: FunctionComponent<IHeroWrapperProps> = props => {
+  return (
+    <Column
+      width="100%"
+      height="100%"
+      padding={10}
+      childSpacing={8}
+      bgColor={LayoutBgColor.BLUE}
+    >
+      {props.children}
+    </Column>
+  );
+};
+
 interface IHero {
   name: string;
   equipment: ICharacterEquipment[];
@@ -77,6 +96,12 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
     props.hero.equipment,
     calcTotalsFor,
   );
+
+  const equipmentList = props.hero.equipment.map(hero => hero.name);
+  const { list, updateList } = useList(equipmentList);
+
+  /**cll in checkbox on change */
+  updateList('string');
 
   useEffect(() => {
     /**
@@ -110,6 +135,19 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
         ),
         Right: (
           <>
+            {/* insert thing here */}
+            <HeroWrapper>
+              <Sprites.CharacterLayout>
+                {{
+                  helmet: <Sprites.WizardHat />,
+                  glove: <Sprites.Glove />,
+                  chest: <Sprites.ChestPiece />,
+                  weapon: <Sprites.Axe />,
+                  leftFoot: <Sprites.Boots />,
+                  rightFoot: <Sprites.Boots />,
+                }}
+              </Sprites.CharacterLayout>
+            </HeroWrapper>
             <Expander />
             <ListWrapper>
               {[
