@@ -93,7 +93,7 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
   const { list, updateList } = useList(equipmentList);
 
   /**cll in checkbox on change */
-  updateList('string');
+  // updateList('string');
 
   useEffect(() => {
     /**
