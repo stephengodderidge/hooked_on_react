@@ -96,6 +96,11 @@ export interface IFlexboxComponentProps extends IDefaultProps {
    * [optional] Sets width of Flexbox Component
    */
   width?: string;
+
+  /**
+   * [optional] Enables border radius styling (set to 3px)
+   */
+  useBorderRadius?: boolean;
 }
 
 const getContentJustification = (props: IFlexboxComponentProps) => {
@@ -163,6 +168,7 @@ export const getFlexboxStyles = (props: IFlexboxComponentProps) => `
   background-color: ${getBackgroundColor(props)};
   padding: ${getPadding(props)};
   overflow-y: ${getOverflowY(props)};
+  border-radius: ${props.useBorderRadius ? '3px' : '0px'};
   ${getHeight(props)};
   ${getWidth(props)};
 `;

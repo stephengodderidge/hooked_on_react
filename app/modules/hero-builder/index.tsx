@@ -49,10 +49,16 @@ const ListWrapper: FunctionComponent<IListWrapperProps> = props => {
       padding={16}
       bgColor={LayoutBgColor.GREY}
       scrollY
+      useBorderRadius
     >
       {props.children.map(Child => {
         return (
-          <Row key={Child.key} width="100%" bgColor={LayoutBgColor.WHITE}>
+          <Row
+            key={Child.key}
+            width="100%"
+            bgColor={LayoutBgColor.WHITE}
+            useBorderRadius
+          >
             {Child}
           </Row>
         );
