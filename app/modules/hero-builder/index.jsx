@@ -1,3 +1,4 @@
+// #region Imports
 import React, { FunctionComponent, useEffect } from 'react';
 import {
   SummaryLayout,
@@ -15,9 +16,9 @@ import {
   recalculateTotals,
   Sprites,
 } from 'components';
-
 import styled from 'styled-components';
-
+// #endregion Imports
+// #region Not in Demo
 const HeaderFont = styled(H1)`
   padding: 0px 8px;
 `;
@@ -55,12 +56,13 @@ const ListWrapper = props => {
     </Column>
   );
 };
+// #endregion Not in Demo
 
 export const HeroBuilder = props => {
   const calcTotalsFor = {
-    armor: equipment => equipment.armor * equipment.level,
-    health: equipment => equipment.health * equipment.level,
-    damage: equipment => equipment.damage * equipment.level,
+    armor: equipment => 0, // TODO
+    health: equipment => 0, // TODO
+    damage: equipment => 0, // TODO
     powerLevel: 0,
   };
 
@@ -72,92 +74,94 @@ export const HeroBuilder = props => {
 
   const { totals, dispatch } = useCalculateTotals(equippedItems, calcTotalsFor);
 
-  /**cll in checkbox on change */
-  // updateList('string');
-
   useEffect(() => {
     /**
-     * Calculate Power Level
+     * TODO - Calculate Power Level & dispatch action to store updated value
      */
-    const powerLevel = totals.armor + totals.health + totals.damage;
-
-    dispatch(setTotalForKey('powerLevel', powerLevel));
   }, [totals.armor, totals.health, totals.damage]);
 
   const onValueChange = (newItem, clicked) => {
     updateList(newItem);
-    dispatch(recalculateTotals(list, calcTotalsFor));
+    /**
+     * TODO - Recalculate totals when list is updated
+     */
   };
 
-  return (
-    <SummaryLayout title="Hero Builder">
-      {{
-        Left: (
-          <>
-            <Row width="90%" padding={16}>
-              <HeaderFont>Item</HeaderFont>
-              <Expander />
-              <HeaderFont>Armr</HeaderFont>
-              <HeaderFont>Hlth</HeaderFont>
-              <HeaderFont>Dmg</HeaderFont>
-              <HeaderFont>Lvl</HeaderFont>
-            </Row>
-            <ListWrapper>
-              {props.equipment.map(item => {
-                return (
-                  <React.Fragment key={item.name}>
-                    <MaterialFormElements.Checkbox
-                      key={item.level}
-                      onChange={onValueChange}
-                      value={item.name}
-                    />
-                    <CellFont>{item.name}</CellFont>
+  const renderHeroBuilder = () => {
+    // #region Render Logic
+    return (
+      <SummaryLayout title="Hero Builder">
+        {{
+          Left: (
+            <>
+              <Row width="90%" padding={16}>
+                <HeaderFont>Item</HeaderFont>
+                <Expander />
+                <HeaderFont>Armr</HeaderFont>
+                <HeaderFont>Hlth</HeaderFont>
+                <HeaderFont>Dmg</HeaderFont>
+                <HeaderFont>Lvl</HeaderFont>
+              </Row>
+              <ListWrapper>
+                {props.equipment.map(item => {
+                  return (
+                    <React.Fragment key={item.name}>
+                      <MaterialFormElements.Checkbox
+                        key={item.level}
+                        onChange={onValueChange}
+                        value={item.name}
+                      />
+                      <CellFont>{item.name}</CellFont>
+                      <Expander />
+                      <CellFont>{item.armor || 0}</CellFont>
+                      <CellFont>{item.health || 0}</CellFont>
+                      <CellFont>{item.damage || 0}</CellFont>
+                      <CellFont>{item.level}</CellFont>
+                    </React.Fragment>
+                  );
+                })}
+              </ListWrapper>
+            </>
+          ),
+          Right: (
+            <>
+              <Column width="100%" height="83%" bgColor={LayoutBgColor.BLUE}>
+                <Sprites.CharacterLayout>
+                  {{
+                    helmet: list.includes('Wizard Hat') ? <Sprites.WizardHat /> : '',
+                    glove: list.includes('Glove') ? <Sprites.Glove /> : '',
+                    chest: list.includes('Silver Chest Piece') ? (
+                      <Sprites.ChestPiece />
+                    ) : (
+                      ''
+                    ),
+                    weapon: list.includes('Axe') ? <Sprites.Axe /> : '',
+                    leftFoot: list.includes('Boots') ? <Sprites.Boots /> : '',
+                    rightFoot: list.includes('Boots') ? <Sprites.Boots /> : '',
+                  }}
+                </Sprites.CharacterLayout>
+              </Column>
+              <ListWrapper>
+                {[
+                  { name: 'Health', value: totals.health },
+                  { name: 'Armor', value: totals.armor },
+                  { name: 'Damage', value: totals.damage },
+                  { name: 'Total Power', value: totals.powerLevel },
+                ].map(total => (
+                  <React.Fragment key={total.name}>
+                    <TotalsFont>{total.name}</TotalsFont>
                     <Expander />
-                    <CellFont>{item.armor || 0}</CellFont>
-                    <CellFont>{item.health || 0}</CellFont>
-                    <CellFont>{item.damage || 0}</CellFont>
-                    <CellFont>{item.level}</CellFont>
+                    <TotalsFont>{total.value}</TotalsFont>
                   </React.Fragment>
-                );
-              })}
-            </ListWrapper>
-          </>
-        ),
-        Right: (
-          <>
-            <Column width="100%" height="83%" bgColor={LayoutBgColor.BLUE}>
-              <Sprites.CharacterLayout>
-                {{
-                  helmet: list.includes('Wizard Hat') ? <Sprites.WizardHat /> : '',
-                  glove: list.includes('Glove') ? <Sprites.Glove /> : '',
-                  chest: list.includes('Silver Chest Piece') ? (
-                    <Sprites.ChestPiece />
-                  ) : (
-                    ''
-                  ),
-                  weapon: list.includes('Axe') ? <Sprites.Axe /> : '',
-                  leftFoot: list.includes('Boots') ? <Sprites.Boots /> : '',
-                  rightFoot: list.includes('Boots') ? <Sprites.Boots /> : '',
-                }}
-              </Sprites.CharacterLayout>
-            </Column>
-            <ListWrapper>
-              {[
-                { name: 'Health', value: totals.health },
-                { name: 'Armor', value: totals.armor },
-                { name: 'Damage', value: totals.damage },
-                { name: 'Total Power', value: totals.powerLevel },
-              ].map(total => (
-                <React.Fragment key={total.name}>
-                  <TotalsFont>{total.name}</TotalsFont>
-                  <Expander />
-                  <TotalsFont>{total.value}</TotalsFont>
-                </React.Fragment>
-              ))}
-            </ListWrapper>
-          </>
-        ),
-      }}
-    </SummaryLayout>
-  );
+                ))}
+              </ListWrapper>
+            </>
+          ),
+        }}
+      </SummaryLayout>
+    );
+    // #endregion Render Logic
+  };
+
+  return renderHeroBuilder();
 };
