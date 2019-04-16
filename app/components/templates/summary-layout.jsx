@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row, Display1 } from 'components';
-import { IDefaultProps } from 'types/default-props';
 import styled from 'styled-components';
 import { colors } from 'modules/config';
 
@@ -8,14 +7,7 @@ const RightColumn = styled(Column)`
   box-shadow: 5px 0px 25px ${colors.black};
 `;
 
-interface ISummaryLayoutProps extends IDefaultProps {
-  /**
-   * [required]
-   */
-  title: string;
-}
-
-export const SummaryLayout: FunctionComponent<ISummaryLayoutProps> = props => {
+export const SummaryLayout = props => {
   const { Left, Right } = props.children;
   return (
     <Row height="100vh">

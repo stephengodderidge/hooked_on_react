@@ -1,4 +1,4 @@
-import React, { Component, FunctionComponent } from 'react';
+import React, { Component } from 'react';
 import { CartSummary } from 'modules/cart-summary';
 import { HeroBuilder } from 'modules/hero-builder';
 import { useToggle, PrimaryButton } from 'components';
@@ -75,11 +75,10 @@ const equipment = [
     level: 3,
   },
 ];
-
 // #endregion Character Setup
 
-const AppDemo: FunctionComponent<{}> = () => {
-  const { isOn, toggleState } = useToggle(false);
+const AppDemo = props => {
+  const { isOn, toggleState } = useToggle(true);
   return (
     <>
       {isOn ? <CartSummary cart={cart} /> : <HeroBuilder equipment={equipment} />}
@@ -89,7 +88,7 @@ const AppDemo: FunctionComponent<{}> = () => {
 };
 
 /** Home Page */
-class Home extends Component<{}, {}> {
+class Home extends Component {
   render() {
     return <AppDemo />;
   }

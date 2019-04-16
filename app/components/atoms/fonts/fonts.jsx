@@ -1,51 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { colors } from 'modules/config/colors';
-import { IDefaultProps } from 'types/default-props';
 
-export enum BoldnessLevels {
-  LIGHT = 1,
-  MEDIUM,
-  BOLD,
-}
+export const BoldnessLevels = {
+  LIGHT: 1,
+  MEDIUM: 2,
+  BOLD: 3,
+};
 
-export enum FontColor {
-  BLACK = 1,
-  WHITE,
-}
+export const FontColor = {
+  BLACK: 1,
+  WHITE: 2,
+};
 
-interface IFontProps extends IDefaultProps {
-  /**
-   * [optional] specifies the font boldness level
-   *
-   * @default MEDIUM
-   */
-  boldness?: BoldnessLevels;
-
-  /**
-   * [optional] Url for links
-   */
-  linkUrl?: string;
-
-  /**
-   * [optional] Target when user clicks on links
-   */
-  target?: string;
-
-  /**
-   * [optional] Prop for any onClick events.  This allows the font text
-   * to become clickable
-   */
-  onClick?: (...args: any[]) => any;
-
-  /**
-   * [optional] Color of font text
-   */
-  color?: FontColor;
-}
-
-const Font = (props: IFontProps) => {
+const Font = props => {
   const { linkUrl, color, ...otherProps } = props;
   const elementProps = linkUrl ? { ...otherProps, href: linkUrl } : otherProps;
   if (linkUrl) {
@@ -54,7 +22,7 @@ const Font = (props: IFontProps) => {
   return <div {...elementProps} />;
 };
 
-const getBoldness = (boldnessLevel: BoldnessLevels): number => {
+const getBoldness = boldnessLevel => {
   switch (boldnessLevel) {
     case BoldnessLevels.LIGHT:
       return 300;
@@ -68,7 +36,7 @@ const getBoldness = (boldnessLevel: BoldnessLevels): number => {
 
 const FONT = 'Courier' || 'Arial';
 
-const getFontColor = (props: IFontProps) => {
+const getFontColor = props => {
   switch (props.color) {
     case FontColor.WHITE:
       return colors.white;
@@ -81,7 +49,7 @@ const getFontColor = (props: IFontProps) => {
 const BaseFont = styled(Font)`
   color: ${props => getFontColor(props)};
   font-family: ${FONT};
-  font-weight: ${(props: IFontProps) =>
+  font-weight: ${props =>
     getBoldness(
       props.boldness !== undefined ? props.boldness : BoldnessLevels.MEDIUM,
     )};
@@ -137,7 +105,7 @@ export const Body3 = styled(BaseFont)`
 
 /*  'Link' Styles  */
 export const Link1 = styled(H1)`
-  color: ${(props: IFontProps) => props.theme.colors.blue};
+  color: ${props => props.theme.colors.blue};
   &:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -145,7 +113,7 @@ export const Link1 = styled(H1)`
 `;
 
 export const Link2 = styled(H3)`
-  color: ${(props: IFontProps) => props.theme.colors.blue};
+  color: ${props => props.theme.colors.blue};
   &:hover {
     text-decoration: underline;
     cursor: pointer;
@@ -153,7 +121,7 @@ export const Link2 = styled(H3)`
 `;
 
 export const Link3 = styled(Body1)`
-  color: ${(props: IFontProps) => props.theme.colors.blue};
+  color: ${props => props.theme.colors.blue};
   text-decoration: none;
   &:hover {
     text-decoration: underline;

@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { IFlexboxComponentProps, Spacer, InjectElement, getFlexboxStyles } from '.';
 
@@ -7,7 +7,7 @@ const FlexColumn = styled.div`
   flex-direction: column;
 `;
 
-const EvenlySpacedColumn: SFC<IFlexboxComponentProps> = props => (
+const EvenlySpacedColumn = props => (
   <FlexColumn {...props}>
     <InjectElement element={<Spacer height={props.childSpacing} />}>
       {props.children}
@@ -15,7 +15,7 @@ const EvenlySpacedColumn: SFC<IFlexboxComponentProps> = props => (
   </FlexColumn>
 );
 
-const BaseColumn: SFC<IFlexboxComponentProps> = ({ bgColor, ...props }) => {
+const BaseColumn = ({ bgColor, ...props }) => {
   if (!!props.childSpacing) {
     return <EvenlySpacedColumn {...props} />;
   }

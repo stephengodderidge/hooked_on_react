@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { IDefaultProps } from 'types';
 import {
   SummaryLayout,
   Row,
@@ -31,19 +30,7 @@ const TotalsFont = styled(Body1)`
   padding: 4px 8px;
 `;
 
-interface ICharacterEquipment {
-  name: string;
-  health?: number;
-  armor?: number;
-  damage?: number;
-  level: number;
-}
-
-interface IListWrapperProps extends IDefaultProps {
-  children: JSX.Element[];
-}
-
-const ListWrapper: FunctionComponent<IListWrapperProps> = props => {
+const ListWrapper = props => {
   return (
     <Column
       width="90%"
@@ -69,15 +56,11 @@ const ListWrapper: FunctionComponent<IListWrapperProps> = props => {
   );
 };
 
-interface IHeroBuilderProps {
-  equipment: ICharacterEquipment[];
-}
-
-export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
-  const calcTotalsFor: any = {
-    armor: (equipment: ICharacterEquipment) => equipment.armor * equipment.level,
-    health: (equipment: ICharacterEquipment) => equipment.health * equipment.level,
-    damage: (equipment: ICharacterEquipment) => equipment.damage * equipment.level,
+export const HeroBuilder = props => {
+  const calcTotalsFor = {
+    armor: equipment => equipment.armor * equipment.level,
+    health: equipment => equipment.health * equipment.level,
+    damage: equipment => equipment.damage * equipment.level,
     powerLevel: 0,
   };
 
@@ -101,7 +84,7 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
     dispatch(setTotalForKey('powerLevel', powerLevel));
   }, [totals.armor, totals.health, totals.damage]);
 
-  const onValueChange = (newItem: string, clicked: boolean) => {
+  const onValueChange = (newItem, clicked) => {
     updateList(newItem);
     dispatch(recalculateTotals(list, calcTotalsFor));
   };

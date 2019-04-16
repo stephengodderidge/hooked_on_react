@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { IDefaultProps } from 'types';
 import {
   SummaryLayout,
   Row,
@@ -30,18 +29,7 @@ const TotalsFont = styled(Body1)`
   padding: 4px 8px;
 `;
 
-interface IProduct {
-  name: string;
-  price: number;
-  quantity: number;
-  [key: string]: number | string;
-}
-
-interface IListWrapperProps extends IDefaultProps {
-  children: JSX.Element[];
-}
-
-const ListWrapper: FunctionComponent<IListWrapperProps> = props => {
+const ListWrapper = props => {
   return (
     <Column
       width="90%"
@@ -67,25 +55,16 @@ const ListWrapper: FunctionComponent<IListWrapperProps> = props => {
   );
 };
 
-interface ICart {
-  name: string;
-  products: IProduct[];
-}
-
-interface ICartSummaryProps {
-  cart: ICart;
-}
-
-const calcShipping = (totalCost: number) => {
+const calcShipping = totalCost => {
   if (totalCost > 50) {
     return 0;
   }
   return 15;
 };
 
-export const CartSummary: FunctionComponent<ICartSummaryProps> = props => {
-  const calcTotalsFor: any = {
-    subTotal: (product: IProduct) => product.price * product.quantity,
+export const CartSummary = props => {
+  const calcTotalsFor = {
+    subTotal: product => product.price * product.quantity,
     taxes: 0,
     shipping: 0,
     totalCost: 0,
@@ -100,7 +79,7 @@ export const CartSummary: FunctionComponent<ICartSummaryProps> = props => {
     /**
      * Calculate Taxes
      */
-    const subTotal = Number(totals.subTotal as number);
+    const subTotal = Number(totals.subTotal);
     const taxes = subTotal * 0.1;
     const shipping = calcShipping(subTotal);
     const totalCost = subTotal + taxes + shipping;

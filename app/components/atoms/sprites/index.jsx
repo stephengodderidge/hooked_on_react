@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import React, { FunctionComponent } from 'react';
-import { IDefaultProps } from 'types/default-props';
 
-const BaseSprite: FunctionComponent<IDefaultProps> = props => <div {...props} />;
+const BaseSprite = props => <div {...props} />;
 
 const BaseEquipmentSlot = styled.div`
   position: absolute;
@@ -40,7 +39,7 @@ const RightFootDiv = styled(BaseEquipmentSlot)`
   transform: scaleX(-1);
 `;
 
-const CharacterLayout: FunctionComponent<IDefaultProps> = props => {
+const CharacterLayout = props => {
   const { helmet, glove, chest, weapon, leftFoot, rightFoot } = props.children;
   return (
     <Cyclops>
@@ -72,7 +71,7 @@ const SimpleSmallSprite = styled(BaseSprite)`
   width: 50px;
 `;
 
-const Cyclops = styled<any>(SimpleCharacterSprite)`
+const Cyclops = styled(SimpleCharacterSprite)`
   position: relative;
   background-image: url('/static/characters/cyclops-sprite-sheet.png');
   background-position: -11px -40px;
