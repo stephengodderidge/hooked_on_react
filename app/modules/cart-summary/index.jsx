@@ -1,3 +1,4 @@
+// #region Imports
 import React, { FunctionComponent, useEffect } from 'react';
 import {
   SummaryLayout,
@@ -14,9 +15,9 @@ import {
   PrimaryButton,
   FlexContent,
 } from 'components';
-
 import styled from 'styled-components';
-
+// #endregion Imports
+// #region Not in Demo
 const HeaderFont = styled(H1)`
   padding: 0px 8px;
 `;
@@ -54,6 +55,7 @@ const ListWrapper = props => {
     </Column>
   );
 };
+// #endregion Not in Demo
 
 const calcShipping = totalCost => {
   if (totalCost > 50) {
@@ -89,63 +91,69 @@ export const CartSummary = props => {
     dispatch(setTotalForKey('totalCost', totalCost));
   }, [totals.subTotal, dispatch]);
 
-  return (
-    <SummaryLayout title="Cart Summary">
-      {{
-        Left: (
-          <>
-            <Row width="90%" padding={16}>
-              <HeaderFont>Products</HeaderFont>
-              <Expander />
-              <HeaderFont>Price</HeaderFont>
-              <HeaderFont>Qty</HeaderFont>
-            </Row>
-            <ListWrapper>
-              {props.cart.products.map(product => {
-                return (
-                  <React.Fragment key={product.name}>
-                    <CellFont>{product.name}</CellFont>
+  const renderCartSummary = () => {
+    // #region Render Logic
+    return (
+      <SummaryLayout title="Cart Summary">
+        {{
+          Left: (
+            <>
+              <Row width="90%" padding={16}>
+                <HeaderFont>Products</HeaderFont>
+                <Expander />
+                <HeaderFont>Price</HeaderFont>
+                <HeaderFont>Qty</HeaderFont>
+              </Row>
+              <ListWrapper>
+                {props.cart.products.map(product => {
+                  return (
+                    <React.Fragment key={product.name}>
+                      <CellFont>{product.name}</CellFont>
+                      <Expander />
+                      <CellFont>${product.price}</CellFont>
+                      <CellFont>{product.quantity}</CellFont>
+                    </React.Fragment>
+                  );
+                })}
+              </ListWrapper>
+            </>
+          ),
+          Right: (
+            <>
+              <ListWrapper>
+                {[
+                  { name: 'Subtotal', value: totals.subTotal.toFixed(2) },
+                  { name: 'Taxes', value: totals.taxes.toFixed(2) },
+                  { name: 'Shipping', value: totals.shipping.toFixed(2) },
+                  { name: 'Total Cost', value: totals.totalCost.toFixed(2) },
+                ].map(total => (
+                  <React.Fragment key={total.name}>
+                    <TotalsFont>{total.name}</TotalsFont>
                     <Expander />
-                    <CellFont>${product.price}</CellFont>
-                    <CellFont>{product.quantity}</CellFont>
+                    <TotalsFont>${total.value}</TotalsFont>
                   </React.Fragment>
-                );
-              })}
-            </ListWrapper>
-          </>
-        ),
-        Right: (
-          <>
-            <ListWrapper>
-              {[
-                { name: 'Subtotal', value: totals.subTotal.toFixed(2) },
-                { name: 'Taxes', value: totals.taxes.toFixed(2) },
-                { name: 'Shipping', value: totals.shipping.toFixed(2) },
-                { name: 'Total Cost', value: totals.totalCost.toFixed(2) },
-              ].map(total => (
-                <React.Fragment key={total.name}>
-                  <TotalsFont>{total.name}</TotalsFont>
-                  <Expander />
-                  <TotalsFont>${total.value}</TotalsFont>
-                </React.Fragment>
-              ))}
-            </ListWrapper>
-            <Expander />
-            <Row
-              width="100%"
-              justifyContent={FlexContent.CENTER}
-              padding={{ top: 32, right: 0 }}
-            >
-              <PrimaryButton
-                color={ButtonColor.BLUE}
-                onClick={() => alert('Cart Submitted!')}
+                ))}
+              </ListWrapper>
+              <Expander />
+              <Row
+                width="100%"
+                justifyContent={FlexContent.CENTER}
+                padding={{ top: 32, right: 0 }}
               >
-                Submit Cart
-              </PrimaryButton>
-            </Row>
-          </>
-        ),
-      }}
-    </SummaryLayout>
-  );
+                <PrimaryButton
+                  color={ButtonColor.BLUE}
+                  onClick={() => alert('Cart Submitted!')}
+                >
+                  Submit Cart
+                </PrimaryButton>
+              </Row>
+            </>
+          ),
+        }}
+      </SummaryLayout>
+    );
+    // #endregion Render Logic
+  };
+
+  return renderCartSummary();
 };

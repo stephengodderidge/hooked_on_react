@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from 'react';
 
+// #region Calculation Logic
 const getSafeTotal = value => {
   return !!value ? value : 0;
 };
@@ -22,7 +23,9 @@ const calcTotals = (data, calcTotalsFor) =>
       [calculationKey]: calcTotalsFor[calculationKey],
     };
   }, {});
+// #endregion Calculation Logic
 
+// #region Actions
 export const setTotalForKey = (key, value) => ({
   type: 'SET_TOTAL_FOR_KEY',
   payload: {
@@ -44,7 +47,9 @@ const CalculateTotalAction = {
   SET_TOTAL_FOR_KEY: 'SET_TOTAL_FOR_KEY',
   RECALCULATE_TOTALS: 'RECALCULATE_TOTALS',
 };
+// #endregion Actions
 
+// #region Reducer
 const totalsReducer = (state, action) => {
   switch (action.type) {
     case CalculateTotalAction.SET_TOTAL_FOR_KEY:
@@ -60,7 +65,8 @@ const totalsReducer = (state, action) => {
       throw new Error();
   }
 };
-
+// #endregion Reducer
+// #region useCalculateTotals Hook
 export const useCalculateTotals = (data, calcTotalsFor) => {
   const initialTotals = calcTotals(data, calcTotalsFor);
   const [totals, dispatch] = useReducer(totalsReducer, initialTotals);
@@ -74,3 +80,4 @@ export const useCalculateTotals = (data, calcTotalsFor) => {
     dispatch,
   };
 };
+// #endregion useCalculateTotals Hook
