@@ -60,9 +60,9 @@ const ListWrapper = props => {
 
 export const HeroBuilder = props => {
   const calcTotalsFor = {
-    armor: equipment => equipment.armor * equipment.level,
-    health: equipment => equipment.health * equipment.level,
-    damage: equipment => equipment.damage * equipment.level,
+    armor: equipment => 0, // TODO
+    health: equipment => 0, // TODO
+    damage: equipment => 0, // TODO
     powerLevel: 0,
   };
 
