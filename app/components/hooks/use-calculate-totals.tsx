@@ -1,5 +1,31 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 import { FSA } from 'types/fsa';
+
+const getSafeTotal = (value: number) => {
+  return !!value ? value : 0;
+};
+
+const calcTotals = <T extends { [key: string]: number | string }>(
+  data: T[],
+  calcTotalsFor: ICalculateTotalsFor,
+) =>
+  Object.keys(calcTotalsFor).reduce((totals, calculationKey) => {
+    if (typeof calcTotalsFor[calculationKey] === 'function') {
+      const total = data.reduce(
+        (currentTotal, obj) =>
+          currentTotal + getSafeTotal(calcTotalsFor[calculationKey](obj)),
+        0,
+      );
+      return {
+        ...totals,
+        [calculationKey]: total,
+      };
+    }
+    return {
+      ...totals,
+      [calculationKey]: calcTotalsFor[calculationKey],
+    };
+  }, {});
 
 type TDispatchCallback = (action: FSA) => void;
 
@@ -27,11 +53,31 @@ export const setTotalForKey = (
   },
 });
 
+interface IRecalculateTotals<T> extends FSA {
+  type: 'RECALCULATE_TOTALS';
+  payload: {
+    data: T[];
+    calculateTotalsFor: ICalculateTotalsFor;
+  };
+}
+
+export const recalculateTotals = <T extends { [key: string]: number | string }>(
+  data: T[],
+  calculateTotalsFor: ICalculateTotalsFor,
+): IRecalculateTotals<T> => ({
+  type: 'RECALCULATE_TOTALS',
+  payload: {
+    data,
+    calculateTotalsFor,
+  },
+});
+
 /** All app actions */
 enum CalculateTotalAction {
   SET_TOTAL_FOR_KEY = 'SET_TOTAL_FOR_KEY',
+  RECALCULATE_TOTALS = 'RECALCULATE_TOTALS',
 }
-type TCalculateTotalActions = ISetTotalForKey;
+type TCalculateTotalActions = ISetTotalForKey | IRecalculateTotals<any>;
 
 const totalsReducer = <T extends {}>(
   state: T,
@@ -44,6 +90,9 @@ const totalsReducer = <T extends {}>(
         ...state,
         [key]: value,
       };
+    case CalculateTotalAction.RECALCULATE_TOTALS:
+      const { data, calculateTotalsFor } = action.payload;
+      return calcTotals<T>(data, calculateTotalsFor);
     default:
       throw new Error();
   }
@@ -53,35 +102,13 @@ interface ICalculateTotalsFor {
   [key: string]: (dataObject: {}) => number;
 }
 
-const getSafeTotal = (value: number) => {
-  return !!value ? value : 0;
-};
-
 export const useCalculateTotals = <T extends { [key: string]: number | string }>(
   data: T[],
   calcTotalsFor: ICalculateTotalsFor,
 ): IUseCalculateTotals<{ [key: string]: number }> => {
-  const initialTotals = Object.keys(calcTotalsFor).reduce(
-    (totals, calculationKey) => {
-      if (typeof calcTotalsFor[calculationKey] === 'function') {
-        const total = data.reduce(
-          (currentTotal, obj) =>
-            currentTotal + getSafeTotal(calcTotalsFor[calculationKey](obj)),
-          0,
-        );
-        return {
-          ...totals,
-          [calculationKey]: total,
-        };
-      }
-      return {
-        ...totals,
-        [calculationKey]: calcTotalsFor[calculationKey],
-      };
-    },
-    {},
-  );
+  const initialTotals = calcTotals(data, calcTotalsFor);
   const [totals, dispatch] = useReducer(totalsReducer, initialTotals);
+
   return {
     totals,
     dispatch,
