@@ -105,9 +105,9 @@ export interface IFlexboxComponentProps extends IDefaultProps {
 
 const getContentJustification = (props: IFlexboxComponentProps) => {
   switch (props.justifyContent) {
-    case FlexContent.CENTER:
-      return 'flex-end';
     case FlexContent.END:
+      return 'flex-end';
+    case FlexContent.CENTER:
       return 'center';
     case FlexContent.SPACE_BETWEEN:
       return 'space-between';

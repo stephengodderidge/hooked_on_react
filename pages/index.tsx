@@ -79,7 +79,7 @@ const equipment = [
 // #endregion Character Setup
 
 const AppDemo: FunctionComponent<{}> = () => {
-  const { isOn, toggleState } = useToggle(false);
+  const { isOn, toggleState } = useToggle(true);
   return (
     <>
       {isOn ? <CartSummary cart={cart} /> : <HeroBuilder equipment={equipment} />}

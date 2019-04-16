@@ -11,6 +11,9 @@ import {
   LayoutBgColor,
   useCalculateTotals,
   setTotalForKey,
+  ButtonColor,
+  PrimaryButton,
+  FlexContent,
 } from 'components';
 
 import styled from 'styled-components';
@@ -133,20 +136,35 @@ export const CartSummary: FunctionComponent<ICartSummaryProps> = props => {
           </>
         ),
         Right: (
-          <ListWrapper>
-            {[
-              { name: 'Subtotal', value: totals.subTotal.toFixed(2) },
-              { name: 'Taxes', value: totals.taxes.toFixed(2) },
-              { name: 'Shipping', value: totals.shipping.toFixed(2) },
-              { name: 'Total Cost', value: totals.totalCost.toFixed(2) },
-            ].map(total => (
-              <React.Fragment key={total.name}>
-                <TotalsFont>{total.name}</TotalsFont>
-                <Expander />
-                <TotalsFont>${total.value}</TotalsFont>
-              </React.Fragment>
-            ))}
-          </ListWrapper>
+          <>
+            <ListWrapper>
+              {[
+                { name: 'Subtotal', value: totals.subTotal.toFixed(2) },
+                { name: 'Taxes', value: totals.taxes.toFixed(2) },
+                { name: 'Shipping', value: totals.shipping.toFixed(2) },
+                { name: 'Total Cost', value: totals.totalCost.toFixed(2) },
+              ].map(total => (
+                <React.Fragment key={total.name}>
+                  <TotalsFont>{total.name}</TotalsFont>
+                  <Expander />
+                  <TotalsFont>${total.value}</TotalsFont>
+                </React.Fragment>
+              ))}
+            </ListWrapper>
+            <Expander />
+            <Row
+              width="100%"
+              justifyContent={FlexContent.CENTER}
+              padding={{ top: 32, right: 0 }}
+            >
+              <PrimaryButton
+                color={ButtonColor.BLUE}
+                onClick={() => alert('Cart Submitted!')}
+              >
+                Submit Cart
+              </PrimaryButton>
+            </Row>
+          </>
         ),
       }}
     </SummaryLayout>
