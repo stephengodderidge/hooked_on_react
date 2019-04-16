@@ -83,11 +83,11 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
 
   const { list, updateList } = useList([]);
 
-  const equipedItems = props.equipment.filter(item => {
-    list.includes(item.name);
+  const equippedItems = props.equipment.filter(item => {
+    return list.includes(item.name);
   });
 
-  const { totals, dispatch } = useCalculateTotals(equipedItems, calcTotalsFor);
+  const { totals, dispatch } = useCalculateTotals(equippedItems, calcTotalsFor);
 
   /**cll in checkbox on change */
   // updateList('string');
@@ -100,8 +100,6 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
 
     dispatch(setTotalForKey('powerLevel', powerLevel));
   }, [totals.armor, totals.health, totals.damage]);
-
-  useEffect(() => {});
 
   const onValueChange = (newItem: string, clicked: boolean) => {
     updateList(newItem);

@@ -92,7 +92,7 @@ const totalsReducer = <T extends {}>(
       };
     case CalculateTotalAction.RECALCULATE_TOTALS:
       const { data, calculateTotalsFor } = action.payload;
-      return calcTotals<T>(data, calculateTotalsFor);
+      return calcTotals(data, calculateTotalsFor) as any;
     default:
       throw new Error();
   }
@@ -108,6 +108,10 @@ export const useCalculateTotals = <T extends { [key: string]: number | string }>
 ): IUseCalculateTotals<{ [key: string]: number }> => {
   const initialTotals = calcTotals(data, calcTotalsFor);
   const [totals, dispatch] = useReducer(totalsReducer, initialTotals);
+
+  useEffect(() => {
+    dispatch(recalculateTotals(data, calcTotalsFor));
+  }, [data.length]);
 
   return {
     totals,

@@ -2,26 +2,7 @@ import styled from 'styled-components';
 import React, { FunctionComponent } from 'react';
 import { IDefaultProps } from 'types/default-props';
 
-import { Row } from 'components';
-
 const BaseSprite: FunctionComponent<IDefaultProps> = props => <div {...props} />;
-
-// export const SummaryLayout: FunctionComponent<ISummaryLayoutProps> = props => {
-//   const { Left, Right } = props.children;
-//   return (
-//     <Row height="100vh">
-//       <Column width="70vw" height="100vh">
-//         <Row padding={{ top: 48, right: 16 }}>
-//           <Display1>{props.title}</Display1>
-//         </Row>
-//         <Column width="100%">{Left}</Column>
-//       </Column>
-//       <Column width="30vw" height="100vh">
-//         {Right}
-//       </Column>
-//     </Row>
-//   );
-// };
 
 const BaseEquipmentSlot = styled.div`
   position: absolute;
@@ -91,7 +72,7 @@ const SimpleSmallSprite = styled(BaseSprite)`
   width: 50px;
 `;
 
-const Cyclops = styled<{ children: JSX.Element[] }>(SimpleCharacterSprite)`
+const Cyclops = styled<any>(SimpleCharacterSprite)`
   position: relative;
   background-image: url('/static/characters/cyclops-sprite-sheet.png');
   background-position: -11px -40px;
