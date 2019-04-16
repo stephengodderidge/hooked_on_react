@@ -60,9 +60,9 @@ const ListWrapper = props => {
 
 export const HeroBuilder = props => {
   const calcTotalsFor = {
-    armor: equipment => 0, // TODO
-    health: equipment => 0, // TODO
-    damage: equipment => 0, // TODO
+    armor: equipment => equipment.armor * equipment.level,
+    health: equipment => equipment.health * equipment.level,
+    damage: equipment => equipment.damage * equipment.level,
     powerLevel: 0,
   };
 
@@ -78,13 +78,12 @@ export const HeroBuilder = props => {
     /**
      * TODO - Calculate Power Level & dispatch action to store updated value
      */
+    const powerLevel = totals.armor + totals.health + totals.damage;
+    dispatch(setTotalForKey('powerLevel', powerLevel));
   }, [totals.armor, totals.health, totals.damage]);
 
   const onValueChange = (newItem, clicked) => {
     updateList(newItem);
-    /**
-     * TODO - Recalculate totals when list is updated
-     */
   };
 
   const renderHeroBuilder = () => {
