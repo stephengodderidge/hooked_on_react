@@ -46,44 +46,43 @@ const cart = {
 };
 // #endregion Cart Setup
 // #region Character Setup
-const hero = {
-  name: 'My Hero',
-  equipment: [
-    {
-      name: 'Wizard Hat',
-      health: 5,
-      level: 1,
-    },
-    {
-      name: 'Silver Chest Piece',
-      health: 5,
-      armor: 5,
-      level: 2,
-    },
-    {
-      name: 'Boots',
-      armor: 2,
-      level: 6,
-    },
-    {
-      name: 'Glove',
-      damage: 3,
-      level: 5,
-    },
-    {
-      name: 'Axe',
-      damage: 7,
-      level: 3,
-    },
-  ],
-};
+
+const equipment = [
+  {
+    name: 'Wizard Hat',
+    health: 5,
+    level: 1,
+  },
+  {
+    name: 'Silver Chest Piece',
+    health: 5,
+    armor: 5,
+    level: 2,
+  },
+  {
+    name: 'Boots',
+    armor: 2,
+    level: 6,
+  },
+  {
+    name: 'Glove',
+    damage: 3,
+    level: 5,
+  },
+  {
+    name: 'Axe',
+    damage: 7,
+    level: 3,
+  },
+];
+
 // #endregion Character Setup
 
 const AppDemo: FunctionComponent<{}> = () => {
   const { isOn, toggleState } = useToggle(false);
   return (
     <>
-      {isOn ? <CartSummary cart={cart} /> : <HeroBuilder hero={hero} />}
+      {isOn ? <CartSummary cart={cart} /> : <HeroBuilder equipment={equipment} />}
       <PrimaryButton onClick={toggleState}>Switch App!</PrimaryButton>
     </>
   );

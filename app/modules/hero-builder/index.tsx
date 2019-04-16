@@ -8,6 +8,7 @@ import {
   H2,
   H1,
   Expander,
+  MaterialFormElements,
   LayoutBgColor,
   useCalculateTotals,
   useList,
@@ -67,13 +68,8 @@ const ListWrapper: FunctionComponent<IListWrapperProps> = props => {
   );
 };
 
-interface IHero {
-  name: string;
-  equipment: ICharacterEquipment[];
-}
-
 interface IHeroBuilderProps {
-  hero: IHero;
+  equipment: ICharacterEquipment[];
 }
 
 export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
@@ -84,13 +80,8 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
     powerLevel: 0,
   };
 
-  const { totals, dispatch } = useCalculateTotals(
-    props.hero.equipment,
-    calcTotalsFor,
-  );
-
-  const equipmentList = props.hero.equipment.map(hero => hero.name);
-  const { list, updateList } = useList(equipmentList);
+  const { totals, dispatch } = useCalculateTotals(props.equipment, calcTotalsFor);
+  const { list, updateList } = useList([]);
 
   /**cll in checkbox on change */
   // updateList('string');
@@ -103,6 +94,15 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
 
     dispatch(setTotalForKey('powerLevel', powerLevel));
   }, [totals.armor, totals.health, totals.damage, dispatch]);
+
+  useEffect(() => {
+    // add elements to display
+  }, [list]);
+
+  const onValueChange = (element: string, something: boolean) => {
+    updateList(element);
+  };
+
   return (
     <SummaryLayout title="Hero Builder">
       {{
@@ -117,9 +117,14 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
               <HeaderFont>Lvl</HeaderFont>
             </Row>
             <ListWrapper>
-              {props.hero.equipment.map(item => {
+              {props.equipment.map(item => {
                 return (
                   <React.Fragment key={item.name}>
+                    <MaterialFormElements.Checkbox
+                      key={item.level}
+                      onChange={onValueChange}
+                      value={item.name}
+                    />
                     <CellFont>{item.name}</CellFont>
                     <Expander />
                     <CellFont>{item.armor || 0}</CellFont>
@@ -137,12 +142,16 @@ export const HeroBuilder: FunctionComponent<IHeroBuilderProps> = props => {
             <Column width="100%" height="83%" bgColor={LayoutBgColor.BLUE}>
               <Sprites.CharacterLayout>
                 {{
-                  helmet: <Sprites.WizardHat />,
-                  glove: <Sprites.Glove />,
-                  chest: <Sprites.ChestPiece />,
-                  weapon: <Sprites.Axe />,
-                  leftFoot: <Sprites.Boots />,
-                  rightFoot: <Sprites.Boots />,
+                  helmet: list.includes('Wizard Hat') ? <Sprites.WizardHat /> : '',
+                  glove: list.includes('Glove') ? <Sprites.Glove /> : '',
+                  chest: list.includes('Silver Chest Piece') ? (
+                    <Sprites.ChestPiece />
+                  ) : (
+                    ''
+                  ),
+                  weapon: list.includes('Axe') ? <Sprites.Axe /> : '',
+                  leftFoot: list.includes('Boots') ? <Sprites.Boots /> : '',
+                  rightFoot: list.includes('Boots') ? <Sprites.Boots /> : '',
                 }}
               </Sprites.CharacterLayout>
             </Column>
