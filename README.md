@@ -1,17 +1,19 @@
-# React Accelerator
+# Hooked on React
 
-This repo is intended to serve as a bootstrap / accelerator for building React webapps
+🔥Used at the `Reactadelphia Meetup` on April 16, 2019 🔥
+
+The app has both a `Cart Summary` Page, and a `Hero Builder` page where you can add equipment to a hero to increase its level. The overall goal was to highlight the reuseability of hooks in a variety of situations. Checkout the `hooks` folder for the custom hooks that were used. 
+
 
 ## Getting Started
-
-**NOTE:** Node version 8.10.0 is required for the package `typescript-eslint/parser`. Until this package is upgraded, please ensure you are using this version of node
 
 1. Clone repo: `git clone https://{{YOUR_USERNAME}}@bitbucket.org/parivedasolutions/react-accelerator.git`
 2. Install `yarn` (and [homebrew](https://brew.sh/) if not already installed) inside the react-accelerator repositiory: `brew install yarn`
 3. Run `yarn`
-4. Run `yarn up`
+4. Run `yarn next`
 
-Your Storybook & Dev server should build and start shortly!
-
-Storybook URL: [localhost:4000](localhost:4000)
 Dev Server URL: [localhost:3000](localhost:3000)
+
+**NOTE:** The `Master` branch is all in Typescript. If you're unfamiliar with Typescript, no worries, checkout the `sans-typescript` branch after cloning the repo.
+
+🎉 Happy Coding! 🎉
