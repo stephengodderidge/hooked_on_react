@@ -7,7 +7,7 @@ The app has both a `Cart Summary` Page, and a `Hero Builder` page where you can 
 
 ## Getting Started
 
-1. Clone repo: `git clone https://{{YOUR_USERNAME}}@bitbucket.org/parivedasolutions/react-accelerator.git`
+1. Clone repo
 2. Install `yarn` (and [homebrew](https://brew.sh/) if not already installed) inside the react-accelerator repositiory: `brew install yarn`
 3. Run `yarn`
 4. Run `yarn next`
