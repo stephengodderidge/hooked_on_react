@@ -8,9 +8,10 @@ The app has both a `Cart Summary` Page, and a `Hero Builder` page where you can 
 ## Getting Started
 
 1. Clone repo
-2. Install `yarn` (and [homebrew](https://brew.sh/) if not already installed) inside the react-accelerator repositiory: `brew install yarn`
-3. Run `yarn`
-4. Run `yarn next`
+2. `cd` into the directory
+3. Install `yarn` and [homebrew](https://brew.sh/) (if not already installed) inside the react-accelerator repositiory: `brew install yarn`
+4. Run `yarn`
+5. Run `yarn next`
 
 Dev Server URL: [localhost:3000](localhost:3000)
 
